@@ -14,6 +14,14 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/student', function () {
+    return Inertia::render('Student/Index');
+});
+
+Route::get('/student/post', function () {
+    return Inertia::render('Student/Post');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
