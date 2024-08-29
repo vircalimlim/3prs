@@ -63,7 +63,7 @@ header {
             </div>
         </header>
 
-        <section class="bg-center bg-no-repeat bg-[url('/images/hero.png')] bg-cover bg-gray-400 bg-blend-multiply">
+        <section class="bg-fixed bg-center bg-no-repeat bg-[url('/images/hero.png')] bg-cover bg-gray-400 bg-blend-multiply">
             <div class="px-4 mx-auto max-w-screen-xl text-start py-24 lg:py-56">
                 <h1
                     class="w-full sm:w-72 mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
