@@ -6,38 +6,40 @@ const isHidden = ref(false);
 let lastScrollTop = 0;
 
 const handleScroll = () => {
-  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-  if (currentScroll > lastScrollTop) {
-    // Scroll Down
-    isHidden.value = true;
-  } else {
-    // Scroll Up
-    isHidden.value = false;
-  }
-  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (currentScroll > lastScrollTop) {
+        // Scroll Down
+        isHidden.value = true;
+    } else {
+        // Scroll Up
+        isHidden.value = false;
+    }
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('scroll', handleScroll);
 });
 </script>
 
 <style scoped>
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: top 0.3s;
-  z-index: 1000; /* Ensure it's above other content */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: top 0.3s;
+    z-index: 1000;
+    /* Ensure it's above other content */
 }
 
 .hidden {
-  top: -100px; /* Adjust this value based on header height */
+    top: -100px;
+    /* Adjust this value based on header height */
 }
 
 /* Optional: add additional styles for the navbar */
@@ -47,9 +49,10 @@ header {
 
     <Head title="Welcome" />
     <main class="w-full">
-        <header class="flex flex-wrap justify-between py-5 px-2" :class="{ 'hidden': isHidden, 'navbar': true }">
+        <header class="flex flex-wrap justify-between py-5 px-2 bg-gray-50"
+            :class="{ 'hidden': isHidden, 'navbar': true }">
             <div>
-                <img src="" alt="school logo">
+                <img class="h-8" src="/images/logo.png" alt="school logo">
             </div>
             <div>
                 <img src="" alt="website logo">
