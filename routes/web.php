@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SemesterController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,6 +28,12 @@ Route::get('/student/post', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/semester',             [SemesterController::class, 'index'])->name('semester.index');
+    Route::get('/student',              [StudentController::class, 'index'])->name('admin.student.index');
+    Route::get('/achievement',          [AchievementController::class, 'index'])->name('admin.achievement.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
