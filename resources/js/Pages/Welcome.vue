@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import TextHeader from '@/Components/TextHeader.vue';
 
 const isHidden = ref(false);
 let lastScrollTop = 0;
@@ -137,10 +138,7 @@ header {
         </section>
 
         <section class="px-5 mt-20">
-            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-700 md:text-5xl lg:text-6xl">
-                Research Library Collections
-            </h1>
-
+            <TextHeader title="Research Library Collections" />
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
                 <div class="grid gap-4">

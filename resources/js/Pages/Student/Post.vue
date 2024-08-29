@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import StudentNavbar from '@/Components/StudentNavbar.vue';
 import Footer from '@/Components/Footer.vue';
+import TextHeader from '@/Components/TextHeader.vue';
 
 const isHidden = ref(false);
 let lastScrollTop = 0;
@@ -126,9 +127,7 @@ header {
             </div>
         </section>
         <section class="px-2 sm:px-5 mt-20">
-            <h1 class="mb-5 text-4xl font-extrabold tracking-tight leading-none text-gray-700">
-                Recent Posts
-            </h1>
+            <TextHeader title="Recent Posts" class="mb-10"/>
             <div class="flex flex-col md:flex-row gap-6">
 
                 <div
