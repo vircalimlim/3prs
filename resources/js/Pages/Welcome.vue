@@ -34,15 +34,12 @@ header {
     width: 100%;
     transition: top 0.3s;
     z-index: 1000;
-    /* Ensure it's above other content */
 }
 
 .hidden {
     top: -100px;
-    /* Adjust this value based on header height */
 }
 
-/* Optional: add additional styles for the navbar */
 </style>
 
 <template>
@@ -64,7 +61,6 @@ header {
                 </button>
             </div>
         </header>
-
 
         <section class="bg-center bg-no-repeat bg-[url('/images/hero.png')] bg-cover bg-gray-400 bg-blend-multiply">
             <div class="px-4 mx-auto max-w-screen-xl text-start py-24 lg:py-56">
