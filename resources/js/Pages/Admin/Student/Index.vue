@@ -1,6 +1,26 @@
 <script setup lang="ts">
 import Admin from "@/Layouts/Admin.vue";
 import { Head } from "@inertiajs/vue3";
+import AddModal from "./Partials/AddModal.vue";
+import EditModal from "./Partials/EditModal.vue";
+import { ref, reactive } from "vue";
+
+const showAdd = ref(false);
+const showEdit = ref(false);
+// Define a type for dynamic properties
+type DynamicObject = Record<string, any>;
+
+// Create a reactive object with dynamic properties
+const editStudent = reactive<DynamicObject>({});
+
+const openAddModal = () => {
+  showAdd.value = true;
+};
+
+const openEditModal = (student: DynamicObject) => {
+  showEdit.value = true;
+  Object.assign(editStudent, student);
+};
 </script>
 
 <template>
@@ -14,7 +34,7 @@ import { Head } from "@inertiajs/vue3";
       >
         Student
       </h1>
-      <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
+      <button @click.prevent="openAddModal" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
         Add
       </button>
     </div>
@@ -50,7 +70,7 @@ import { Head } from "@inertiajs/vue3";
               <td class="px-6 py-4">09496537953</td>
               <td class="px-6 py-4">Lingayen, Pangasinan</td>
               <td class="px-6 py-4 text-right">
-                <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                <a @click.prevent="openEditModal({first_name: 'vir', middle_name: 'padilla', last_name: 'calimlim'})" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
               </td>
             </tr>
             <tr class="bg-white border-b">
@@ -194,5 +214,7 @@ import { Head } from "@inertiajs/vue3";
         </ul>
     </nav>
     </section>
+    <AddModal :showAdd="showAdd" @close="showAdd = false" />
+    <EditModal v-if="showEdit" :showEdit="showEdit" @close="showEdit = false" :student="editStudent" />
   </Admin>
 </template>
