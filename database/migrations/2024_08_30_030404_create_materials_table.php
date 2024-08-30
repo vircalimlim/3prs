@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->string('title');
+            $table->text('description');
+            $table->string('file_path');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
-        });
+        });    
     }
 
     /**
