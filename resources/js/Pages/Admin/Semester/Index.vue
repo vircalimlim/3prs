@@ -1,6 +1,33 @@
 <script setup lang="ts">
 import Admin from "@/Layouts/Admin.vue";
 import { Head } from "@inertiajs/vue3";
+import AddModal from "./Partials/AddModal.vue";
+import { ref, reactive } from "vue";
+import EditModal from "./Partials/EditModal.vue";
+
+const showAdd = ref(false);
+const showEdit = ref(false);
+interface Semester {
+  name: string;
+  start_date: string;
+  end_date: string;
+}
+
+
+const editSemester = reactive<Semester>({
+  name: '',
+  start_date: '',
+  end_date: '',
+});
+
+const openAddModal = () => {
+  showAdd.value = true;
+};
+
+const openEditModal = (semester: Semester) => {
+  showEdit.value = true;
+  Object.assign(editSemester, semester);
+};
 </script>
 
 <template>
@@ -14,7 +41,7 @@ import { Head } from "@inertiajs/vue3";
       >
         Semester
       </h1>
-      <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
+      <button @click.prevent="openAddModal()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
         Add
       </button>
     </div>
@@ -74,7 +101,7 @@ import { Head } from "@inertiajs/vue3";
               <td class="px-6 py-4">Aug 01, 2024</td>
               <td class="px-6 py-4">Jan 30, 2025</td>
               <td class="px-6 py-4 text-right">
-                <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                <a  @click.prevent="openEditModal({name: 'name1', start_date: '2024-08-30', end_date: '2025-01-01'})" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
               </td>
             </tr>
             <tr class="bg-white border-b">
@@ -87,7 +114,7 @@ import { Head } from "@inertiajs/vue3";
               <td class="px-6 py-4">Feb 01, 2025</td>
               <td class="px-6 py-4">Jun 30, 2025</td>
               <td class="px-6 py-4 text-right">
-                <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                <a @click.prevent="openEditModal({name: 'name2', start_date: '2024-09-30', end_date: '2025-02-01'})" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
               </td>
             </tr>
             <tr class="bg-white border-b">
@@ -100,12 +127,15 @@ import { Head } from "@inertiajs/vue3";
               <td class="px-6 py-4">Feb 01, 2025</td>
               <td class="px-6 py-4">Jun 30, 2025</td>
               <td class="px-6 py-4 text-right">
-                <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                <a @click.prevent="openEditModal({name: 'name3', start_date: '2024-10-30', end_date: '2025-05-01'})" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
+
+    <AddModal :showAdd="showAdd" @close="showAdd = false" />
+    <EditModal v-if="showEdit" :showEdit="showEdit" @close="showEdit = false" :semester="editSemester" />
   </Admin>
 </template>
