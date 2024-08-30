@@ -7,24 +7,17 @@ import EditModal from "./Partials/EditModal.vue";
 
 const showAdd = ref(false);
 const showEdit = ref(false);
-interface Semester {
-  name: string;
-  start_date: string;
-  end_date: string;
-}
+// Define a type for dynamic properties
+type DynamicObject = Record<string, any>;
 
-
-const editSemester = reactive<Semester>({
-  name: '',
-  start_date: '',
-  end_date: '',
-});
+// Create a reactive object with dynamic properties
+const editSemester = reactive<DynamicObject>({});
 
 const openAddModal = () => {
   showAdd.value = true;
 };
 
-const openEditModal = (semester: Semester) => {
+const openEditModal = (semester: DynamicObject) => {
   showEdit.value = true;
   Object.assign(editSemester, semester);
 };
