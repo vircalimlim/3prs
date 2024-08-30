@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\StudentController;
@@ -33,6 +36,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/semester',             [SemesterController::class, 'index'])->name('semester.index');
     Route::get('/student',              [StudentController::class, 'index'])->name('admin.student.index');
     Route::get('/achievement',          [AchievementController::class, 'index'])->name('admin.achievement.index');
+    Route::get('/announcement',         [AnnouncementController::class, 'index'])->name('admin.announcement.index');
+    Route::get('/category',             [CategoryController::class, 'index'])->name('admin.category.index');
+    Route::get('/material',             [MaterialController::class, 'index'])->name('admin.material.index');
 });
 
 Route::middleware('auth')->group(function () {

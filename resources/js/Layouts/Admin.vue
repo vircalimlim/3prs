@@ -134,7 +134,7 @@ const isShowDropDown2 = ref(false);
             </li>
             <li>
               <Link
-                href="route('announcement.index')"
+                :href="route('admin.announcement.index')"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
               >Announcements</Link>
             </li>
@@ -156,7 +156,7 @@ const isShowDropDown2 = ref(false);
             >
               <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
             </svg>
-            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Staff</span>
+            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Research</span>
             <svg
               class="w-3 h-3"
               aria-hidden="true"
@@ -180,34 +180,17 @@ const isShowDropDown2 = ref(false);
           >
             <li>
               <Link
-                href="route('employee.index')"
+                :href="route('admin.category.index')"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-              >Employee</Link>
+              >Category</Link>
             </li>
             <li>
               <Link
-                href="route('employee.attendance')"
+                :href="route('admin.material.index')"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-              >Attendance</Link>
+              >Materials</Link>
             </li>
           </ul>
-        </li>
-        <li>
-          <Link
-            href="route('cashdrawer.index')"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
-          >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
-            fill="currentColor"
-            viewBox="0 0 18 16"
-          >
-            <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
-            <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z" />
-          </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Cash Drawer</span>
-          </Link>
         </li>
         <li>
           <Link

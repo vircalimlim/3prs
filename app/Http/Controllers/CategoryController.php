@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class AnnouncementController extends Controller
+class CategoryController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/Announcement/Index');
+        return Inertia::render('Admin/Category/Index');
     }
 }
