@@ -31,12 +31,28 @@ const closeModal = () => {
   emit('close');
   form.reset();
 };
+
+const storeStudent = () => {
+  form.post(route("admin.student.store"), {
+    onSuccess: () => {
+      emit('close');
+      form.first_name = "";
+      form.middle_name = "";
+      form.last_name = "";
+      form.gender = "";
+      form.dob = "";
+      form.email = "";
+      form.mobile = "";
+      form.address = "";
+    },
+  });
+}
 </script>
 
 <template>
   <Modal :show="showAdd" @close="closeModal">
     <h1 class="text-gray-700 text-2xl font-bold">Add Student</h1>
-    <form @submit.prevent="" class="mt-6 space-y-6">
+    <form @submit.prevent="storeStudent" class="mt-6 space-y-6">
       <div class="grid gap-6 md:grid-cols-3">
         <div>
             <InputLabel for="first_name" value="First Name" />
@@ -85,19 +101,18 @@ const closeModal = () => {
             type="text"
             class="mt-1 block w-full"
             v-model="form.email"
-            required
             />
             <InputError class="mt-2" :message="form.errors.email" />
         </div>
 
         <div>
-            <InputLabel for="mobile" value="Mobile" />
+            <InputLabel for="mobile" value="Mobile"/>
             <TextInput
             id="mobile"
             type="text"
+            maxLength="11"
             class="mt-1 block w-full"
             v-model="form.mobile"
-            required
             />
             <InputError class="mt-2" :message="form.errors.mobile" />
         </div>
@@ -131,11 +146,11 @@ const closeModal = () => {
         <InputLabel for="gender" value="Gender" />
 
         <div class="flex items-center mb-4">
-            <input v-model="form.gender" id="gender-1" type="radio" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+            <input v-model="form.gender" id="gender-1" value="male" type="radio" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
             <label for="gender-1" class="ms-2 text-sm font-medium text-gray-900">Male</label>
         </div>
         <div class="flex items-center">
-            <input v-model="form.gender" id="gender-2" type="radio" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+            <input v-model="form.gender" id="gender-2" value="female" type="radio" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
             <label for="gender-2" class="ms-2 text-sm font-medium text-gray-900">Female</label>
         </div>
 

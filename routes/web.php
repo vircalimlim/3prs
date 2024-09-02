@@ -34,9 +34,11 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/semester',             [SemesterController::class, 'index'])->name('semester.index');
-    Route::post('/semester',            [SemesterController::class, 'storeSemester'])->name('semester.store');
+    Route::post('/semester/save',       [SemesterController::class, 'storeSemester'])->name('semester.store');
     Route::patch('/semester/update',    [SemesterController::class, 'updateSemester'])->name('semester.update');
     Route::get('/student',              [StudentController::class, 'index'])->name('admin.student.index');
+    Route::post('/student/save',        [StudentController::class, 'storeStudent'])->name('admin.student.store');
+    Route::patch('/student/update',     [StudentController::class, 'updateStudent'])->name('admin.student.update');
     Route::get('/achievement',          [AchievementController::class, 'index'])->name('admin.achievement.index');
     Route::get('/announcement',         [AnnouncementController::class, 'index'])->name('admin.announcement.index');
     Route::get('/category',             [CategoryController::class, 'index'])->name('admin.category.index');
