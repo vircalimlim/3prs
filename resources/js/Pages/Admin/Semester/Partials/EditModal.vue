@@ -23,6 +23,7 @@ const {showEdit, semester} = defineProps({
 const emit = defineEmits(['close']);
 
 const form = useForm({
+  id: '',
   name: '',
   start_date: '',
   end_date: '',
@@ -33,15 +34,28 @@ const closeModal = () => {
   form.reset();
 };
 
-const updateForm = () => {
+const editForm = () => {
   form.name = semester.name || '';
   form.start_date = semester.start_date || '';
   form.end_date = semester.end_date || '';
+  form.id = semester.id || '';
+};
+
+const updateSemester = () => {
+  form.patch(route("semester.update"), {
+    onSuccess: () => {
+      emit('close');
+      form.name = "";
+      form.start_date = "";
+      form.end_date = "";
+      form.id = "";
+    },
+  });
 };
 
 // Use watchEffect to track prop changes
 watchEffect(() => {
-  updateForm();
+  editForm();
 });
 
 </script>
@@ -49,7 +63,7 @@ watchEffect(() => {
 <template>
   <Modal :show="showEdit" @close="closeModal">
     <h1 class="text-gray-700 text-2xl font-bold">Edit semester</h1>
-    <form @submit.prevent="" class="mt-6 space-y-6">
+    <form @submit.prevent="updateSemester" class="mt-6 space-y-6">
       <div>
         <InputLabel for="name" value="Name" />
         <TextInput

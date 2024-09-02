@@ -9,4 +9,5 @@ class Semester extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public $timestamps = false;
 }

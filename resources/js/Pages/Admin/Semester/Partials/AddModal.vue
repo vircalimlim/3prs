@@ -25,13 +25,24 @@ const form = useForm({
 const closeModal = () => {
   emit('close');
   form.reset();
-};
+}
+
+const storeSemester = () => {
+  form.post(route("semester.store"), {
+    onSuccess: () => {
+      emit('close');
+      form.name = "";
+      form.start_date = "";
+      form.end_date = "";
+    },
+  });
+}
 </script>
 
 <template>
   <Modal :show="showAdd" @close="closeModal">
     <h1 class="text-gray-700 text-2xl font-bold">Add semester</h1>
-    <form @submit.prevent="" class="mt-6 space-y-6">
+    <form @submit.prevent="storeSemester" class="mt-6 space-y-6">
       <div>
         <InputLabel for="name" value="Name" />
         <TextInput

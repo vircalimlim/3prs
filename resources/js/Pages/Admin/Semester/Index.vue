@@ -4,6 +4,11 @@ import { Head } from "@inertiajs/vue3";
 import AddModal from "./Partials/AddModal.vue";
 import { ref, reactive } from "vue";
 import EditModal from "./Partials/EditModal.vue";
+import Pagination from "@/Components/Pagination.vue";
+
+const {semesters} = defineProps<{
+  semesters: Object,
+}>();
 
 const showAdd = ref(false);
 const showEdit = ref(false);
@@ -84,47 +89,25 @@ const openEditModal = (semester: DynamicObject) => {
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-white border-b">
+            <tr v-for="semester in semesters.data" class="bg-white border-b">
               <th
                 scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
               >
-                2024 1st Sem
+                {{semester.name}}
               </th>
-              <td class="px-6 py-4">Aug 01, 2024</td>
-              <td class="px-6 py-4">Jan 30, 2025</td>
+              <td class="px-6 py-4">{{semester.start_date}}</td>
+              <td class="px-6 py-4">{{semester.end_date}}</td>
               <td class="px-6 py-4 text-right">
-                <a  @click.prevent="openEditModal({name: 'name1', start_date: '2024-08-30', end_date: '2025-01-01'})" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                <a  @click.prevent="openEditModal(semester)" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
               </td>
             </tr>
-            <tr class="bg-white border-b">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-              >
-                2024 2nd Sem
-              </th>
-              <td class="px-6 py-4">Feb 01, 2025</td>
-              <td class="px-6 py-4">Jun 30, 2025</td>
-              <td class="px-6 py-4 text-right">
-                <a @click.prevent="openEditModal({name: 'name2', start_date: '2024-09-30', end_date: '2025-02-01'})" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
-              </td>
-            </tr>
-            <tr class="bg-white border-b">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-              >
-                2025 1st Sem
-              </th>
-              <td class="px-6 py-4">Feb 01, 2025</td>
-              <td class="px-6 py-4">Jun 30, 2025</td>
-              <td class="px-6 py-4 text-right">
-                <a @click.prevent="openEditModal({name: 'name3', start_date: '2024-10-30', end_date: '2025-05-01'})" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
-              </td>
+            <tr v-if="semesters.data.length == 0">
+              <td class="text-center" colspan="3">No records found.</td>
             </tr>
           </tbody>
         </table>
+        <Pagination :links="semesters.links" />
       </div>
     </section>
 
