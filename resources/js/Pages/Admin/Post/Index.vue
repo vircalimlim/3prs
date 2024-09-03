@@ -5,6 +5,7 @@ import AddModal from "../Post/Partials/AddModal.vue";
 import EditModal from "../Post/Partials/EditModal.vue";
 import ImageModal from "../Post/Partials/ImageModal.vue";
 import { reactive, ref } from "vue";
+import Pagination from "@/Components/Pagination.vue";
 
 const {posts} = defineProps<{
     posts: Array<Object>,
@@ -78,7 +79,7 @@ const handleTypeFilter = () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="post in posts" class="bg-white border-b">
+            <tr v-for="post in posts.data" class="bg-white border-b">
                 <td class="w-96 px-2 py-4 whitespace-nowrap align-top">
                     <div @click.prevent="openImageModal(post)" class="relative group">
                         <div class="absolute inset-0 flex items-center justify-center rounded bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
@@ -103,6 +104,7 @@ const handleTypeFilter = () => {
             </tr>
           </tbody>
         </table>
+        <Pagination :links="posts.links"/>
       </div>
     </section>
     <AddModal :showAdd="showAdd" @close="showAdd = false" />

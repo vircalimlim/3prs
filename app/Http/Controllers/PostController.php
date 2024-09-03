@@ -22,13 +22,14 @@ class PostController extends Controller
 
     public function index(){
         $result = [];
+        $type = request()->type ? request()->type : 'achievements';
         if(request()->type == 'announcements'){
-            $result = Announcement::get();
+            $result = Announcement::paginate(10);
         }
         else{
-            $result = Achievement::get();
+            $result = Achievement::paginate(10);
         }
-        $storage_link = asset('storage/images/'.request()->type);
+        $storage_link = asset('storage/images/'.$type);
 
         return Inertia::render('Admin/Post/Index', [
             'posts' => $result,
