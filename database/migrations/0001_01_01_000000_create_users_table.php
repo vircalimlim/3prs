@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -35,6 +36,18 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        DB::table('users')->insert(
+            array(
+                [             
+                    'name' => 'admin admin',
+                    'email' => 'admin@gmail.com',
+                    'password' => '$2y$12$0ZB9uqbJL/xBrIlVA8Glxe4Iw8hI25mKkt4yxjgUAtg7tc8Xt/SYC',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'), 
+                ],   
+            )
+        );
     }
 
     /**
