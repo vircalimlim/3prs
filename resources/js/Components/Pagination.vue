@@ -16,7 +16,7 @@
               'mb-1 mr-1 px-4 py-3 text-sm leading-4 border rounded',
               link.active || activeLink === index ? 'bg-red text-red-700' : 'hover:bg-white'
             ]"
-            :href="link.url"
+            :href="buildUrlWithParams(link.url)"
             @click="setActiveLink(index)"
             v-html="link.label"
           />
@@ -38,5 +38,26 @@
   const setActiveLink = (index) => {
     activeLink.value = index;
   };
+
+  const buildUrlWithParams = (url) => {
+    const urlObj = new URL(url, window.location.origin);
+    const currentParams = new URLSearchParams(window.location.search);
+
+    // Merge existing parameters with the new ones
+    currentParams.forEach((value, key) => {
+      if (key !== 'page') {
+        urlObj.searchParams.set(key, value);
+      }
+    });
+
+    // Add the page parameter from the current link
+    const linkParams = new URLSearchParams(url.split('?')[1]);
+    linkParams.forEach((value, key) => {
+      urlObj.searchParams.set(key, value);
+    });
+
+    return urlObj.href;
+  };
+
   </script>
   
