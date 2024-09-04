@@ -6,9 +6,10 @@ import EditModal from "../Post/Partials/EditModal.vue";
 import ImageModal from "../Post/Partials/ImageModal.vue";
 import { reactive, ref } from "vue";
 import Pagination from "@/Components/Pagination.vue";
+import { onMounted } from "vue";
 
 const {posts} = defineProps<{
-    posts: Array<Object>,
+    posts: Object,
     storage_link: string,
 }>();
 
@@ -37,9 +38,21 @@ const openImageModal = (post: DynamicObject) => {
     Object.assign(editPost, post);
 }
 
+const getFilter = () => {
+  const defaultValue = 'achievements';
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  const typeValue = params.get('type') || defaultValue;
+  filteredPost.value = typeValue;
+}
+
 const handleTypeFilter = () => {
     router.get('/admin/post', {type: filteredPost.value}, {preserveState: true, preserveScroll: true});
 }
+
+onMounted(() => {
+  getFilter();
+})
 </script>
 
 <template>
@@ -104,8 +117,8 @@ const handleTypeFilter = () => {
             </tr>
           </tbody>
         </table>
-        <Pagination :links="posts.links"/>
       </div>
+      <Pagination :links="posts.links"/>
     </section>
     <AddModal :showAdd="showAdd" @close="showAdd = false" />
     <EditModal v-if="showEdit" :showEdit="showEdit" @close="showEdit = false" :post="editPost" />
