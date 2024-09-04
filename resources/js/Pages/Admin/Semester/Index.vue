@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Admin from "@/Layouts/Admin.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import AddModal from "./Partials/AddModal.vue";
 import { ref, reactive } from "vue";
 import EditModal from "./Partials/EditModal.vue";
@@ -14,6 +14,7 @@ const showAdd = ref(false);
 const showEdit = ref(false);
 // Define a type for dynamic properties
 type DynamicObject = Record<string, any>;
+const current_url = window.location.href;
 
 // Create a reactive object with dynamic properties
 const editSemester = reactive<DynamicObject>({});
@@ -33,15 +34,36 @@ const openEditModal = (semester: DynamicObject) => {
 
   <Admin>
     <section>
+      
+    <div class="text-sm font-medium text-center text-gray-500 mb-5">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="me-2">
+                <Link :href="route('semester.index')" :class="current_url == route('semester.index') ? 'active-tab' : ''" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">
+                  Semester
+                </Link>
+            </li>
+            <li class="me-2">
+                <a :href="route('semester.enrolled_student')" :class="current_url == route('semester.enrolled_student') ? 'active-tab' : ''" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" aria-current="page">
+                  Enrolled Student
+                </a>
+            </li>
+        </ul>
+    </div>
+
     <div class="flex justify-between items-center">
       <h1
         class="my-5 text-4xl font-extrabold tracking-tight leading-none text-gray-600"
       >
         Semester
       </h1>
-      <button @click.prevent="openAddModal()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
-        Add
-      </button>
+      <div class="flex flex-wrap gap-2">
+        <Link :href="route('semester.register_student')" type="button" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
+          Register Student
+        </Link>
+        <button @click.prevent="openAddModal()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
+          Add
+        </button>
+      </div>
     </div>
 
       <div class="relative overflow-x-auto shadow sm:rounded-lg">

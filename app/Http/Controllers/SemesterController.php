@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Semester;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class SemesterController extends Controller
@@ -42,5 +44,48 @@ class SemesterController extends Controller
                 'end_date'      => $request->end_date,
             ]);
         return redirect()->back();
+    }
+
+    public function registerStudentIndex(){
+        $students   = Student::latest('id')->paginate(20);
+        $semesters  = Semester::latest('id')->get();
+        return Inertia::render('Admin/Semester/RegisterStudent', [
+            'students' => $students,
+            'semesters' => $semesters,
+        ]);
+    }
+
+    public function registerStudent(Request $request){
+        $data = $request->validate([
+            'selected_sem'          => 'required',
+            'selected_students'     => 'required'
+        ]);
+
+        foreach($request->selected_students as $student){
+            $is_exist = DB::table('semester_student')
+                        ->where('student_id', $student)
+                        ->where('semester_id', $request->selected_sem)
+                        ->exists();
+            if($is_exist) continue; //skip this current iteration proceed to next
+
+            DB::table('semester_student')
+            ->insert([
+                'semester_id'   => $request->selected_sem,
+                'student_id'    => $student,
+            ]);
+        }
+
+        return back();
+    }
+
+    public function enrolledStudentIndex(){
+        $students = DB::table('semester_student as ss')
+                    ->selectRaw('st.first_name, st.last_name, st.gender, st.dob')
+                    ->leftJoin('semesters as sem', 'ss.semester_id', '=', 'sem.id')
+                    ->leftJoin('students as st', 'ss.student_id', '=', 'st.id')
+                    ->paginate(20);
+        return Inertia::render('Admin/Semester/EnrolledStudent', [
+            'students'  => $students
+        ]);
     }
 }
