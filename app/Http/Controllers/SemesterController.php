@@ -4,12 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Semester;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class SemesterController extends Controller
 {
+    private function generateUserKey() {
+        $number = mt_rand(1000000000, 9999999999);
+    
+        // call the same function if the barcode exists already
+        if ($this->isUserKeyExist($number)) {
+            return $this->generateUserKey();
+        }
+    
+        // otherwise, it's valid and can be used
+        return $number;
+    }
+    
+    private function isUserKeyExist($number) {
+        return User::where('user_key', $number)->exists();
+    }
+
     public function index(){
         $semesters = Semester::latest('id')->paginate(10);
         return Inertia::render('Admin/Semester/Index', [
@@ -55,6 +73,19 @@ class SemesterController extends Controller
         ]);
     }
 
+    public function createAccountForEnrolledStudent($student_id, $semester_id, $password){
+        $user_key = $this->generateUserKey();
+        $student = Student::find($student_id);
+        $user = User::create([
+            'student_id' => $student_id,
+            'semester_id' => $semester_id,
+            'user_key' => $user_key,
+            'name' => $student->first_name . ' ' . $student->last_name,
+            'email' => $student->email,
+            'password' => Hash::make($password),
+        ]);
+    }
+
     public function registerStudent(Request $request){
         $data = $request->validate([
             'selected_sem'          => 'required',
@@ -85,6 +116,8 @@ class SemesterController extends Controller
                 'semester_id'   => $request->selected_sem,
                 'student_id'    => $student,
             ]);
+
+            $this->createAccountForEnrolledStudent($student, $request->selected_sem, 'pass@dev');
         }
 
         return back();

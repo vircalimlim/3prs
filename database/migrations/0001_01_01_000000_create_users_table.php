@@ -14,8 +14,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('semester_id');
+            $table->string('user_key', 10)->unique();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -39,7 +42,10 @@ return new class extends Migration
 
         DB::table('users')->insert(
             array(
-                [             
+                [
+                    'student_id'    => 0,
+                    'semester_id'   => 0,
+                    'user_key'      => '1000000000',
                     'name' => 'admin admin',
                     'email' => 'admin@gmail.com',
                     'password' => '$2y$12$0ZB9uqbJL/xBrIlVA8Glxe4Iw8hI25mKkt4yxjgUAtg7tc8Xt/SYC',
