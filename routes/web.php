@@ -32,9 +32,9 @@ Route::get('/student/post', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'isAdmin'])->name('dashboard');
 
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/semester',                     [SemesterController::class,     'index'])->name('semester.index');
     Route::get('/semester/student/register',    [SemesterController::class,     'registerStudentIndex'])->name('semester.register_student');
     Route::get('/semester/enrolled/student',    [SemesterController::class,     'enrolledStudentIndex'])->name('semester.enrolled_student');
