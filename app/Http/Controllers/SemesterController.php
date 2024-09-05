@@ -117,7 +117,7 @@ class SemesterController extends Controller
                 'student_id'    => $student,
             ]);
 
-            $this->createAccountForEnrolledStudent($student, $request->selected_sem, 'pass@dev');
+            $this->createAccountForEnrolledStudent($student, $request->selected_sem, 'pass@student');
         }
 
         return back();
