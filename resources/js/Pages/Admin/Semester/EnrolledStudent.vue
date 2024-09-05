@@ -47,7 +47,7 @@ const handleTypeFilter = () => {
       </h1>
       <div class="flex items-center gap-2">
         <select @change="handleTypeFilter" v-model="filteredSem" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 py-2">
-            <option value="" disabled selected>Filter by semester</option>
+            <option value="" selected>Filter by semester</option>
             <option v-for="semester in semesters" :value="semester.id">{{semester.name}}</option>
         </select>
       </div>
