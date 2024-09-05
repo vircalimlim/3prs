@@ -65,7 +65,7 @@ const registerStudent = () => {
             <option v-for="semester in semesters" :value="semester.id">{{semester.name}}</option>
         </select>
 
-        <button @click.prevent="registerStudent" :disabled="form.selected_students.length < 1 || form.selected_sem == ''" :class="form.selected_students.length < 1 ? 'cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">
+        <button @click.prevent="registerStudent" :disabled="form.selected_students.length < 1 || form.selected_sem == ''" :class="form.selected_students.length < 1 || form.selected_sem == '' ? 'cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">
             Register
         </button>
       </div>
@@ -73,7 +73,7 @@ const registerStudent = () => {
     <div class="bg-white border-b">
         <div colspan="3" class="px-6 py-4">
             <div class="flex gap-2 items-center">
-                <input @click="selectAllStudent($event)" v-model="form.select_all" id="all_students" type="checkbox" name="students" value="all_students">
+                <input @click="selectAllStudent($event)" v-model="form.select_all" id="all_students" type="checkbox" name="students" :value="true">
                 <label class="text-xl" for="all_students">
                     Select all students
                 </label>
@@ -93,7 +93,7 @@ const registerStudent = () => {
             <tr class="bg-white border-b">
                 <td colspan="3" class="px-6 py-4">
                     <div class="flex gap-2 items-center">
-                        <input @click="selectStudentsInList($event)" v-model="form.select_list" id="all_list" type="checkbox" name="students" value="all_list">
+                        <input @click="selectStudentsInList($event)" v-model="form.select_list" id="all_list" type="checkbox" name="students" :value="true">
                         <label class="text-xl" for="all_list">
                             Select students in this list
                         </label>
@@ -120,8 +120,8 @@ const registerStudent = () => {
             </tr>
           </tbody>
         </table>
-        <Pagination :links="students.links" />
       </div>
+      <Pagination :links="students.links" />
     </section>
   </Admin>
 </template>

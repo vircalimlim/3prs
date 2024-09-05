@@ -47,7 +47,7 @@ class SemesterController extends Controller
     }
 
     public function registerStudentIndex(){
-        $students   = Student::latest('id')->paginate(20);
+        $students   = Student::latest('id')->paginate(1);
         $semesters  = Semester::latest('id')->get();
         return Inertia::render('Admin/Semester/RegisterStudent', [
             'students' => $students,
@@ -60,12 +60,24 @@ class SemesterController extends Controller
             'selected_sem'          => 'required',
             'selected_students'     => 'required'
         ]);
+        $selected_students = [];
 
-        foreach($request->selected_students as $student){
+        if($request->select_all){
+            $students = Student::get();
+            $ids = $students->pluck('id')->toArray();
+            $selected_students = $ids;
+        }
+        else{
+            $selected_students = $request->selected_students;
+        }
+
+
+        foreach($selected_students as $student){
             $is_exist = DB::table('semester_student')
                         ->where('student_id', $student)
                         ->where('semester_id', $request->selected_sem)
                         ->exists();
+
             if($is_exist) continue; //skip this current iteration proceed to next
 
             DB::table('semester_student')
