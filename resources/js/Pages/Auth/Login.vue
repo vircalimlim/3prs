@@ -13,7 +13,7 @@ defineProps<{
 }>();
 
 const form = useForm({
-    email: '',
+    login: '',
     password: '',
     remember: false,
 });
@@ -40,19 +40,20 @@ const submit = () => {
                 <img class="inline-block p-2 rounded h-18 fill-current text-gray-500" src="/images/logo.png" alt="logo">
             </div>
             <div>
-                <InputLabel for="email" value="Email / Unique ID" />
+                <InputLabel for="login" value="Unique ID" />
 
                 <TextInput
-                    id="email"
-                    type="email"
+                    maxLength="10"
+                    id="login"
+                    type="text"
                     class="mt-1 block w-full"
-                    v-model="form.email"
+                    v-model="form.login"
                     required
                     autofocus
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.login" />
             </div>
 
             <div class="mt-4">

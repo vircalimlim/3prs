@@ -3,6 +3,7 @@
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -63,4 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('login',                             [LoginController::class, 'create'])->name('login');
+Route::post('login',                            [LoginController::class, 'store']);
+Route::post('logout',                           [LoginController::class, 'destroy'])->name('logout');
+// require __DIR__.'/auth.php';
