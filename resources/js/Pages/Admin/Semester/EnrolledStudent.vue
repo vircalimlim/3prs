@@ -82,7 +82,7 @@ const handleTypeFilter = () => {
             <tr v-if="students.data.length == 0">
               <td class="text-center py-5" colspan="4">
                 <p class="text-xl">No records found.</p>
-                <Link :href="route('admin.student.index')" class="py-2 text-blue-400">Click here to student.</Link>
+                <Link :href="route('semester.register_student')" class="py-2 text-blue-400">Click here to register student.</Link>
               </td>
             </tr>
           </tbody>

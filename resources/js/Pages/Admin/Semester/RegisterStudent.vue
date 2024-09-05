@@ -118,7 +118,7 @@ const registerStudent = () => {
             <tr v-if="students.data.length == 0">
               <td class="text-center py-5" colspan="3">
                 <p class="text-xl">No records found.</p>
-                <Link :href="route('admin.student.index')" class="py-2 text-blue-400">Click here to student.</Link>
+                <Link :href="route('admin.student.index')" class="py-2 text-blue-400">Click here to add student.</Link>
               </td>
             </tr>
           </tbody>
