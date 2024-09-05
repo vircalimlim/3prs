@@ -57,7 +57,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/category',                     [CategoryController::class, 'index'])->name('admin.category.index');
     Route::post('/category/save',               [CategoryController::class, 'storeCategory'])->name('admin.category.store');
     Route::patch('/category/save',              [CategoryController::class, 'updateCategory'])->name('admin.category.update');
+
     Route::get('/material',                     [MaterialController::class, 'index'])->name('admin.material.index');
+    Route::post('/material/save',               [MaterialController::class, 'storeMaterial'])->name('admin.material.store');
 });
 
 Route::middleware('auth')->group(function () {
