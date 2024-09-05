@@ -116,7 +116,10 @@ const registerStudent = () => {
               <td class="px-6 py-4">{{student.dob}}</td>
             </tr>
             <tr v-if="students.data.length == 0">
-              <td class="text-center" colspan="3">No records found.</td>
+              <td class="text-center py-5" colspan="3">
+                <p class="text-xl">No records found.</p>
+                <Link :href="route('admin.student.index')" class="py-2 text-blue-400">Click here to student.</Link>
+              </td>
             </tr>
           </tbody>
         </table>
