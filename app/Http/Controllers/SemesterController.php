@@ -47,7 +47,7 @@ class SemesterController extends Controller
     }
 
     public function registerStudentIndex(){
-        $students   = Student::latest('id')->paginate(1);
+        $students   = Student::latest('id')->paginate(20);
         $semesters  = Semester::latest('id')->get();
         return Inertia::render('Admin/Semester/RegisterStudent', [
             'students' => $students,
