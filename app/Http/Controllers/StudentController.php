@@ -24,7 +24,7 @@ class StudentController extends Controller
             'dob'           => 'required',
             'gender'        => 'required',
             'mobile'        => 'nullable|digits:11',
-            'email'         => 'nullable|email:rfc,dns'
+            'email'         => 'required|email:rfc,dns|unique:students'
         ]);
         $email = $request->email ? $request->email : '';
         $mobile = $request->mobile ? $request->mobile : '';
@@ -52,7 +52,7 @@ class StudentController extends Controller
             'dob'           => 'required',
             'gender'        => 'required',
             'mobile'        => 'nullable|digits:11',
-            'email'         => 'nullable|email:rfc,dns'
+            'email'         => 'required|email:rfc,dns|unique:students,email,'.$request->id,
         ]);
         $email = $request->email ? $request->email : '';
         $mobile = $request->mobile ? $request->mobile : '';
