@@ -70,7 +70,7 @@ const registerStudent = () => {
         </button>
       </div>
     </div>
-    <div class="bg-white border-b">
+    <div class="bg-white">
         <div colspan="3" class="px-6 py-4">
             <div class="flex gap-2 items-center">
                 <input @click="selectAllStudent($event)" v-model="form.select_all" id="all_students" type="checkbox" name="students" :value="true">
