@@ -27,14 +27,18 @@ class LoginController extends Controller
         ]);
 
         // check if user input email or user key
-        //uncomment this if you want to support email as login
+        // uncomment this if you want to support email as login
         // $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_key';
         $loginType = 'user_key';
  
         if (Auth::attempt([$loginType => $request->login, 'password' => $request->password])){
             $request->session()->regenerate();
- 
-            return redirect()->intended('dashboard');
+
+            $user = auth()->user();
+            if($user->student_id == 0 || $user->semester_id == 0){
+                return redirect()->intended('dashboard');
+            }
+            return redirect()->to('/student');
         }
  
         return back()->withErrors([
