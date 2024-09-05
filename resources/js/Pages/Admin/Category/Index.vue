@@ -1,6 +1,31 @@
 <script setup lang="ts">
 import Admin from "@/Layouts/Admin.vue";
 import { Head } from "@inertiajs/vue3";
+import AddModal from "./Partials/AddModal.vue";
+import { ref, reactive } from "vue";
+import Pagination from "@/Components/Pagination.vue";
+import EditModal from "./Partials/EditModal.vue";
+
+const {categories} = defineProps<{
+  categories: Object,
+}>();
+
+const showAdd = ref(false);
+const showEdit = ref(false);
+// Define a type for dynamic properties
+type DynamicObject = Record<string, any>;
+
+// Create a reactive object with dynamic properties
+const editCategory = reactive<DynamicObject>({});
+
+const openAddModal = () => {
+  showAdd.value = true;
+};
+
+const openEditModal = (category: DynamicObject) => {
+  showEdit.value = true;
+  Object.assign(editCategory, category);
+};
 </script>
 
 <template>
@@ -14,7 +39,7 @@ import { Head } from "@inertiajs/vue3";
       >
         Categories
       </h1>
-      <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
+      <button @click.prevent="openAddModal" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
         Add
       </button>
     </div>
@@ -31,31 +56,26 @@ import { Head } from "@inertiajs/vue3";
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-white border-b">
+            <tr v-for="category in categories.data" class="bg-white border-b">
               <td class="px-6 py-4">
-                Lorem ipsum dolor sit.
+                {{category.title}}
               </td>
               <td class="px-6 py-4">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                {{ category.description }}
               </td>
               <td class="px-6 py-4 text-right">
-                <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                <a @click.prevent="openEditModal(category)" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
               </td>
             </tr>
-            <tr class="bg-white border-b">
-              <td class="px-6 py-4">
-                Lorem ipsum dolor.
-              </td>
-              <td class="px-6 py-4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, temporibus.
-              </td>
-              <td class="px-6 py-4 text-right">
-                <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
-              </td>
+            <tr v-if="categories.data.length == 0">
+              <td class="text-center py-5" colspan="2">No records found.</td>
             </tr>
           </tbody>
         </table>
       </div>
+      <Pagination :links="categories.links"/>
     </section>
+    <AddModal :showAdd="showAdd" @close="showAdd = false" />
+    <EditModal v-if="showEdit" :showEdit="showEdit" @close="showEdit = false" :category="editCategory" />
   </Admin>
 </template>
