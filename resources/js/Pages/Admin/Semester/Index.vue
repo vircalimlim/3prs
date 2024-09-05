@@ -43,9 +43,9 @@ const openEditModal = (semester: DynamicObject) => {
                 </Link>
             </li>
             <li class="me-2">
-                <a :href="route('semester.enrolled_student')" :class="current_url == route('semester.enrolled_student') ? 'active-tab' : ''" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" aria-current="page">
+                <Link :href="route('semester.enrolled_student')" :class="current_url == route('semester.enrolled_student') ? 'active-tab' : ''" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" aria-current="page">
                   Enrolled Student
-                </a>
+                </Link>
             </li>
         </ul>
     </div>

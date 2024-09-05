@@ -78,14 +78,12 @@ class SemesterController extends Controller
         return back();
     }
 
-    public function enrolledStudentIndex(){
-        $students = DB::table('semester_student as ss')
-                    ->selectRaw('st.first_name, st.last_name, st.gender, st.dob')
-                    ->leftJoin('semesters as sem', 'ss.semester_id', '=', 'sem.id')
-                    ->leftJoin('students as st', 'ss.student_id', '=', 'st.id')
-                    ->paginate(20);
+    public function enrolledStudentIndex(Request $request){
+        $students = Semester::getEnrolledStudents($request->sem);
+        $semesters  = Semester::latest('id')->get();
         return Inertia::render('Admin/Semester/EnrolledStudent', [
-            'students'  => $students
+            'students'  => $students,
+            'semesters' => $semesters,
         ]);
     }
 }
