@@ -24,9 +24,11 @@ class MaterialController extends Controller
     {
         $materials = Material::with('category')->latest('id')->paginate(10);
         $categories = Category::latest('id')->get();
+        $file_link = asset('storage/materials/');
         return Inertia::render('Admin/Material/Index', [
-            'materials' => $materials,
-            'categories' => $categories,
+            'materials'     => $materials,
+            'categories'    => $categories,
+            'file_link'     => $file_link,
         ]);
     }
 

@@ -5,9 +5,10 @@ import { Head } from "@inertiajs/vue3";
 import { ref, reactive } from "vue";
 import AddModal from "./Partials/AddModal.vue";
 
-const {materials, categories} = defineProps<{
+const {materials, categories, file_link} = defineProps<{
   materials: Object,
   categories: Array<Object>,
+  file_link: string,
 }>();
 
 const showAdd = ref(false);
@@ -71,7 +72,9 @@ const openEditModal = (category: DynamicObject) => {
                 {{material.description}}
               </td>
               <td class="px-6 py-4">
-                {{material.file_path}}
+                <a :href="`${file_link}/${material.file_path}`" target="_blank" rel="noopener noreferrer">
+                  {{material.file_path}}
+                </a>
               </td>
               <td class="px-6 py-4">
                 {{material.status}}
