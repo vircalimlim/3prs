@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@vueup/vue-quill": "^1.2.0",
-        "@yeger/vue-masonry-wall": "^5.0.14"
+        "@yeger/vue-masonry-wall": "^5.0.14",
+        "vue3-toastify": "^0.2.3"
     }
 }
