@@ -20,9 +20,15 @@ class MaterialController extends Controller
         return $filename;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $materials = Material::with('category')->latest('id')->paginate(10);
+        $materials = Material::with('category');
+
+        if(!empty($request->type)){
+            $materials = $materials->where('category_id', $request->type);
+        }
+
+        $materials = $materials->latest('id')->paginate(10);
         $categories = Category::latest('id')->get();
         $file_link = asset('storage/materials/');
         return Inertia::render('Admin/Material/Index', [

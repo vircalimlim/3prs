@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Pagination from "@/Components/Pagination.vue";
 import Admin from "@/Layouts/Admin.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import { ref, reactive } from "vue";
 import AddModal from "./Partials/AddModal.vue";
 import EditModal from "./Partials/EditModal.vue";
@@ -14,6 +14,7 @@ const {materials, categories, file_link} = defineProps<{
 
 const showAdd = ref(false);
 const showEdit = ref(false);
+const categoryFilter = ref('');
 // Define a type for dynamic properties
 type DynamicObject = Record<string, any>;
 
@@ -28,6 +29,10 @@ const openEditModal = (material: DynamicObject) => {
   showEdit.value = true;
   Object.assign(editMaterial, material);
 };
+
+const handleCategoryFilter = () => {
+  router.get(route('admin.material.index'), {type: categoryFilter.value}, {preserveState: true, preserveScroll: true});
+}
 </script>
 
 <template>
@@ -41,9 +46,16 @@ const openEditModal = (material: DynamicObject) => {
       >
         Materials
       </h1>
-      <button @click.prevent="openAddModal" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
-        Add
-      </button>
+      <div class="flex items-center gap-2">
+        <select @change="handleCategoryFilter" v-model="categoryFilter" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 py-2">
+            <option value="" selected>Filter by</option>
+            <option v-for="category in categories" :value="category.id">{{category.title}}</option>
+        </select>
+
+        <button @click.prevent="openAddModal" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">
+          Add
+        </button>
+      </div>
     </div>
 
       <div class="relative overflow-x-auto shadow sm:rounded-lg">
