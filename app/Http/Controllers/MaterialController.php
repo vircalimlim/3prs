@@ -50,19 +50,32 @@ class MaterialController extends Controller
         return back();
     }
 
-    public function updateCategory(Request $request)
+    public function updateMaterial(Request $request)
     {
         $request->validate([
             'id'            => 'required',
-            'title'         => 'required|unique:categories,title,'.$request->id,
+            'category'      => 'required',
+            'title'         => 'required|unique:materials,title,'.$request->id,
             'description'   => 'required',
+            'pdf'           => 'nullable|mimetypes:application/pdf',
         ]);
 
-        Category::where('id', $request->id)
+        $file_name = '';
+        if(empty($request->pdf)){
+            $file_name = $request->currentFile;
+        }
+        else{
+            $file_name = $this->saveFileToStorage($request->file('pdf'));
+        }
+
+        Material::where('id', $request->id)
             ->update([
+                'category_id'      => $request->category,
                 'title'         => $request->title,
                 'description'   => $request->description,
+                'file_path'     => $file_name,
             ]);
-        return redirect()->back();
+
+        return back();
     }
 }

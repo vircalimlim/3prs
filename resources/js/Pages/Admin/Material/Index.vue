@@ -4,6 +4,7 @@ import Admin from "@/Layouts/Admin.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, reactive } from "vue";
 import AddModal from "./Partials/AddModal.vue";
+import EditModal from "./Partials/EditModal.vue";
 
 const {materials, categories, file_link} = defineProps<{
   materials: Object,
@@ -23,9 +24,9 @@ const openAddModal = () => {
   showAdd.value = true;
 };
 
-const openEditModal = (category: DynamicObject) => {
+const openEditModal = (material: DynamicObject) => {
   showEdit.value = true;
-  Object.assign(editMaterial, category);
+  Object.assign(editMaterial, material);
 };
 </script>
 
@@ -83,7 +84,7 @@ const openEditModal = (category: DynamicObject) => {
                 {{material.created_at}}
               </td>
               <td class="px-6 py-4 text-right">
-                <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                <a @click.prevent="openEditModal(material)" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
               </td>
             </tr>
             <tr v-if="materials.data.length == 0">
@@ -95,6 +96,6 @@ const openEditModal = (category: DynamicObject) => {
       <Pagination :links="materials.links"/>
     </section>
     <AddModal :showAdd="showAdd" @close="showAdd = false" :categories="categories"/>
-    <!-- <EditModal v-if="showEdit" :showEdit="showEdit" @close="showEdit = false" :category="editCategory" /> -->
+    <EditModal v-if="showEdit" :showEdit="showEdit" @close="showEdit = false" :material="editMaterial" :categories="categories" />
   </Admin>
 </template>
