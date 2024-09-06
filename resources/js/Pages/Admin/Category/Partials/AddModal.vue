@@ -6,6 +6,8 @@ import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showAdd} = defineProps({
   showAdd: {
@@ -26,12 +28,17 @@ const closeModal = () => {
   form.reset();
 };
 
-const storeStudent = () => {
+const storeCategory = () => {
   form.post(route("admin.category.store"), {
     onSuccess: () => {
       emit('close');
       form.title = "";
       form.description = "";
+
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+
     },
   });
 }
@@ -40,7 +47,7 @@ const storeStudent = () => {
 <template>
   <Modal :show="showAdd" @close="closeModal">
     <h1 class="text-gray-700 text-2xl font-bold">Add Category</h1>
-    <form @submit.prevent="storeStudent" class="mt-6 space-y-6">
+    <form @submit.prevent="storeCategory" class="mt-6 space-y-6">
 
       <div>
         <InputLabel for="title" value="Title" />

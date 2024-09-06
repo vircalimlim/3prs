@@ -8,6 +8,8 @@ import InputError from '@/Components/InputError.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { onMounted } from 'vue';
 import { watchEffect } from 'vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showEdit, semester} = defineProps({
   showEdit: {
@@ -49,6 +51,11 @@ const updateSemester = () => {
       form.start_date = "";
       form.end_date = "";
       form.id = "";
+                        
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+
     },
   });
 };

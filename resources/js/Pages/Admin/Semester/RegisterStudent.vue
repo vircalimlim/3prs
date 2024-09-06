@@ -3,6 +3,8 @@ import Admin from "@/Layouts/Admin.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import { ref, reactive } from "vue";
 import Pagination from "@/Components/Pagination.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {students, semesters} = defineProps<{
   students: Object,
@@ -43,6 +45,11 @@ const registerStudent = () => {
             form.selected_students  = [];
             form.select_all         = false;
             form.select_list        = false;
+                              
+            toast.success("Saved!", {
+              autoClose: 1000,
+            });
+
         },
   });
 }

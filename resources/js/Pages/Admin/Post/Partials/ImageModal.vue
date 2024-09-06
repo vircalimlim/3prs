@@ -6,6 +6,8 @@ import { useForm } from '@inertiajs/vue3';
 import { watchEffect, defineEmits } from 'vue';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import InputError from '@/Components/InputError.vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showImage, post} = defineProps({
   showImage: {
@@ -44,6 +46,11 @@ const updatePost = () => {
       form.image = null;
       form.type = '';
       form.id = '';
+                  
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+
     },
   });
 };

@@ -8,6 +8,8 @@ import { useForm, usePage } from '@inertiajs/vue3';
 import { watchEffect, defineEmits } from 'vue';
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showEdit, post} = defineProps({
   showEdit: {
@@ -49,6 +51,11 @@ const updatePost = () => {
       form.description = '';
       form.type = '';
       form.id = '';
+                  
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+
     },
   });
 };

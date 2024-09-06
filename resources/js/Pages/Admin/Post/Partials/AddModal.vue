@@ -8,6 +8,8 @@ import InputError from '@/Components/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showAdd} = defineProps({
   showAdd: {
@@ -38,6 +40,11 @@ const storePost = () => {
       form.description = "";
       form.image = null;
       form.type = '';
+                  
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+
     },
   });
 }

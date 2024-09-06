@@ -6,6 +6,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { watchEffect, defineEmits } from 'vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showEdit, student} = defineProps({
   showEdit: {
@@ -62,6 +64,11 @@ const updateStudent = () => {
       form.mobile = '';
       form.address = '';
       form.id = '';
+                        
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+
     },
   });
 };

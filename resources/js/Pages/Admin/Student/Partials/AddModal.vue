@@ -6,6 +6,8 @@ import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showAdd} = defineProps({
   showAdd: {
@@ -44,6 +46,11 @@ const storeStudent = () => {
       form.email = "";
       form.mobile = "";
       form.address = "";
+                        
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+
     },
   });
 }
