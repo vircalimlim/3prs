@@ -72,7 +72,7 @@ const openEditModal = (category: DynamicObject) => {
                 {{material.description}}
               </td>
               <td class="px-6 py-4">
-                <a :href="`${file_link}/${material.file_path}`" target="_blank" rel="noopener noreferrer">
+                <a class="text-blue-400" :href="`${file_link}/${material.file_path}`" target="_blank" rel="noopener noreferrer">
                   {{material.file_path}}
                 </a>
               </td>
