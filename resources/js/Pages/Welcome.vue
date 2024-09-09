@@ -54,9 +54,6 @@ header {
                 <img class="h-8" src="/images/logo.png" alt="school logo">
             </div>
             <div>
-                <img src="" alt="website logo">
-            </div>
-            <div>
                 <a href="/login" type="button"
                     class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
                     Login
