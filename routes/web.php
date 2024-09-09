@@ -3,6 +3,7 @@
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PostController;
@@ -30,9 +31,7 @@ Route::get('/student/post', function () {
     return Inertia::render('Student/Post');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified', 'isAdmin'])->name('dashboard');
+Route::get('/dashboard',                        [DashboardController::class,    'index'])->middleware(['auth', 'verified', 'isAdmin'])->name('dashboard');
 
 Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/semester',                     [SemesterController::class,     'index'])->name('semester.index');
@@ -60,7 +59,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
 
     Route::get('/material',                     [MaterialController::class, 'index'])->name('admin.material.index');
     Route::post('/material/save',               [MaterialController::class, 'storeMaterial'])->name('admin.material.store');
-    Route::post('/material/update',            [MaterialController::class, 'updateMaterial'])->name('admin.material.update');
+    Route::post('/material/update',             [MaterialController::class, 'updateMaterial'])->name('admin.material.update');
 });
 
 Route::middleware('auth')->group(function () {
