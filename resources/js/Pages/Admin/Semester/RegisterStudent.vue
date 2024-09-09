@@ -6,10 +6,16 @@ import Pagination from "@/Components/Pagination.vue";
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-const {students, semesters} = defineProps<{
-  students: Object,
-  semesters: Array<Object>,
-}>();
+const {students, semesters} = defineProps({
+  students: {
+    type: Object,
+    required: true,
+  },
+  semesters: {
+    type: Array<any>,
+    required: true,
+  },
+});
 
 const form = useForm({
     selected_sem: '',
@@ -21,7 +27,7 @@ const form = useForm({
 const selectStudentsInList = (event: any) => {
     form.select_all = false;
     if(event.target.checked){
-        form.selected_students = students.data.map(student => student.id);
+        form.selected_students = students.data.map((student: { id: any; }) => student.id);
     }
     else{
         form.selected_students = [];
@@ -31,7 +37,7 @@ const selectStudentsInList = (event: any) => {
 const selectAllStudent = (event: any) => {
     form.select_list = false;
     if(event.target.checked){
-        form.selected_students = students.data.map(student => student.id);
+        form.selected_students = students.data.map((student: { id: any; }) => student.id);
     }
     else{
         form.selected_students = [];

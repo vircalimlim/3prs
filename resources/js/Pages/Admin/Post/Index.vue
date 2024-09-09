@@ -8,10 +8,16 @@ import { reactive, ref } from "vue";
 import Pagination from "@/Components/Pagination.vue";
 import { onMounted } from "vue";
 
-const {posts} = defineProps<{
-    posts: Object,
-    storage_link: string,
-}>();
+const {posts} = defineProps({
+    posts: {
+      type: Object,
+      required: true,
+    },
+    storage_link: {
+      type: String,
+      required: true,
+    },
+});
 
 const filteredPost = ref('achievements');
 const showAdd = ref(false);

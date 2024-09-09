@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Modal from '@/Components/Modal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -19,7 +19,7 @@ const {showEdit, material} = defineProps({
     required: true
   },
   categories: {
-    type: Array<Object>,
+    type: Array,
     required: true
   }
 });

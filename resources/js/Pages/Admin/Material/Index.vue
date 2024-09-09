@@ -6,11 +6,20 @@ import { ref, reactive } from "vue";
 import AddModal from "./Partials/AddModal.vue";
 import EditModal from "./Partials/EditModal.vue";
 
-const {materials, categories, file_link} = defineProps<{
-  materials: Object,
-  categories: Array<Object>,
-  file_link: string,
-}>();
+const {materials, categories, file_link} = defineProps({
+  materials: {
+    type: Object,
+    required: true,
+  },
+  categories: {
+    type: Array<any>,
+    required: true,
+  },
+  file_link: {
+    type: String,
+    required: true,
+  },
+});
 
 const showAdd = ref(false);
 const showEdit = ref(false);

@@ -4,10 +4,16 @@ import { Head, Link, router, useForm } from "@inertiajs/vue3";
 import { ref, reactive } from "vue";
 import Pagination from "@/Components/Pagination.vue";
 
-const {students, semesters} = defineProps<{
-  students: Object,
-  semesters: Array<Object>,
-}>();
+const {students, semesters} = defineProps({
+  students: {
+    type: Object,
+    required: true,
+  },
+  semesters: {
+    type: Array<any>,
+      required: true,
+  },
+});
 
 const current_url = window.location.href;
 const baseUrl = current_url.split('?')[0];

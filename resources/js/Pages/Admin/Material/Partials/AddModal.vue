@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, defineEmits, watch } from 'vue';
 import Modal from '@/Components/Modal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -15,7 +15,7 @@ const {showAdd, categories} = defineProps({
     required: true
   },
   categories: {
-    type: Array<Object>,
+    type: Array,
     required: true
   },
 });

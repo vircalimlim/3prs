@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Modal from '@/Components/Modal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';

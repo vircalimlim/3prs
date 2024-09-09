@@ -6,9 +6,12 @@ import EditModal from "./Partials/EditModal.vue";
 import { ref, reactive } from "vue";
 import Pagination from "@/Components/Pagination.vue";
 
-const {students} = defineProps<{
-  students: Object,
-}>();
+const {students} = defineProps({
+  students: {
+    type: Object,
+    required: true,
+  },
+});
 
 const showAdd = ref(false);
 const showEdit = ref(false);
