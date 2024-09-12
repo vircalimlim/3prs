@@ -174,7 +174,7 @@ header {
                 </div>
             </div>
             <div v-show="achievements.length < 1">
-                <h1 class="text-center text-xl text-gray-500 py-10">No announcements yet.</h1>
+                <h1 class="text-center text-xl text-gray-500 py-10">No achievements yet.</h1>
             </div>
         </section>
 
