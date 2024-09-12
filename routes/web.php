@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\StudentController;
 use App\Models\Achievement;
+use App\Models\Announcement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,7 +21,8 @@ Route::get('/', function () {
         'canLogin'      => Route::has('login'),
         'canRegister'   => Route::has('register'),
         'achievements'  => Achievement::latest('created_at')->take(3)->get(),
-        'storage_link'  => asset('storage/images/achievements'),
+        'announcements' => Announcement::latest('created_at')->take(3)->get(),
+        'storage_link'  => asset('storage/images/'),
     ]);
 });
 
