@@ -64,7 +64,7 @@ onUnmounted(() => {
             </div>
         </div>
         <div class="h-full flex flex-col items-center justify-center gap-10">
-            <h1 class="uppercase text-4xl font-bold text-gray-50">{{pageName}}</h1>
+            <h1 class="uppercase text-center text-4xl font-bold text-gray-50">{{pageName}}</h1>
             <div class="flex gap-2 text-gray-100">
                 <Link class="hover:text-blue-600" href="/">Home</Link>
                 <span>//</span>
