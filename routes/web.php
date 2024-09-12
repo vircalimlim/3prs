@@ -64,6 +64,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
 });
 
     Route::get('/achievements',                  [AchievementController::class, 'index'])->name('achievement.index');
+    Route::get('/achievement/{id}',              [AchievementController::class, 'getSingleAchievement'])->name('achievement.id');
     Route::get('/announcements',                 [AnnouncementController::class, 'index'])->name('announcement.index');
     Route::get('/announcement/{id}',             [AnnouncementController::class, 'getSingleAnnouncement'])->name('announcement.id');
 
