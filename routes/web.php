@@ -10,16 +10,17 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\StudentController;
+use App\Models\Achievement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'canLogin'      => Route::has('login'),
+        'canRegister'   => Route::has('register'),
+        'achievements'  => Achievement::latest('created_at')->take(3)->get(),
+        'storage_link'  => asset('storage/images/achievements'),
     ]);
 });
 
@@ -61,6 +62,10 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::post('/material/save',               [MaterialController::class, 'storeMaterial'])->name('admin.material.store');
     Route::post('/material/update',             [MaterialController::class, 'updateMaterial'])->name('admin.material.update');
 });
+
+    Route::get('/achievements',                  [AchievementController::class, 'index'])->name('achievement.index');
+    Route::get('/announcements',                 [AnnouncementController::class, 'index'])->name('announcement.index');
+    Route::get('/announcement/{id}',             [AnnouncementController::class, 'getSingleAnnouncement'])->name('announcement.id');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
