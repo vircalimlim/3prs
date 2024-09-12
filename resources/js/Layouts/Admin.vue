@@ -5,39 +5,39 @@ import { ref } from "vue";
 const isShowDropDown = ref(false);
 const isShowDropDown2 = ref(false);
 
-onMounted(() => {
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
+// onMounted(() => {
+//   document.addEventListener('contextmenu', function(e) {
+//     e.preventDefault();
+//   });
 
-  document.onkeydown = (e) => {
-    if (e.key == 123) {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'I') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'C') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'J') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.key == 'U') {
-        e.preventDefault();
-    }
-    if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && (e.key === 'p' || e.key === 's')) {
-            e.preventDefault();
-    }
-  };
+//   document.onkeydown = (e) => {
+//     if (e.key == 123) {
+//         e.preventDefault();
+//     }
+//     if (e.ctrlKey && e.shiftKey && e.key == 'I') {
+//         e.preventDefault();
+//     }
+//     if (e.ctrlKey && e.shiftKey && e.key == 'C') {
+//         e.preventDefault();
+//     }
+//     if (e.ctrlKey && e.shiftKey && e.key == 'J') {
+//         e.preventDefault();
+//     }
+//     if (e.ctrlKey && e.key == 'U') {
+//         e.preventDefault();
+//     }
+//     if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+//         e.preventDefault();
+//     }
+//     if (e.ctrlKey && (e.key === 'p' || e.key === 's')) {
+//             e.preventDefault();
+//     }
+//   };
 
-  window.print = function() {
-    alert('Printing is disabled on this page.');
-  };
-})
+//   window.print = function() {
+//     alert('Printing is disabled on this page.');
+//   };
+// })
 </script>
 
 <template>
