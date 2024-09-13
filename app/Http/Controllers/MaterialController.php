@@ -84,4 +84,17 @@ class MaterialController extends Controller
 
         return back();
     }
+
+    public function indexPublic(){
+        $materials = Material::latest('created_at')->get();
+        $storage_link = asset('storage/materials/');
+        return Inertia::render('Material/Index', [
+            'materials' => $materials,
+            'storage_link'  => $storage_link,
+        ]);
+    }
+
+    public function getSingleMaterial(Request $request){
+        return Inertia::render('Material/Id');
+    }
 }

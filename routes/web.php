@@ -70,6 +70,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/announcements',                 [AnnouncementController::class, 'index'])->name('announcement.index');
     Route::get('/announcement/{id}',             [AnnouncementController::class, 'getSingleAnnouncement'])->name('announcement.id');
 
+    Route::get('/research',                      [MaterialController::class, 'indexPublic'])->name('research.index_public');
+    Route::get('/research/{id}',                 [MaterialController::class, 'getSingleMaterial'])->name('research.id');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
