@@ -1,56 +1,79 @@
 <script setup lang="ts">
-import StudentLayout from '@/Layouts/StudentLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import StudentLayout from "@/Layouts/StudentLayout.vue";
+import { Link } from "@inertiajs/vue3";
 
 const {} = defineProps({
-    'materials': {
-        type: Array<any>,
-        required: true,
-    },
-    'storage_link': {
-        type: String,
-        required: true,
-    }
+  materials: {
+    type: Array<any>,
+    required: true,
+  },
+  storage_link: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 
 <template>
-    <StudentLayout page-name="Research">
-        <section>
-            
+  <StudentLayout page-name="Research">
+    <section>
 
-<div class="relative overflow-x-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50">
+      <div
+        v-if="materials.length > 0"
+        class="relative overflow-x-auto"
+      >
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+          <thead class="text-lg text-gray-700 uppercase bg-gray-50">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    Title
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Description
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Link
-                </th>
+              <th
+                scope="col"
+                class="px-6 py-3"
+              >
+                Title
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3"
+              >
+                Description
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3"
+              >
+                Link
+              </th>
             </tr>
-        </thead>
-        <tbody>
-            <tr v-for="material in materials" class="bg-white border-b text-lg">
-                <th scope="row" class="capitalize px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {{ material.title }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ material.description }}
-                </td>
-                <td class="px-6 py-4">
-                    <Link class="text-blue-600 hover:text-blue-400" :href="`/research/${material.id}`">{{ material.file_path }}</Link>
-                </td>
+          </thead>
+          <tbody>
+            <tr
+              v-for="material in materials"
+              class="bg-white border-b text-lg"
+            >
+              <th
+                scope="row"
+                class="capitalize px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+              >
+                {{ material.title }}
+              </th>
+              <td class="px-6 py-4">
+                {{ material.description }}
+              </td>
+              <td class="px-6 py-4">
+                <Link
+                  class="text-blue-600 hover:text-blue-400"
+                  :href="`/research/${material.id}`"
+                >{{ material.file_path }}</Link>
+              </td>
             </tr>
-        </tbody>
-    </table>
-</div>
-        </section>
-        <!-- <section class="flex flex-col justify-center items-center gap-10 py-10">
+          </tbody>
+        </table>
+      </div>
+      <div v-if="materials.length < 1">
+        <h1 class="text-gray-500 text-center">No results found.</h1>
+      </div>
+    </section>
+    <!-- <section class="flex flex-col justify-center items-center gap-10 py-10">
             
             <a v-for="achievement in achievements" href="#" class="flex flex-col bg-white rounded-lg shadow md:flex-row md:max-w-[90%] hover:bg-gray-100">
                 <img class="object-cover w-full h-96 md:h-86 md:w-[450px]" :src="`${storage_link}/${achievement.image}`" alt="">
@@ -70,5 +93,5 @@ const {} = defineProps({
             </div>
 
         </section> -->
-    </StudentLayout>
+  </StudentLayout>
 </template>
