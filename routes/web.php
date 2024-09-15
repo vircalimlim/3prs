@@ -65,13 +65,13 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::post('/material/update',             [MaterialController::class, 'updateMaterial'])->name('admin.material.update');
 });
 
-    Route::get('/achievements',                  [AchievementController::class, 'index'])->name('achievement.index');
-    Route::get('/achievement/{id}',              [AchievementController::class, 'getSingleAchievement'])->name('achievement.id');
-    Route::get('/announcements',                 [AnnouncementController::class, 'index'])->name('announcement.index');
-    Route::get('/announcement/{id}',             [AnnouncementController::class, 'getSingleAnnouncement'])->name('announcement.id');
+Route::get('/achievements',                  [AchievementController::class, 'index'])->name('achievement.index');
+Route::get('/achievement/{id}',              [AchievementController::class, 'getSingleAchievement'])->name('achievement.id');
+Route::get('/announcements',                 [AnnouncementController::class, 'index'])->name('announcement.index');
+Route::get('/announcement/{id}',             [AnnouncementController::class, 'getSingleAnnouncement'])->name('announcement.id');
 
-    Route::get('/research',                      [MaterialController::class, 'indexPublic'])->name('research.index_public');
-    Route::get('/research/{id}',                 [MaterialController::class, 'getSingleMaterial'])->name('research.id');
+Route::get('/research',                      [MaterialController::class, 'indexPublic'])->middleware(['auth'])->name('research.index_public');
+Route::get('/research/{id}',                 [MaterialController::class, 'getSingleMaterial'])->middleware(['auth'])->name('research.id');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
