@@ -30,17 +30,17 @@ class LoginController extends Controller
         // uncomment this if you want to support email as login
         // $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_key';
         $loginType = 'user_key';
- 
-        if (Auth::attempt([$loginType => $request->login, 'password' => $request->password])){
+
+        if (Auth::attempt([$loginType => $request->login, 'password' => $request->password])) {
             $request->session()->regenerate();
 
             $user = auth()->user();
-            if($user->student_id == 0 || $user->semester_id == 0){
+            if ($user->student_id == 0 || $user->semester_id == 0) {
                 return redirect()->intended('dashboard');
             }
-            return redirect()->to('/student');
+            return redirect()->to('/announcements');
         }
- 
+
         return back()->withErrors([
             'login' => 'The provided credentials do not match our records.',
         ])->onlyInput('login');
