@@ -9,8 +9,9 @@ use Inertia\Inertia;
 
 class MaterialController extends Controller
 {
-    private function saveFileToStorage($file_pdf){
-        $filename = time().'.'.$file_pdf->getClientOriginalExtension();
+    private function saveFileToStorage($file_pdf)
+    {
+        $filename = time() . '.' . $file_pdf->getClientOriginalExtension();
         $save_path = storage_path("app/public/materials/");
 
         if (!file_exists($save_path)) {
@@ -24,7 +25,7 @@ class MaterialController extends Controller
     {
         $materials = Material::with('category');
 
-        if(!empty($request->type)){
+        if (!empty($request->type)) {
             $materials = $materials->where('category_id', $request->type);
         }
 
@@ -38,7 +39,8 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function storeMaterial(Request $request){
+    public function storeMaterial(Request $request)
+    {
         $request->validate([
             'category'      => 'required',
             'title'         => 'required|unique:materials',
@@ -61,16 +63,15 @@ class MaterialController extends Controller
         $request->validate([
             'id'            => 'required',
             'category'      => 'required',
-            'title'         => 'required|unique:materials,title,'.$request->id,
+            'title'         => 'required|unique:materials,title,' . $request->id,
             'description'   => 'required',
             'pdf'           => 'nullable|mimetypes:application/pdf',
         ]);
 
         $file_name = '';
-        if(empty($request->pdf)){
+        if (empty($request->pdf)) {
             $file_name = $request->currentFile;
-        }
-        else{
+        } else {
             $file_name = $this->saveFileToStorage($request->file('pdf'));
         }
 
@@ -85,7 +86,8 @@ class MaterialController extends Controller
         return back();
     }
 
-    public function indexPublic(){
+    public function indexPublic()
+    {
         $materials = Material::latest('created_at')->get();
         $storage_link = asset('storage/materials/');
         return Inertia::render('Material/Index', [
@@ -94,7 +96,13 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function getSingleMaterial(Request $request){
-        return Inertia::render('Material/Id');
+    public function getSingleMaterial(Request $request)
+    {
+        $material = Material::find($request->id);
+        if (!$material) abort(404);
+        $file = asset('storage/materials') . '/' . $material->file_path;
+        return Inertia::render('Material/Id', [
+            'pdfSource' => $file
+        ]);
     }
 }

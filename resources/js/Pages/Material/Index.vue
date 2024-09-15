@@ -60,10 +60,11 @@ const {} = defineProps({
                 {{ material.description }}
               </td>
               <td class="px-6 py-4">
-                <Link
+                <a
+                  target="_blank"
                   class="text-blue-600 hover:text-blue-400"
                   :href="`/research/${material.id}`"
-                >{{ material.file_path }}</Link>
+                >File Path</a>
               </td>
             </tr>
           </tbody>
