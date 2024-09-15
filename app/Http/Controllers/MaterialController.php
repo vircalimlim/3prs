@@ -22,6 +22,14 @@ class MaterialController extends Controller
         return $filename;
     }
 
+    private function userVisit($user_id, $origin)
+    {
+        if ($user_id) {
+            DB::table('user_visit')
+                ->insert(['user_id' => $user_id, 'origin' => $origin, 'created_at' => date('Y-m-d H:i:s')]);
+        }
+    }
+
     public function index(Request $request)
     {
         $materials = Material::with('category');
@@ -111,6 +119,10 @@ class MaterialController extends Controller
     {
         $material = Material::find($request->id);
         if (!$material) abort(404);
+
+        $user_id = auth()->user()->student_id;
+        $this->userVisit($user_id, 'research');
+
         $file = asset('storage/materials') . '/' . $material->file_path;
         return Inertia::render('Material/Id', [
             'pdfSource' => $file

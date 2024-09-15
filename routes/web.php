@@ -64,6 +64,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/material',                     [MaterialController::class, 'index'])->name('admin.material.index');
     Route::post('/material/save',               [MaterialController::class, 'storeMaterial'])->name('admin.material.store');
     Route::post('/material/update',             [MaterialController::class, 'updateMaterial'])->name('admin.material.update');
+
+    Route::get('/logs',                         [DashboardController::class,    'logs'])->name('admin.logs');
 });
 
 Route::get('/achievements',                  [AchievementController::class, 'index'])->name('achievement.index');
