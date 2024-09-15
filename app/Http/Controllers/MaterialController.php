@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class MaterialController extends Controller
@@ -86,9 +87,19 @@ class MaterialController extends Controller
         return back();
     }
 
-    public function indexPublic()
+    public function indexPublic(Request $request)
     {
-        $materials = Material::latest('created_at')->get();
+        $search = $request->search;
+        $search = str_replace('-', ' ', $search);
+        $materials = DB::table('materials as m')
+            ->selectRaw('m.*, c.title as category_name')
+            ->leftJoin('categories as c', 'm.category_id', '=', 'c.id')
+            ->where(function ($query) use ($search) {
+                $query->where('m.title', 'like', '%' . $search . '%')
+                    ->orWhere('c.title', 'like', '%' . $search . '%');
+            })
+            ->latest('created_at')
+            ->get();
         $storage_link = asset('storage/materials/');
         return Inertia::render('Material/Index', [
             'materials' => $materials,
