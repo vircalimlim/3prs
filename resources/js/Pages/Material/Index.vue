@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import StudentLayout from "@/Layouts/StudentLayout.vue";
 import { Link, router } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const {} = defineProps({
   materials: {
@@ -35,6 +35,12 @@ const handleSearch = () => {
     { preserveState: true, preserveScroll: true }
   );
 };
+
+watch(searchQuery, (newValue: any, oldValue: any) => {
+  if (newValue == "") {
+    handleSearch();
+  }
+});
 </script>
 
 <template>
@@ -112,14 +118,14 @@ const handleSearch = () => {
             >
               <th
                 scope="row"
-                class="capitalize px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                class="capitalize px-6 py-4 font-medium text-gray-900 min-w-96 align-top"
               >
                 {{ material.title }}
               </th>
               <td class="px-6 py-4">
                 {{ material.description }}
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 align-top">
                 <a
                   target="_blank"
                   class="text-blue-600 hover:text-blue-400"
