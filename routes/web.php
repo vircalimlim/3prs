@@ -13,6 +13,7 @@ use App\Http\Controllers\StudentController;
 use App\Models\Achievement;
 use App\Models\Announcement;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -82,4 +83,8 @@ Route::middleware('auth')->group(function () {
 Route::get('login',                             [LoginController::class, 'create'])->name('login');
 Route::post('login',                            [LoginController::class, 'store']);
 Route::post('logout',                           [LoginController::class, 'destroy'])->name('logout');
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 // require __DIR__.'/auth.php';
