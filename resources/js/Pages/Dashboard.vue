@@ -40,27 +40,27 @@ const props = defineProps({
             <div class="flex flex-wrap gap-10 justify-center">
             
                 <Link :href="route('admin.student.index')" class="flex flex-col gap-2 items-center justify-center max-w-sm py-6 px-20 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                    <h3 class="text-2xl font-medium text-gray-600">Total Students</h3>
+                    <h3 class="text-xl font-medium text-blue-900">Total Students</h3>
                     <h1 class="font-bold text-6xl text-gray-700">{{total_students}}</h1>
                 </Link>
 
                 <Link :href="route('semester.enrolled_student')" class="flex flex-col gap-2 items-center justify-center max-w-sm py-6 px-20 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                    <h3 class="text-2xl font-medium text-gray-600">Total Enrolled</h3>
+                    <h3 class="text-xl font-medium text-blue-900">Total Enrolled</h3>
                     <h1 class="font-bold text-6xl text-gray-700">{{ total_enrolled }}</h1>
                 </Link>
 
                 <Link :href="route('admin.post.index')" class="flex flex-col gap-2 items-center justify-center max-w-sm py-6 px-20 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                    <h3 class="text-2xl font-medium text-gray-600">Achievements</h3>
+                    <h3 class="text-xl font-medium text-blue-900">Achievements</h3>
                     <h1 class="font-bold text-6xl text-gray-700">{{total_achievements}}</h1>
                 </Link>
 
                 <Link :href="route('admin.post.index')" class="flex flex-col gap-2 items-center justify-center max-w-sm py-6 px-20 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                    <h3 class="text-2xl font-medium text-gray-600">Announcements</h3>
+                    <h3 class="text-xl font-medium text-blue-900">Announcements</h3>
                     <h1 class="font-bold text-6xl text-gray-700">{{ total_announcements }}</h1>
                 </Link>
 
                 <Link :href="route('admin.material.index')" class="flex flex-col gap-2 items-center justify-center max-w-sm py-6 px-20 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                    <h3 class="text-2xl font-medium text-gray-600">Research Materials</h3>
+                    <h3 class="text-xl font-medium text-blue-900">Research Materials</h3>
                     <h1 class="font-bold text-6xl text-gray-700">{{ total_materials }}</h1>
                 </Link>
 
