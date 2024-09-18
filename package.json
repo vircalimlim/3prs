@@ -22,6 +22,8 @@
     "dependencies": {
         "@vueup/vue-quill": "^1.2.0",
         "@yeger/vue-masonry-wall": "^5.0.14",
+        "chart.js": "^4.4.4",
+        "vue-chartjs": "^5.3.1",
         "vue-pdf-embed": "^2.1.0",
         "vue3-toastify": "^0.2.3"
     }
