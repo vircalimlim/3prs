@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Semester;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -21,6 +23,7 @@ class LoginController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        $today = date('Y-m-d');
         $credentials = $request->validate([
             'login' => ['required'],
             'password' => ['required'],
@@ -32,12 +35,33 @@ class LoginController extends Controller
         $loginType = 'user_key';
 
         if (Auth::attempt([$loginType => $request->login, 'password' => $request->password])) {
-            $request->session()->regenerate();
 
             $user = auth()->user();
             if ($user->student_id == 0 || $user->semester_id == 0) {
+                $request->session()->regenerate();
                 return redirect()->intended('dashboard');
             }
+
+            $semester = Semester::find($user->semester_id);
+            if(!$semester){
+                return back()->withErrors([
+                    'login' => 'Your login key is expired or invalid.',
+                ])->onlyInput('login');
+            }
+
+            $semester_valid = DB::table('semesters')
+            ->where('id', $user->semester_id)
+            ->whereDate('start_date', '<=', $today)
+            ->whereDate('end_date', '>=', $today)
+            ->first();
+            if(!$semester_valid){
+                return back()->withErrors([
+                    'login' => 'Your login key is expired or invalid.',
+                ])->onlyInput('login');
+            }
+
+            $request->session()->regenerate();
+
             return redirect()->to('/announcements');
         }
 
