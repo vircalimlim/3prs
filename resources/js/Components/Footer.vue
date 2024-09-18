@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
+</script>
+
 <template>
     <footer class="bg-white rounded-lg shadow mt-20">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
@@ -8,7 +12,7 @@
                 </a>
                 <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0">
                     <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                        <Link :href="route('about')" class="hover:underline me-4 md:me-6">About</Link>
                     </li>
                     <li>
                         <a href="#" class="hover:underline">Contact</a>
