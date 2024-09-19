@@ -14,9 +14,10 @@ class Semester extends Model
 
     public static function getEnrolledStudents($sem = ''){
         $students = DB::table('semester_student as ss')
-                    ->selectRaw('sem.name, st.first_name, st.last_name, st.gender, st.dob')
+                    ->selectRaw('sem.name, st.first_name, st.last_name, st.gender, st.dob, users.user_key')
                     ->leftJoin('semesters as sem', 'ss.semester_id', '=', 'sem.id')
-                    ->leftJoin('students as st', 'ss.student_id', '=', 'st.id');
+                    ->leftJoin('students as st', 'ss.student_id', '=', 'st.id')
+                    ->leftJoin('users', 'ss.semester_id', '=', 'users.semester_id');
 
         if(!empty($sem)){
             $students = $students->where('ss.semester_id', $sem);
