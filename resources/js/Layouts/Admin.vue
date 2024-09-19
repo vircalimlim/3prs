@@ -62,7 +62,7 @@ const handleMenu = () => {
         <li>
           <Link
             :href="route('dashboard')"
-            :class="currentRoute == 'dashboard' ? 'text-blue-900 bg-gray-100' : ''"
+            :class="currentRoute == 'dashboard' ? 'text-blue-800 bg-gray-100' : ''"
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/dashboard.png" />
@@ -72,7 +72,7 @@ const handleMenu = () => {
         <li>
           <Link
             :href="route('semester.index')"
-            :class="currentRoute == 'semester.index' ? 'text-blue-900 bg-gray-100' : ''"
+            :class="currentRoute == 'semester.index' ? 'text-blue-800 bg-gray-100' : ''"
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/semester.png" />
@@ -82,7 +82,7 @@ const handleMenu = () => {
         <li>
           <Link
             :href="route('admin.student.index')"
-            :class="currentRoute == 'admin.student.index' ? 'text-blue-900 bg-gray-100' : ''"
+            :class="currentRoute == 'admin.student.index' ? 'text-blue-800 bg-gray-100' : ''"
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/student.png" />
@@ -92,7 +92,7 @@ const handleMenu = () => {
         <li>
           <Link
             :href="route('admin.post.index')"
-            :class="currentRoute == 'admin.post.index' ? 'text-blue-900 bg-gray-100' : ''"
+            :class="currentRoute == 'admin.post.index' ? 'text-blue-800 bg-gray-100' : ''"
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/post.png" />
@@ -133,14 +133,14 @@ const handleMenu = () => {
             <li>
               <Link
                 :href="route('admin.category.index')"
-                :class="currentRoute == 'admin.category.index' ? 'text-blue-900 bg-gray-100' : ''"
+                :class="currentRoute == 'admin.category.index' ? 'text-blue-800 bg-gray-100' : ''"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
               >Category</Link>
             </li>
             <li>
               <Link
                 :href="route('admin.material.index')"
-                :class="currentRoute == 'admin.material.index' ? 'text-blue-900 bg-gray-100' : ''"
+                :class="currentRoute == 'admin.material.index' ? 'text-blue-800 bg-gray-100' : ''"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
               >Materials</Link>
             </li>
@@ -149,7 +149,7 @@ const handleMenu = () => {
         <li>
           <Link
             :href="route('admin.logs')"
-            :class="currentRoute == 'admin.logs' ? 'text-blue-900 bg-gray-100' : ''"
+            :class="currentRoute == 'admin.logs' ? 'text-blue-800 bg-gray-100' : ''"
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/logs.png" />
