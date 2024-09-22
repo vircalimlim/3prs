@@ -39,22 +39,22 @@ class LoginController extends Controller
             $user = auth()->user();
             if ($user->student_id == 0 || $user->semester_id == 0) {
                 $request->session()->regenerate();
-                return redirect()->intended('dashboard');
+                return redirect()->to('/dashboard');
             }
 
             $semester = Semester::find($user->semester_id);
-            if(!$semester){
+            if (!$semester) {
                 return back()->withErrors([
                     'login' => 'Your login key is expired or invalid.',
                 ])->onlyInput('login');
             }
 
             $semester_valid = DB::table('semesters')
-            ->where('id', $user->semester_id)
-            ->whereDate('start_date', '<=', $today)
-            ->whereDate('end_date', '>=', $today)
-            ->first();
-            if(!$semester_valid){
+                ->where('id', $user->semester_id)
+                ->whereDate('start_date', '<=', $today)
+                ->whereDate('end_date', '>=', $today)
+                ->first();
+            if (!$semester_valid) {
                 return back()->withErrors([
                     'login' => 'Your login key is expired or invalid.',
                 ])->onlyInput('login');
