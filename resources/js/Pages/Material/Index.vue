@@ -89,7 +89,7 @@ watch(searchQuery, (newValue: any, oldValue: any) => {
         class="relative overflow-x-auto"
       >
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-          <thead class="text-lg text-gray-700 uppercase bg-gray-50">
+          <thead class="text-lg text-gray-50 uppercase bg-blue-700">
             <tr>
               <th
                 scope="col"
