@@ -31,13 +31,17 @@ Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
 
-Route::get('/student', function () {
-    return Inertia::render('Student/Index');
-});
+Route::get('/contactus', function () {
+    return Inertia::render('Contact');
+})->name('contact');
 
-Route::get('/student/post', function () {
-    return Inertia::render('Student/Post');
-});
+// Route::get('/student', function () {
+//     return Inertia::render('Student/Index');
+// });
+
+// Route::get('/student/post', function () {
+//     return Inertia::render('Student/Post');
+// });
 
 Route::get('/dashboard',                        [DashboardController::class,    'index'])->middleware(['auth', 'verified', 'isAdmin'])->name('dashboard');
 
