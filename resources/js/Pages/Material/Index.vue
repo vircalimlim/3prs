@@ -130,7 +130,7 @@ watch(searchQuery, (newValue: any, oldValue: any) => {
                   target="_blank"
                   class="text-blue-600 hover:text-blue-400"
                   :href="`/research/${material.id}`"
-                >File Path</a>
+                >View File</a>
               </td>
             </tr>
           </tbody>
