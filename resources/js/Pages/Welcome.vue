@@ -78,7 +78,7 @@ header {
     >
       <div class="max-w-screen-xl flex flex-wraps items-center justify-between mx-auto p-4">
         <a
-          href="https://flowbite.com/"
+          href="/"
           class="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
