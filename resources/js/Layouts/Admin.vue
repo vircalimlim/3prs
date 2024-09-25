@@ -100,6 +100,16 @@ const handleMenu = () => {
           </Link>
         </li>
         <li>
+          <Link
+            :href="route('admin.futurism.index')"
+            :class="currentRoute == 'admin.futurism.index' ? 'text-blue-800 bg-gray-100' : ''"
+            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+          >
+          <img class="h-8 w-8" src="/images/icons/futurism.png" />
+          <span class="flex-1 ms-3">Sustainability and Futurism</span>
+          </Link>
+        </li>
+        <li>
           <button
             @click="isShowDropDown2 = !isShowDropDown2"
             type="button"

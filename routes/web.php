@@ -4,6 +4,7 @@ use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FuturismController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PostController;
@@ -61,6 +62,11 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::post('/post/save',                   [PostController::class,         'storePost'])->name('admin.post.store');
     Route::patch('/post/update',                [PostController::class,         'updatePost'])->name('admin.post.update');
     Route::post('/post/update/image',           [PostController::class,         'handleImageUpdate'])->name('admin.post.update_image');
+
+    Route::get('/futurism',                     [FuturismController::class,     'index'])->name('admin.futurism.index');
+    Route::post('/futurism/save',               [FuturismController::class,     'storePost'])->name('admin.futurism.store');
+    Route::patch('/futurism/update',            [FuturismController::class,     'updatePost'])->name('admin.futurism.update');
+    Route::post('/post/update/image',           [FuturismController::class,     'handleImageUpdate'])->name('admin.futurism.update_image');
 
     // Route::get('/achievement',               [AchievementController::class, 'index'])->name('admin.achievement.index');
     // Route::get('/announcement',              [AnnouncementController::class, 'index'])->name('admin.announcement.index');
