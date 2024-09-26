@@ -80,7 +80,7 @@ onUnmounted(() => {
         class="w-full md:block"
         id="navbar-default"
       >
-        <ul class="bg-white md:bg-transparent text-xl font-bold flex flex-col justify-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+        <ul class="menu-items bg-white md:bg-transparent text-xl font-bold flex flex-col justify-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
           <li>
               <Link
                 href="/"
@@ -89,19 +89,30 @@ onUnmounted(() => {
               >Home</Link>
           </li>
           <li>
-            <Link
-              :href="route('announcement.index')"
-              :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
-              class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-            >Announcements</Link>
-          </li>
-          <li>
-            <Link
-              :href="route('achievement.index')"
-              :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
-              class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-            >Achievements</Link>
-          </li>
+              <div id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+                <Link
+                  href="#"
+                  class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0"
+                  >
+                  Post
+                </Link>
+                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+
+                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
+                      <li>
+                        <Link :href="route('announcement.index')" class="block px-4 py-2 hover:bg-gray-100">Announcements</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('achievement.index')" class="block px-4 py-2 hover:bg-gray-100">Achievements</Link>
+                      </li>
+                    </ul>
+                </div>
+
+              </div>
+            </li>
           <li>
             <Link
               href="/research"
@@ -109,6 +120,46 @@ onUnmounted(() => {
               class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
             >Research</Link>
           </li>
+          <li>
+              <div id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+                <Link
+                  href="#"
+                  class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0"
+                  >
+                  Sustainability and Futurism
+                </Link>
+                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+
+                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-full">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">Av Innovation</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'futurism'})" class="block px-4 py-2 hover:bg-gray-100">Futurism</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'social'})" class="block px-4 py-2 hover:bg-gray-100">Social Impact</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'empowerment'})" class="block px-4 py-2 hover:bg-gray-100">Women Empowerment</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'learning'})" class="block px-4 py-2 hover:bg-gray-100">Learning Development</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'environmental'})" class="block px-4 py-2 hover:bg-gray-100">Environmental Projects</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'initiatives'})" class="block px-4 py-2 hover:bg-gray-100">Student Initiatives</Link>
+                      </li>
+                    </ul>
+                </div>
+
+              </div>
+            </li>
           <li>
             <Link
               :href="route('about')"
@@ -207,7 +258,7 @@ onUnmounted(() => {
         class="w-full md:block"
         id="navbar-default"
       >
-        <ul class="text-xl font-bold flex flex-col justify-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+        <ul class="menu-items text-xl font-bold flex flex-col justify-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
           <li>
               <Link
                 href="/"
@@ -216,19 +267,30 @@ onUnmounted(() => {
               >Home</Link>
           </li>
           <li>
-            <Link
-              :href="route('announcement.index')"
-              :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-100'"
-              class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-            >Announcements</Link>
-          </li>
-          <li>
-            <Link
-              :href="route('achievement.index')"
-              :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-100'"
-              class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-            >Achievements</Link>
-          </li>
+              <div id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+                <Link
+                  href="#"
+                  class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0"
+                  >
+                  Post
+                </Link>
+                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+
+                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
+                      <li>
+                        <Link :href="route('announcement.index')" class="block px-4 py-2 hover:bg-gray-100">Announcements</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('achievement.index')" class="block px-4 py-2 hover:bg-gray-100">Achievements</Link>
+                      </li>
+                    </ul>
+                </div>
+
+              </div>
+            </li>
           <li>
             <Link
               href="/research"
@@ -236,6 +298,46 @@ onUnmounted(() => {
               class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
             >Research</Link>
           </li>
+          <li>
+              <div id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+                <Link
+                  href="#"
+                  class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0"
+                  >
+                  Sustainability and Futurism
+                </Link>
+                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+
+                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-full">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">Av Innovation</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'futurism'})" class="block px-4 py-2 hover:bg-gray-100">Futurism</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'social'})" class="block px-4 py-2 hover:bg-gray-100">Social Impact</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'empowerment'})" class="block px-4 py-2 hover:bg-gray-100">Women Empowerment</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'learning'})" class="block px-4 py-2 hover:bg-gray-100">Learning Development</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'environmental'})" class="block px-4 py-2 hover:bg-gray-100">Environmental Projects</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('futurism.index', {category: 'initiatives'})" class="block px-4 py-2 hover:bg-gray-100">Student Initiatives</Link>
+                      </li>
+                    </ul>
+                </div>
+
+              </div>
+            </li>
           <li>
             <Link
               :href="route('about')"
@@ -282,3 +384,18 @@ onUnmounted(() => {
 
   <Footer />
 </template>
+
+<style scoped>
+#post-child-dropdown {
+  display: none;
+}
+
+.menu-items>li:hover #post-child-dropdown{
+  display: block;
+  color: blue;
+}
+
+.menu-items>li {
+  padding: 10px 0px;
+}
+</style>
