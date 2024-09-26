@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Futurism;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class FuturismController extends Controller
@@ -84,5 +85,40 @@ class FuturismController extends Controller
         ]);
 
         return back();
+    }
+
+    public function indexPublic(Request $request)
+    {
+        $fullNamecategoryList = ['Av Innovation', 'Futurism', 'Social Impact', 'Women Empowerment', 'Learning Development', 'Environmental Projects', 'Student Initiatives'];
+
+        $category = $request->category;
+        $futurisms = DB::table('futurisms')
+            ->where('category', $category)
+            ->get();
+            
+        $storage_link = asset('storage/images/futurism/');
+        $fullNameCategory = array_filter($fullNamecategoryList, function($string) use ($category) {
+            return stripos($string, $category) !== false;
+        });
+        $fullNameCategory = reset($fullNameCategory);
+        if(!$fullNameCategory) abort(404);
+
+        return Inertia::render('Futurism/Index', [
+            'futurisms'     => $futurisms,
+            'storage_link'  => $storage_link,
+            'category'      => $fullNameCategory,
+        ]);
+    }
+
+    public function getSingleFuturism(Request $request)
+    {
+        $futurism = Futurism::find($request->id);
+        $more_futurisms = Futurism::where('id', '!=', $request->id)->latest('created_at')->take(10)->get();
+        $storage_link = asset('storage/images/futurism');
+        return Inertia::render('Futurism/Id', [
+            'futurism'          => $futurism,
+            'more_futurisms'    => $more_futurisms,
+            'storage_link'      => $storage_link,
+        ]);
     }
 }
