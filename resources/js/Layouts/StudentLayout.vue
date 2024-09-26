@@ -38,7 +38,7 @@ onUnmounted(() => {
     :class="scrollValue >= 250 ? 'hidden' : ''"
     class="absolute top-0 right-0 z-10 w-full border-gray-200 py-4 bg-fixed bg-center bg-no-repeat bg-[url('/images/hero.png')] bg-cover bg-gray-600 bg-blend-multiply h-[300px]"
   >
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
       <a
         href="/"
         class="flex items-center space-x-3 rtl:space-x-reverse"
@@ -77,10 +77,17 @@ onUnmounted(() => {
       </button>
       <div
         :class="isMenuOpen ? 'block fixed top-20 left-0 md:relative md:top-0' : 'hidden'"
-        class="w-full md:block md:w-auto"
+        class="w-full md:block"
         id="navbar-default"
       >
-        <ul class="bg-white md:bg-transparent text-xl font-bold flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+        <ul class="bg-white md:bg-transparent text-xl font-bold flex flex-col justify-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+          <li>
+              <Link
+                href="/"
+                :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
+                class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+              >Home</Link>
+          </li>
           <li>
             <Link
               :href="route('announcement.index')"
@@ -127,6 +134,18 @@ onUnmounted(() => {
           </li>
         </ul>
       </div>
+      <img
+        v-show="scrollValue < 250"
+        src="/images/logo-without-bg-2.png"
+        class="h-8 hidden md:block"
+        alt="Flowbite Logo"
+      />
+      <img
+        v-show="scrollValue >= 250"
+        src="/images/logo.png"
+        class="h-8 hidden md:block"
+        alt="Flowbite Logo"
+      />
     </div>
     <div class="h-full flex flex-col items-center justify-center gap-10">
       <h1 class="uppercase text-center text-4xl font-bold text-gray-50">{{pageName}}</h1>
@@ -146,7 +165,7 @@ onUnmounted(() => {
     v-if="scrollValue >= 250"
     class="fixed top-0 right-0 z-10 w-full bg-white shadow border-gray-200 py-4"
   >
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
       <a
         href="/"
         class="flex items-center space-x-3 rtl:space-x-reverse"
@@ -184,11 +203,18 @@ onUnmounted(() => {
         </svg>
       </button>
       <div
-        :class="isMenuOpen ? 'block' : 'hidden'"
-        class="w-full md:block md:w-auto"
+        :class="isMenuOpen ? 'block fixed top-20 left-0 md:relative md:top-0 bg-white' : 'hidden'"
+        class="w-full md:block"
         id="navbar-default"
       >
-        <ul class="text-xl font-bold flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+        <ul class="text-xl font-bold flex flex-col justify-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+          <li>
+              <Link
+                href="/"
+                :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
+                class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+              >Home</Link>
+          </li>
           <li>
             <Link
               :href="route('announcement.index')"
@@ -235,6 +261,18 @@ onUnmounted(() => {
           </li>
         </ul>
       </div>
+      <img
+        v-show="scrollValue < 250"
+        src="/images/logo-without-bg-2.png"
+        class="h-8 hidden md:block"
+        alt="Flowbite Logo"
+      />
+      <img
+        v-show="scrollValue >= 250"
+        src="/images/logo.png"
+        class="h-8 hidden md:block"
+        alt="Flowbite Logo"
+      />
     </div>
   </nav>
 
