@@ -1,5 +1,7 @@
 export interface User {
     id: number;
+    student_id: number,
+    semester_id: number,
     name: string;
     email: string;
     email_verified_at?: string;

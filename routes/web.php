@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CategoryController;
@@ -28,9 +29,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/about', function () {
-    return Inertia::render('About');
-})->name('about');
+
+Route::get('/about',            [AboutController::class, 'index'])->name('about');
+Route::get('/mission',          [AboutController::class, 'mission'])->name('mission');
+Route::get('/vision',           [AboutController::class, 'vision'])->name('vision');
+Route::get('/objectives',        [AboutController::class, 'objective'])->name('objectives');
+Route::post('/about/update',     [AboutController::class, 'update'])->name('about.update');
 
 Route::get('/contactus', function () {
     return Inertia::render('Contact');
@@ -104,5 +108,9 @@ Route::post('logout',                           [LoginController::class, 'destro
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
+});
+
+Route::get('/artisan/migrate', function () {
+    Artisan::call('migrate');
 });
 // require __DIR__.'/auth.php';
