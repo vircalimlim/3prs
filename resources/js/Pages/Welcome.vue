@@ -247,18 +247,31 @@ header {
             </li>
           </ul>
         </div>
-        <img
-            v-show="scrollValue < 250"
+
+        <div v-if="scrollValue < 250" class="hidden md:flex items-center gap-x-3">
+          <img
             src="/images/logo-without-bg-2.png"
             class="h-8 hidden md:block"
-            alt="Flowbite Logo"
+            alt="Logo"
           />
-        <img
-            v-show="scrollValue >= 250"
+          <img
+            src="/images/binalonan-without-bg.png"
+            class="h-12 hidden md:block"
+            alt="Logo"
+          />
+        </div>
+        <div v-else class="hidden md:flex items-center gap-x-3">
+          <img
             src="/images/logo.png"
             class="h-8 hidden md:block"
-            alt="Flowbite Logo"
-         />
+            alt="Logo"
+          />
+          <img
+            src="/images/binalonan.png"
+            class="h-12 hidden md:block"
+            alt="Logo"
+          />
+        </div>
       </div>
     </nav>
 

@@ -209,18 +209,30 @@ onUnmounted(() => {
           </li>
         </ul>
       </div>
-      <img
-        v-show="scrollValue < 250"
-        src="/images/logo-without-bg-2.png"
-        class="h-8 hidden md:block"
-        alt="Flowbite Logo"
-      />
-      <img
-        v-show="scrollValue >= 250"
-        src="/images/logo.png"
-        class="h-8 hidden md:block"
-        alt="Flowbite Logo"
-      />
+      <div v-if="scrollValue < 250" class="hidden md:flex items-center gap-x-3">
+          <img
+            src="/images/logo-without-bg-2.png"
+            class="h-8 hidden md:block"
+            alt="Logo"
+          />
+          <img
+            src="/images/binalonan-without-bg.png"
+            class="h-12 hidden md:block"
+            alt="Logo"
+          />
+        </div>
+        <div v-else class="hidden md:flex items-center gap-x-3">
+          <img
+            src="/images/logo.png"
+            class="h-8 hidden md:block"
+            alt="Logo"
+          />
+          <img
+            src="/images/binalonan.png"
+            class="h-12 hidden md:block"
+            alt="Logo"
+          />
+        </div>
     </div>
     <div class="h-full flex flex-col items-center justify-center gap-10">
       <h1 class="uppercase text-center text-4xl font-bold text-gray-50">{{pageName}}</h1>
@@ -361,14 +373,7 @@ onUnmounted(() => {
                 </div>
 
               </div>
-            </li>
-          <!-- <li>
-            <Link
-              :href="route('about')"
-              :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-100'"
-              class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-            >About</Link>
-          </li> -->
+          </li>
           <li>
               <div id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
                 <Link
@@ -418,18 +423,30 @@ onUnmounted(() => {
           </li>
         </ul>
       </div>
-      <img
-        v-show="scrollValue < 250"
-        src="/images/logo-without-bg-2.png"
-        class="h-8 hidden md:block"
-        alt="Flowbite Logo"
-      />
-      <img
-        v-show="scrollValue >= 250"
-        src="/images/logo.png"
-        class="h-8 hidden md:block"
-        alt="Flowbite Logo"
-      />
+      <div v-if="scrollValue < 250" class="hidden md:flex items-center gap-x-3">
+          <img
+            src="/images/logo-without-bg-2.png"
+            class="h-8 hidden md:block"
+            alt="Logo"
+          />
+          <img
+            src="/images/binalonan-without-bg.png"
+            class="h-12 hidden md:block"
+            alt="Logo"
+          />
+        </div>
+        <div v-else class="hidden md:flex items-center gap-x-3">
+          <img
+            src="/images/logo.png"
+            class="h-8 hidden md:block"
+            alt="Logo"
+          />
+          <img
+            src="/images/binalonan.png"
+            class="h-12 hidden md:block"
+            alt="Logo"
+          />
+        </div>
     </div>
   </nav>
 
