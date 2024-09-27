@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import TextHeader from '@/Components/TextHeader.vue';
 import StudentLayout from '@/Layouts/StudentLayout.vue';
 import { Link, useForm } from '@inertiajs/vue3';
@@ -23,7 +23,7 @@ const editImage = () => {
     document.getElementById('fileInput').click();
 }
 
-const updateAbout = (category: string) => {
+const updateAbout = (category) => {
     const  form = useForm({
         description: '',
         image: null,
