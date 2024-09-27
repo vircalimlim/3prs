@@ -160,12 +160,36 @@ onUnmounted(() => {
 
               </div>
             </li>
-          <li>
-            <Link
-              :href="route('about')"
-              :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
-              class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-            >About</Link>
+            <li>
+              <div id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+                <Link
+                  href="#"
+                  class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0"
+                  >
+                  About
+                </Link>
+                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+
+                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
+                      <li>
+                        <Link :href="route('about')" class="block px-4 py-2 hover:bg-gray-100">About</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('mission')" class="block px-4 py-2 hover:bg-gray-100">Mission</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('vision')" class="block px-4 py-2 hover:bg-gray-100">Vision</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('objectives')" class="block px-4 py-2 hover:bg-gray-100">Objectives</Link>
+                      </li>
+                    </ul>
+                </div>
+
+              </div>
           </li>
           <li v-if="$page.props.auth.user == null">
             <Link
@@ -338,12 +362,43 @@ onUnmounted(() => {
 
               </div>
             </li>
-          <li>
+          <!-- <li>
             <Link
               :href="route('about')"
               :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-100'"
               class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
             >About</Link>
+          </li> -->
+          <li>
+              <div id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+                <Link
+                  href="#"
+                  class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0"
+                  >
+                  About
+                </Link>
+                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+
+                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
+                      <li>
+                        <Link :href="route('about')" class="block px-4 py-2 hover:bg-gray-100">About</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('mission')" class="block px-4 py-2 hover:bg-gray-100">Mission</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('vision')" class="block px-4 py-2 hover:bg-gray-100">Vision</Link>
+                      </li>
+                      <li>
+                        <Link :href="route('objectives')" class="block px-4 py-2 hover:bg-gray-100">Objectives</Link>
+                      </li>
+                    </ul>
+                </div>
+
+              </div>
           </li>
           <li v-if="$page.props.auth.user == null">
             <Link
