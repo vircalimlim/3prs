@@ -53,11 +53,13 @@ const handleMenu = () => {
           class="text-[30px] text-gray-700 px-2 cursor-pointer rounded hover:bg-gray-200"
         >&times;</span>
       </div>
-      <img
-        class="h-15 p-2 mb-5"
-        src="/images/logo-without-bg.png"
-        alt=""
-      >
+      <a href="/">
+        <img
+          class="h-15 p-2 mb-5"
+          src="/images/logo-without-bg.png"
+          alt=""
+        >
+      </a>
       <ul class="space-y-2 font-medium">
         <li>
           <Link
