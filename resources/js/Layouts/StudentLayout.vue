@@ -211,8 +211,8 @@ onUnmounted(() => {
       </div>
       <div v-if="scrollValue < 250" class="hidden md:flex items-center gap-x-3">
           <img
-            src="/images/logo-without-bg-2.png"
-            class="h-8 hidden md:block"
+            src="/images/logo-binalonan-without-bg.png"
+            class="h-10 hidden md:block"
             alt="Logo"
           />
           <img
@@ -223,8 +223,8 @@ onUnmounted(() => {
         </div>
         <div v-else class="hidden md:flex items-center gap-x-3">
           <img
-            src="/images/logo.png"
-            class="h-8 hidden md:block"
+            src="/images/logo-2.png"
+            class="h-10 hidden md:block"
             alt="Logo"
           />
           <img
@@ -425,8 +425,8 @@ onUnmounted(() => {
       </div>
       <div v-if="scrollValue < 250" class="hidden md:flex items-center gap-x-3">
           <img
-            src="/images/logo-without-bg-2.png"
-            class="h-8 hidden md:block"
+            src="/images/logo-binalonan-without-bg.png"
+            class="h-10 hidden md:block"
             alt="Logo"
           />
           <img
@@ -437,8 +437,8 @@ onUnmounted(() => {
         </div>
         <div v-else class="hidden md:flex items-center gap-x-3">
           <img
-            src="/images/logo.png"
-            class="h-8 hidden md:block"
+            src="/images/logo-2.png"
+            class="h-10 hidden md:block"
             alt="Logo"
           />
           <img
