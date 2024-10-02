@@ -449,6 +449,14 @@ onUnmounted(() => {
   </main>
 
   <Footer />
+
+  <section class="fixed bottom-0 left-0 w-full" v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0">
+      <div class="text-center bg-white py-2">
+        <h3 class="">You're viewing as <strong>ADMIN</strong></h3>
+        <p>You can customize some parts of this page.</p>
+        <p>Go to <a class="text-blue-700 font-bold" href="/dashboard">Dashboard</a></p>
+      </div>
+  </section>
 </template>
 
 <style scoped>

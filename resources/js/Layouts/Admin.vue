@@ -170,6 +170,16 @@ const handleMenu = () => {
         </li>
         <li>
           <Link
+            :href="route('about')"
+            :class="currentRoute == 'about' ? 'text-blue-800 bg-gray-100' : ''"
+            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+          >
+          <img class="h-8 w-8" src="/images/icons/about.png" />
+          <span class="flex-1 ms-3 whitespace-nowrap">About</span>
+          </Link>
+        </li>
+        <li>
+          <Link
             :href="route('logout')"
             method="post"
             as="button"
