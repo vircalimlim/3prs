@@ -373,18 +373,7 @@ header {
           Access Boundless Knowledge
         </p>
         <p class="text-justify">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus cupiditate vitae, enim quis atque
-          odio fugit exercitationem inventore quae temporibus tenetur asperiores provident obcaecati ullam
-          voluptas veniam. Aliquid, porro fugit dolorem id sunt expedita amet dolores non minima voluptate
-          harum quod magni sed? Provident omnis, nemo non impedit suscipit, adipisci voluptates vero velit
-          quis, sed id est maxime rem aspernatur illum voluptas dolores expedita veritatis quo? Iusto optio
-          exercitationem ducimus accusamus alias dolor earum modi voluptatem minima beatae? Quaerat autem
-          ratione, esse molestias fuga nostrum nobis distinctio eveniet adipisci. Consectetur facere quos
-          ducimus at accusantium animi ipsam odit? Illum aliquid incidunt ullam ipsa harum provident
-          praesentium impedit perferendis minus eius iste non explicabo voluptas veniam vel accusamus,
-          voluptatibus a nemo maxime totam quia, odio tempore placeat? Nulla, voluptates accusamus veritatis
-          corporis eum quae suscipit quos inventore, fuga ex, in cupiditate praesentium necessitatibus quis
-          expedita ad voluptas porro labore repellat laboriosam incidunt.
+          {{section2.description}}
         </p>
         <a
           href="/research"
@@ -394,7 +383,8 @@ header {
         </a>
       </div>
       <div class="w-full md:w-[50%] px-4">
-        <div class="min-h-[400px] rounded bg-center bg-no-repeat bg-[url('/images/library.png')] bg-gray-400 bg-blend-multiply">
+        <div :style="{ backgroundImage: `url('/storage/images/about/${section2.thumbnail}')` }" 
+            class="min-h-[400px] rounded bg-center bg-cover bg-no-repeat bg-gray-400 bg-blend-multiply">
         </div>
       </div>
     </section>
