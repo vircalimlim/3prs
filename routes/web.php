@@ -6,6 +6,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuturismController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PostController;
@@ -19,22 +20,15 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin'      => Route::has('login'),
-        'canRegister'   => Route::has('register'),
-        'achievements'  => Achievement::latest('created_at')->take(3)->get(),
-        'announcements' => Announcement::latest('created_at')->take(3)->get(),
-        'storage_link'  => asset('storage/images/'),
-    ]);
-});
+Route::get('/',                                     [GeneralController::class, 'index'])->name('home');
+Route::post('/section/update',                      [GeneralController::class, 'updateSection'])->name('section.update');
 
 
-Route::get('/about',            [AboutController::class, 'index'])->name('about');
-Route::get('/mission',          [AboutController::class, 'mission'])->name('mission');
-Route::get('/vision',           [AboutController::class, 'vision'])->name('vision');
-Route::get('/objectives',        [AboutController::class, 'objective'])->name('objectives');
-Route::post('/about/update',     [AboutController::class, 'update'])->name('about.update');
+Route::get('/about',                                [AboutController::class, 'index'])->name('about');
+Route::get('/mission',                              [AboutController::class, 'mission'])->name('mission');
+Route::get('/vision',                               [AboutController::class, 'vision'])->name('vision');
+Route::get('/objectives',                           [AboutController::class, 'objective'])->name('objectives');
+Route::post('/about/update',                        [AboutController::class, 'update'])->name('about.update');
 
 Route::get('/contactus', function () {
     return Inertia::render('Contact');

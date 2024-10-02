@@ -1,16 +1,22 @@
-<script setup lang="ts">
-import { Head, Link } from "@inertiajs/vue3";
+<script setup>
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import { ref, onMounted, onUnmounted } from "vue";
 import TextHeader from "@/Components/TextHeader.vue";
 import Footer from "@/Components/Footer.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
-const { achievements } = defineProps({
+const { achievements, section2 } = defineProps({
   achievements: {
-    type: Array<any>,
+    type: Array,
     required: true,
   },
   announcements: {
-    type: Array<any>,
+    type: Array,
+    required: true,
+  },
+  section2: {
+    type: Object,
     required: true,
   },
   storage_link: {
@@ -22,6 +28,11 @@ const showMenu = ref(true);
 const scrollValue = ref(0);
 const isMenuOpen = ref(false);
 let lastScrollTop = 0;
+const formSection2 = useForm({
+  description: '',
+  image: null,
+  category: 'section2',
+});
 
 const handleScroll = () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -42,8 +53,26 @@ const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
+const editImage = () => {
+    document.getElementById('fileInput').click();
+};
+
+const updateSection2 = () => {
+    formSection2.post(route("section.update"), {
+        onSuccess: () => {
+        formSection2.image = null;
+                    
+        toast.success("Saved!", {
+            autoClose: 1000,
+        });
+
+        },
+    });
+}
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
+  formSection2.description   = section2.description || '';
 });
 
 onUnmounted(() => {
@@ -291,7 +320,51 @@ header {
       </div>
     </section>
 
-    <section class="flex flex-wrap justify-between items-center px-5 mt-20">
+    <section v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0" class="flex flex-wrap justify-between items-center px-5 mt-20">
+      <div class="w-full md:w-[50%]">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-700 md:text-5xl lg:text-6xl">
+          Welcome to 3PRS e-Journal Website
+        </h1>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl">
+          Access Boundless Knowledge
+        </p>
+        <textarea v-model="formSection2.description" class="text-justify block" placeholder="Write your description here ..." rows="10" cols="60" required></textarea>
+        <button @click.prevent="updateSection2" type="button" class="mt-2 border border-blue-900 text-blue-800 bg-white-700 hover:bg-blue-800 hover:text-white font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 focus:outline-none">
+            Save
+        </button>
+        <!-- <a
+          href="/research"
+          class="mt-5 bg-blue-700 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg hover:text-grey-300 hover:bg-blue-800"
+        >
+          Explore Our Library
+        </a> -->
+      </div>
+      <div class="w-full md:w-[50%] px-4">
+        <div @click="editImage" class="relative group">
+                  <div class="absolute inset-0 flex items-center justify-center rounded bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      fill="currentColor"
+                      class="bi bi-camera text-white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z" />
+                      <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                    </svg>
+                  </div>
+
+                  <img
+                    class="h-auto w-auto md:h-[400px] md:w-full object-cover rounded"
+                    :src="`/storage/images/about/${section2.thumbnail}`"
+                    alt="image description"
+                  >
+                  <input id="fileInput" @input="formSection2.image = $event.target.files[0]" class="hidden" accept="image/png, image/gif, image/jpeg, image/jpg" type="file">
+        </div>
+      </div>
+    </section>
+    <section v-else class="flex flex-wrap justify-between items-center px-5 mt-20">
       <div class="w-full md:w-[50%]">
         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-700 md:text-5xl lg:text-6xl">
           Welcome to 3PRS e-Journal Website
@@ -314,7 +387,7 @@ header {
           expedita ad voluptas porro labore repellat laboriosam incidunt.
         </p>
         <a
-          href="#"
+          href="/research"
           class="mt-5 bg-blue-700 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg hover:text-grey-300 hover:bg-blue-800"
         >
           Explore Our Library
