@@ -56,7 +56,7 @@ const handleMenu = () => {
       <a href="/">
         <img
           class="h-15 p-2 mb-5"
-          src="/images/logo-without-bg.png"
+          src="/images/logo-binalonan-without-bg.png"
           alt=""
         >
       </a>
