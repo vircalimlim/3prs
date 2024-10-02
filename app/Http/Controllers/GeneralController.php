@@ -59,4 +59,8 @@ class GeneralController extends Controller
         ]);
         return back();
     }
+
+    public function updatePassword(){
+        return Inertia::render('Profile/Partials/UpdatePasswordForm');
+    }
 }

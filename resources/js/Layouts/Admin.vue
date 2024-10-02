@@ -178,7 +178,7 @@ const handleMenu = () => {
           <span class="flex-1 ms-3 whitespace-nowrap">About</span>
           </Link>
         </li>
-        <li>
+        <li class="block md:hidden">
           <Link
             :href="route('logout')"
             method="post"
@@ -192,8 +192,44 @@ const handleMenu = () => {
       </ul>
     </div>
   </aside>
-
+  <section class="w-full absolute top-0 right-0 px-2 py-4 text-end hidden md:block">
+    <div class="flex justify-end text-center">
+      <img class="avatar mr-4 w-10 h-10 rounded-full cursor-pointer" src="/images/icons/profile-2.gif" alt="Rounded avatar">
+      <div id="post-child-dropdown" class="absolute top-14 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+          <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
+            <li>
+              <Link :href="route('admin.password')" class="block px-4 py-2 hover:bg-gray-100">Change Password</Link>
+            </li>
+            <li>
+              <Link
+                :href="route('logout')"
+                method="post"
+                as="button"
+                class="ml-4 block px-4 py-2 hover:bg-gray-100"
+              >
+              Logout
+              </Link>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </section>
   <div class="p-4 md:ml-64 h-screen">
     <slot />
   </div>
+  
 </template>
+
+<style scoped>
+#post-child-dropdown {
+  display: none;
+}
+
+#post-child-dropdown:hover {
+  display: block;
+}
+
+.avatar:hover + #post-child-dropdown{
+  display: block;
+}
+</style>
