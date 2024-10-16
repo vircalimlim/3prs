@@ -24,10 +24,10 @@ class FuturismController extends Controller
         $result = [];
         $category = !empty(request()->category) ? request()->category : '';
         if($category){
-            $result = Futurism::latest('created_at')->where('category', $category)->paginate(10);
+            $result = Futurism::where('status', 'active')->latest('created_at')->where('category', $category)->paginate(10);
         }
         else{
-            $result = Futurism::latest('created_at')->paginate(10);
+            $result = Futurism::where('status', 'active')->latest('created_at')->paginate(10);
         }
 
         $storage_link = asset('storage/images/futurism');
@@ -93,6 +93,7 @@ class FuturismController extends Controller
 
         $category = $request->category;
         $futurisms = DB::table('futurisms')
+            ->where('status', 'active')
             ->where('category', $category)
             ->get();
             
@@ -113,12 +114,25 @@ class FuturismController extends Controller
     public function getSingleFuturism(Request $request)
     {
         $futurism = Futurism::find($request->id);
-        $more_futurisms = Futurism::where('id', '!=', $request->id)->latest('created_at')->take(10)->get();
+        $more_futurisms = Futurism::where('id', '!=', $request->id)->where('status', 'active')->latest('created_at')->take(10)->get();
         $storage_link = asset('storage/images/futurism');
         return Inertia::render('Futurism/Id', [
             'futurism'          => $futurism,
             'more_futurisms'    => $more_futurisms,
             'storage_link'      => $storage_link,
         ]);
+    }
+
+    public function deleteFuturism(Request $request){
+        $request->validate([
+            'id'            => 'required'
+        ]);
+
+        Futurism::where('id', $request->id)
+        ->update([
+            'status'         => 'inactive'
+        ]);
+
+        return back();
     }
 }

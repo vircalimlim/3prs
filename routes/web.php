@@ -67,6 +67,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::post('/futurism/save',               [FuturismController::class,     'storePost'])->name('admin.futurism.store');
     Route::patch('/futurism/update',            [FuturismController::class,     'updatePost'])->name('admin.futurism.update');
     Route::post('/post/update/image',           [FuturismController::class,     'handleImageUpdate'])->name('admin.futurism.update_image');
+    Route::delete('/futurism/delete',           [FuturismController::class,     'deleteFuturism'])->name('admin.futurism.delete');
 
     // Route::get('/achievement',               [AchievementController::class, 'index'])->name('admin.achievement.index');
     // Route::get('/announcement',              [AnnouncementController::class, 'index'])->name('admin.announcement.index');
@@ -88,7 +89,7 @@ Route::get('/achievements',                  [AchievementController::class, 'ind
 Route::get('/achievement/{id}',              [AchievementController::class, 'getSingleAchievement'])->name('achievement.id');
 Route::get('/announcements',                 [AnnouncementController::class, 'index'])->name('announcement.index');
 Route::get('/announcement/{id}',             [AnnouncementController::class, 'getSingleAnnouncement'])->name('announcement.id');
-Route::get('/futurism/index/{category}',           [FuturismController::class, 'indexPublic'])->name('futurism.index');
+Route::get('/futurism/index/{category}',     [FuturismController::class, 'indexPublic'])->name('futurism.index');
 Route::get('/futurism/{id}',                 [FuturismController::class, 'getSingleFuturism'])->name('futurism.id');
 
 Route::get('/research',                      [MaterialController::class, 'indexPublic'])->middleware(['auth'])->name('research.index_public');
