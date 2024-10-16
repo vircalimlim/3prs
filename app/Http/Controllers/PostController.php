@@ -24,10 +24,10 @@ class PostController extends Controller
         $result = [];
         $type = request()->type ? request()->type : 'achievements';
         if(request()->type == 'announcements'){
-            $result = Announcement::where('status', 'active')->paginate(10);
+            $result = Announcement::where('status', 'active')->latest('created_at')->paginate(10);
         }
         else{
-            $result = Achievement::where('status', 'active')->paginate(10);
+            $result = Achievement::where('status', 'active')->latest('created_at')->paginate(10);
         }
         $storage_link = asset('storage/images/'.$type);
 
