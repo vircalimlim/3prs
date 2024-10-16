@@ -202,7 +202,7 @@ header {
                 <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-full">
                     <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
                       <li>
-                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">Av Innovation</Link>
+                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">AVInnovation</Link>
                       </li>
                       <li>
                         <Link :href="route('futurism.index', {category: 'futurism'})" class="block px-4 py-2 hover:bg-gray-100">Futurism</Link>
@@ -313,12 +313,12 @@ header {
           Access Boundless Knowledge
         </p>
         <div class="flex flex-col space-y-4 sm:flex-row sm:justify-start sm:space-y-0">
-          <a
-            href="#"
+          <Link
+            :href="route('mission')"
             class="max-w-32 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:border-blue-800 hover:text-grey-300 hover:bg-blue-800 focus:ring-4 focus:ring-gray-400"
           >
             Learn more
-          </a>
+          </Link>
         </div>
       </div>
     </section>
