@@ -6,13 +6,17 @@ import Footer from "@/Components/Footer.vue";
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-const { achievements, section2 } = defineProps({
+const { achievements, section2, section1 } = defineProps({
   achievements: {
     type: Array,
     required: true,
   },
   announcements: {
     type: Array,
+    required: true,
+  },
+  section1: {
+    type: Object,
     required: true,
   },
   section2: {
@@ -28,6 +32,13 @@ const showMenu = ref(true);
 const scrollValue = ref(0);
 const isMenuOpen = ref(false);
 let lastScrollTop = 0;
+
+const formSection1 = useForm({
+  description: '',
+  image: null,
+  category: 'section1',
+});
+
 const formSection2 = useForm({
   description: '',
   image: null,
@@ -53,9 +64,23 @@ const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
-const editImage = () => {
-    document.getElementById('fileInput').click();
-};
+const editImage = (category) => {
+    const fileId = `file-${category}`;
+    document.getElementById(fileId).click();
+}
+
+const updateSection1 = () => {
+    formSection1.post(route("section.update"), {
+        onSuccess: () => {
+        formSection1.image = null;
+                    
+        toast.success("Saved!", {
+            autoClose: 1000,
+        });
+
+        },
+    });
+}
 
 const updateSection2 = () => {
     formSection2.post(route("section.update"), {
@@ -304,7 +329,7 @@ header {
       </div>
     </nav>
 
-    <section class="bg-fixed bg-center bg-no-repeat bg-[url('/images/hero.png')] bg-cover bg-gray-400 bg-blend-multiply">
+    <section :style="{ backgroundImage: `url('/storage/images/about/${section1.thumbnail}')` }"  class="bg-fixed bg-center bg-no-repeat bg-cover bg-gray-400 bg-blend-multiply">
       <div class="px-4 mx-auto max-w-screen-xl text-start py-24 lg:py-56">
         <h1 class="w-full sm:w-72 mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
           Discover Boundless Research
@@ -320,6 +345,10 @@ header {
             About Us
           </Link>
         </div>
+        <button @click="editImage('section-1')" v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0" class="absolute top-[35%] right-[40%] py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-800 focus:ring-4 focus:ring-gray-400 shadow-lg">
+          Update Background Image
+          <input @change="updateSection1" id="file-section-1" @input="formSection1.image = $event.target.files[0]" class="hidden" accept="image/png, image/gif, image/jpeg, image/jpg" type="file">
+        </button>
       </div>
     </section>
 
@@ -343,7 +372,7 @@ header {
         </a> -->
       </div>
       <div class="w-full md:w-[50%] px-4">
-        <div @click="editImage" class="relative group">
+        <div @click="editImage('section-2')" class="relative group">
                   <div class="absolute inset-0 flex items-center justify-center rounded bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -363,7 +392,7 @@ header {
                     :src="`/storage/images/about/${section2.thumbnail}`"
                     alt="image description"
                   >
-                  <input id="fileInput" @input="formSection2.image = $event.target.files[0]" class="hidden" accept="image/png, image/gif, image/jpeg, image/jpg" type="file">
+                  <input id="file-section-2" @input="formSection2.image = $event.target.files[0]" class="hidden" accept="image/png, image/gif, image/jpeg, image/jpg" type="file">
         </div>
       </div>
     </section>
@@ -480,5 +509,12 @@ header {
 
 .menu-items>li {
   padding: 10px 0px;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 </style>

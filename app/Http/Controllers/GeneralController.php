@@ -29,12 +29,26 @@ class GeneralController extends Controller
             'canRegister'   => Route::has('register'),
             'achievements'  => Achievement::latest('created_at')->take(3)->get(),
             'announcements' => Announcement::latest('created_at')->take(3)->get(),
+            'section1'      => DB::table('sections')->where('category', 'section1')->first(),
             'section2'      => DB::table('sections')->where('category', 'section2')->first(),
             'storage_link'  => asset('storage/images/'),
         ]);
     }
 
     public function updateSection(Request $request) {
+        if($request->category == 'section1'){
+            if($request->image){
+                $image_name = $this->saveImageToStorage($request->file('image'));
+                DB::table('sections')
+                ->where('category', $request->category)
+                ->update([
+                    'thumbnail'     => $image_name,
+                ]);
+            }
+            return back();
+        }
+
+
         $request->validate([
             'category'      => 'required',
             'description'   => 'required',
