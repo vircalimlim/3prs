@@ -82,7 +82,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
 
     Route::get('/logs',                         [DashboardController::class,    'logs'])->name('admin.logs');
     Route::get('/update-password',              [GeneralController::class,      'updatePassword'])->name('admin.password');
-    Route::put('password',                      [PasswordController::class, 'update'])->name('password.update');
+    Route::put('password',                      [PasswordController::class,     'update'])->name('password.update');
+    Route::patch('/contact/update',             [GeneralController::class,      'updateContact'])->name('admin.contact.update');
 });
 
 Route::get('/achievements',                  [AchievementController::class, 'index'])->name('achievement.index');

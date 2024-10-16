@@ -25,11 +25,13 @@ class AboutController extends Controller
         $mission    = DB::table('abouts')->where('category', 'mission')->first();
         $vision     = DB::table('abouts')->where('category', 'vision')->first();
         $objectives = DB::table('abouts')->where('category', 'objectives')->first();
+        $contact    = DB::table('contact')->first();
         return Inertia::render('About/About', [
             'about'         => $about,
             'mission'       => $mission,
             'vision'        => $vision,
             'objectives'    => $objectives,
+            'contact'       => $contact,
         ]);
     }
 
@@ -37,10 +39,12 @@ class AboutController extends Controller
         $mission    = DB::table('abouts')->where('category', 'mission')->first();
         $vision     = DB::table('abouts')->where('category', 'vision')->first();
         $objectives = DB::table('abouts')->where('category', 'objectives')->first();
+        $contact    = DB::table('contact')->first();
         return Inertia::render('About/Mission', [
             'mission'       => $mission,
             'vision'        => $vision,
             'objectives'    => $objectives,
+            'contact'       => $contact,
         ]);
     }
 

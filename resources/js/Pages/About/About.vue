@@ -5,8 +5,9 @@ import { Link, useForm } from '@inertiajs/vue3';
 import { onMounted } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import ContactSection from './ContactSection.vue';
 
-const {about, mission, vision, objectives} = defineProps({
+const {about, mission, vision, objectives, contact} = defineProps({
     'about': {
         type: Object,
         required: true,
@@ -20,6 +21,10 @@ const {about, mission, vision, objectives} = defineProps({
         required: true,
     },
     'objectives': {
+        type: Object,
+        required: true,
+    },
+    'contact': {
         type: Object,
         required: true,
     },
@@ -206,19 +211,6 @@ onMounted(() => {
             </section>
         </form> -->
         
-        <section class="mt-10">
-            <div class="p-4 bg-blue-700 text-white font-bold text-center text-lg">Contact Details</div>
-            <div class="flex flex-col justify-center items-center gap-2 mt-5">
-                <div>
-                    <div class="flex gap-x-2">
-                        <span>Facebook:</span>
-                        <a class="text-blue-700" href="https://www.facebook.com/" target="_blank">
-                            3PRS RPDO
-                        </a>
-                    </div>
-                    <h1>Email: 3prsrpdo@gmail.com</h1>
-                </div>
-            </div>
-        </section>
+        <ContactSection :contact="contact"/>
     </StudentLayout>
 </template>

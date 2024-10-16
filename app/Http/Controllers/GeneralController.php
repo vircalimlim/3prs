@@ -77,4 +77,20 @@ class GeneralController extends Controller
     public function updatePassword(){
         return Inertia::render('Profile/Partials/UpdatePasswordForm');
     }
+
+    public function updateContact(Request $request){
+        $request->validate([
+            'fb_name'   => 'required',
+            'fb_link'   => 'required',
+            'email'     => 'required',
+        ]);
+
+        DB::table('contact')
+        ->update([
+            'fb_name'   => $request->fb_name,
+            'fb_link'   => $request->fb_link,
+            'email'     => $request->email,
+        ]);
+        return back();
+    }
 }
