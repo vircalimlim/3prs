@@ -178,14 +178,14 @@ onUnmounted(() => {
                         <Link :href="route('about')" class="block px-4 py-2 hover:bg-gray-100">About</Link>
                       </li>
                       <li>
-                        <Link :href="route('mission')" class="block px-4 py-2 hover:bg-gray-100">Mission</Link>
+                        <Link :href="route('mission')" class="block px-4 py-2 hover:bg-gray-100">Mission Vision</Link>
                       </li>
-                      <li>
+                      <!-- <li>
                         <Link :href="route('vision')" class="block px-4 py-2 hover:bg-gray-100">Vision</Link>
                       </li>
                       <li>
                         <Link :href="route('objectives')" class="block px-4 py-2 hover:bg-gray-100">Objectives</Link>
-                      </li>
+                      </li> -->
                     </ul>
                 </div>
 
@@ -392,14 +392,14 @@ onUnmounted(() => {
                         <Link :href="route('about')" class="block px-4 py-2 hover:bg-gray-100">About</Link>
                       </li>
                       <li>
-                        <Link :href="route('mission')" class="block px-4 py-2 hover:bg-gray-100">Mission</Link>
+                        <Link :href="route('mission')" class="block px-4 py-2 hover:bg-gray-100">Mission Vision</Link>
                       </li>
-                      <li>
+                      <!-- <li>
                         <Link :href="route('vision')" class="block px-4 py-2 hover:bg-gray-100">Vision</Link>
                       </li>
                       <li>
                         <Link :href="route('objectives')" class="block px-4 py-2 hover:bg-gray-100">Objectives</Link>
-                      </li>
+                      </li> -->
                     </ul>
                 </div>
 

@@ -35,8 +35,12 @@ class AboutController extends Controller
 
     public function mission(){
         $mission    = DB::table('abouts')->where('category', 'mission')->first();
+        $vision     = DB::table('abouts')->where('category', 'vision')->first();
+        $objectives = DB::table('abouts')->where('category', 'objectives')->first();
         return Inertia::render('About/Mission', [
             'mission'       => $mission,
+            'vision'        => $vision,
+            'objectives'    => $objectives,
         ]);
     }
 
