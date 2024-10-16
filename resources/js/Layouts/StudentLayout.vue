@@ -135,7 +135,7 @@ onUnmounted(() => {
                 <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-full">
                     <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
                       <li>
-                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">Av Innovation</Link>
+                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">AVInnovation</Link>
                       </li>
                       <li>
                         <Link :href="route('futurism.index', {category: 'futurism'})" class="block px-4 py-2 hover:bg-gray-100">Futurism</Link>
@@ -349,7 +349,7 @@ onUnmounted(() => {
                 <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-full">
                     <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
                       <li>
-                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">Av Innovation</Link>
+                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">AVInnovation</Link>
                       </li>
                       <li>
                         <Link :href="route('futurism.index', {category: 'futurism'})" class="block px-4 py-2 hover:bg-gray-100">Futurism</Link>
