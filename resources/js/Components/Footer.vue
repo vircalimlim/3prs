@@ -24,12 +24,12 @@ import { Link } from "@inertiajs/vue3";
               class="hover:underline me-4 md:me-6"
             >About</Link>
           </li>
-          <li>
+          <!-- <li>
             <Link
-              :href="route('contact')"
+              :href="route('about')"
               class="hover:underline me-4 md:me-6"
             >Contact</Link>
-          </li>
+          </li> -->
         </ul>
       </div>
       <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
