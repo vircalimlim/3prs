@@ -24,10 +24,10 @@ class PostController extends Controller
         $result = [];
         $type = request()->type ? request()->type : 'achievements';
         if(request()->type == 'announcements'){
-            $result = Announcement::paginate(10);
+            $result = Announcement::where('status', 'active')->paginate(10);
         }
         else{
-            $result = Achievement::paginate(10);
+            $result = Achievement::where('status', 'active')->paginate(10);
         }
         $storage_link = asset('storage/images/'.$type);
 
@@ -108,6 +108,28 @@ class PostController extends Controller
             Announcement::where('id', $request->id)
             ->update([
                 'image'         => $image_name,
+            ]);
+        }
+
+        return back();
+    }
+
+    public function deletePost(Request $request){
+        $request->validate([
+            'id'            => 'required',
+            'type'          => 'required',
+        ]);
+
+        if($request->type == 'achievements'){
+            Achievement::where('id', $request->id)
+            ->update([
+                'status'         => 'inactive'
+            ]);
+        }
+        else if($request->type == 'announcements'){
+            Announcement::where('id', $request->id)
+            ->update([
+                'status'         => 'inactive'
             ]);
         }
 

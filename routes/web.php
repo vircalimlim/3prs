@@ -60,6 +60,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/post',                         [PostController::class,         'index'])->name('admin.post.index');
     Route::post('/post/save',                   [PostController::class,         'storePost'])->name('admin.post.store');
     Route::patch('/post/update',                [PostController::class,         'updatePost'])->name('admin.post.update');
+    Route::delete('/post/delete',                [PostController::class,         'deletePost'])->name('admin.post.delete');
     Route::post('/post/update/image',           [PostController::class,         'handleImageUpdate'])->name('admin.post.update_image');
 
     Route::get('/futurism',                     [FuturismController::class,     'index'])->name('admin.futurism.index');

@@ -3,6 +3,7 @@ import Admin from "@/Layouts/Admin.vue";
 import { Head, router, useForm } from "@inertiajs/vue3";
 import AddModal from "../Post/Partials/AddModal.vue";
 import EditModal from "../Post/Partials/EditModal.vue";
+import DeleteModal from "../Post/Partials/DeleteModal.vue";
 import ImageModal from "../Post/Partials/ImageModal.vue";
 import { reactive, ref } from "vue";
 import Pagination from "@/Components/Pagination.vue";
@@ -22,11 +23,14 @@ const { posts } = defineProps({
 const filteredPost = ref("achievements");
 const showAdd = ref(false);
 const showEdit = ref(false);
+const showDelete = ref(false);
 const showImage = ref(false);
+
 type DynamicObject = Record<string, any>;
 
 // Create a reactive object with dynamic properties
 const editPost = reactive<DynamicObject>({});
+const deletePost = reactive<DynamicObject>({});
 
 const openAddModal = () => {
   showAdd.value = true;
@@ -42,6 +46,12 @@ const openImageModal = (post: DynamicObject) => {
   showImage.value = true;
   post.type = filteredPost.value;
   Object.assign(editPost, post);
+};
+
+const openDeleteModal = (post: DynamicObject) => {
+  showDelete.value = true;
+  post.type = filteredPost.value;
+  Object.assign(deletePost, post);
 };
 
 const getFilter = () => {
@@ -171,6 +181,12 @@ onMounted(() => {
                   href="#"
                   class="font-medium text-blue-600 hover:underline"
                 >Edit</a>
+                <span class="px-2">|</span>
+                <a
+                  @click.prevent="openDeleteModal(post)"
+                  href="#"
+                  class="font-medium text-red-600 hover:underline"
+                >Delete</a>
               </td>
             </tr>
             <tr v-if="posts.data.length == 0">
@@ -199,6 +215,12 @@ onMounted(() => {
       :showImage="showImage"
       @close="showImage = false"
       :post="editPost"
+    />
+    <DeleteModal
+      v-if="showDelete"
+      :showDelete="showDelete"
+      @close="showDelete = false"
+      :post="deletePost"
     />
   </Admin>
 </template>
