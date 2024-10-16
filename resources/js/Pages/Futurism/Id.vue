@@ -35,6 +35,7 @@ const formatDate = (inputDate: string) => {
             <div>
                 <img class="object-cover w-full h-9s6 md:h-86s md:w-full" :src="storage_link + '/' + futurism.image">
                 <h1 class="mt-5 text-2xl font-bold tracking-tight text-gray-900 capitalize">{{ futurism.title }}</h1>
+                <p class="text-[14px] font-bold text-gray-600 mb-2">{{ formatDate(futurism.created_at) }}</p>
                 <div class="mt-5" v-html="futurism.description"></div>
             </div>
             <div v-show="more_futurisms.length > 0">

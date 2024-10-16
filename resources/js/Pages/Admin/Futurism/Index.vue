@@ -60,6 +60,16 @@ const handleTypeFilter = () => {
   );
 };
 
+const formatDate = (inputDate: string) => {
+    const date = new Date(inputDate.split(' ')[0]);
+
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${month}/${day}/${year}`;
+}
+
 onMounted(() => {
   getFilter();
 });
@@ -124,6 +134,10 @@ onMounted(() => {
               <th
                 scope="col"
                 class="px-6 py-3"
+              >Date</th>
+              <th
+                scope="col"
+                class="px-6 py-3"
               >
                 <span class="sr-only">Edit</span>
               </th>
@@ -168,6 +182,9 @@ onMounted(() => {
                 class="px-6 py-4 inline-block"
                 v-html="post.description"
               >
+              </td>
+              <td class="font-bold px-4 py-4 align-top">
+                {{formatDate(post.created_at)}}
               </td>
               <td class="px-6 py-4 text-right align-top">
                 <a
