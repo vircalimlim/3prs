@@ -10,7 +10,7 @@ class AnnouncementController extends Controller
 {
     public function index()
     {
-        $announcements = Announcement::latest('created_at')->get();
+        $announcements = Announcement::where('status', 'active')->latest('created_at')->get();
         $storage_link = asset('storage/images/announcements');
         return Inertia::render('Announcement/Index', [
             'announcements'  => $announcements,
@@ -21,7 +21,7 @@ class AnnouncementController extends Controller
     public function getSingleAnnouncement(Request $request)
     {
         $announcement = Announcement::find($request->id);
-        $more_announcements = Announcement::where('id', '!=', $request->id)->latest('created_at')->take(10)->get();
+        $more_announcements = Announcement::where('status', 'active')->where('id', '!=', $request->id)->latest('created_at')->take(10)->get();
         $storage_link = asset('storage/images/announcements');
         return Inertia::render('Announcement/Id', [
             'announcement'          => $announcement,
