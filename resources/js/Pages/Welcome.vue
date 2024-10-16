@@ -314,10 +314,10 @@ header {
         </p>
         <div class="flex flex-col space-y-4 sm:flex-row sm:justify-start sm:space-y-0">
           <Link
-            :href="route('mission')"
+            :href="route('about')"
             class="max-w-32 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:border-blue-800 hover:text-grey-300 hover:bg-blue-800 focus:ring-4 focus:ring-gray-400"
           >
-            Learn more
+            About Us
           </Link>
         </div>
       </div>
