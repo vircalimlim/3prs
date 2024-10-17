@@ -5,6 +5,7 @@ import TextHeader from "@/Components/TextHeader.vue";
 import Footer from "@/Components/Footer.vue";
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import Dotdotdot from 'dotdotdot-js';
 
 const { achievements, section2, section1 } = defineProps({
   achievements: {
@@ -32,6 +33,9 @@ const showMenu = ref(true);
 const scrollValue = ref(0);
 const isMenuOpen = ref(false);
 let lastScrollTop = 0;
+const clampTextAchvmnt = ref(null);
+const clampTextAnnncmnt = ref(null);
+let dotInstance = null;
 
 const formSection1 = useForm({
   description: '',
@@ -98,10 +102,48 @@ const updateSection2 = () => {
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
   formSection2.description   = section2.description || '';
+
+  if (clampTextAchvmnt.value.length > 1) {
+    // Apply Dotdotdot to each element in the array
+    clampTextAchvmnt.value.forEach(text => {
+      if (text) {
+        new Dotdotdot(text, {
+          height: 100,  // Set max height for the text container
+          truncate: 'letter'  // Truncate by letter, can be 'word' or 'node'
+        });
+      }
+    });
+  } else if (clampTextAchvmnt.value.length === 1 && clampTextAchvmnt.value[0]) {
+    // Handle single element case
+    new Dotdotdot(clampTextAchvmnt.value[0], {
+      height: 100,
+      truncate: 'letter'
+    });
+  }
+
+  if (clampTextAnnncmnt.value.length > 1) {
+    // Apply Dotdotdot to each element in the array
+    clampTextAnnncmnt.value.forEach(text => {
+      if (text) {
+        new Dotdotdot(text, {
+          height: 100,  // Set max height for the text container
+          truncate: 'letter'  // Truncate by letter, can be 'word' or 'node'
+        });
+      }
+    });
+  } else if (clampTextAnnncmnt.value.length === 1 && clampTextAnnncmnt.value[0]) {
+    // Handle single element case
+    new Dotdotdot(clampTextAnnncmnt.value[0], {
+      height: 100,
+      truncate: 'letter'
+    });
+  }
+
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+
 });
 </script>
 
@@ -436,10 +478,11 @@ header {
           <h1 class="capitalize line-clamp-2 mt-5 text-xl font-extrabold tracking-tight leading-none text-gray-700 sm:text-2xl lg:text-3xl">
             {{ announcement.title }}
           </h1>
-          <p
+          <div
+            ref="clampTextAnnncmnt"
             v-html="announcement.description"
             class="line-clamp-3 mt-2 mb-5 text-lg font-normal text-gray-500"
-          ></p>
+          ></div>
           <Link
             :href="`/announcement/${announcement.id}`"
             class="py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800"
@@ -468,10 +511,11 @@ header {
           <h1 class="capitalize line-clamp-2 mt-5 text-xl font-extrabold tracking-tight leading-none text-gray-700 sm:text-2xl lg:text-3xl">
             {{ achievement.title }}
           </h1>
-          <p
+          <div
+            ref="clampTextAchvmnt"
             v-html="achievement.description"
             class="line-clamp-3 mt-2 mb-5 text-lg font-normal text-gray-500"
-          ></p>
+          ></div>
           <Link
             :href="`/achievement/${achievement.id}`"
             class="py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800"
@@ -513,8 +557,12 @@ header {
 
 .line-clamp-3 {
   display: -webkit-box;
-  -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-pack: end;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
   overflow: hidden;
+  text-align: left;
 }
 </style>
