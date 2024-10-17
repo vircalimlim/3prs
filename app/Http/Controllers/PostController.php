@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Achievement;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -20,14 +21,27 @@ class PostController extends Controller
         return $filename;
     }
 
+    private function uploadImages($image_files, $category, $post_id){
+        if($image_files){
+            foreach($image_files as $image_file){
+                $image_name_2 = $this->saveImageToStorage($category, $image_file);
+                DB::table('post_images')->insert([
+                    'category'  => $category,
+                    'post_id'   => $post_id,
+                    'file_name' => $image_name_2
+                ]);
+            }
+        }
+    }
+
     public function index(){
         $result = [];
         $type = request()->type ? request()->type : 'achievements';
         if(request()->type == 'announcements'){
-            $result = Announcement::where('status', 'active')->latest('created_at')->paginate(10);
+            $result = Announcement::with('images')->where('status', 'active')->latest('created_at')->paginate(10);
         }
         else{
-            $result = Achievement::where('status', 'active')->latest('created_at')->paginate(10);
+            $result = Achievement::with('images')->where('status', 'active')->latest('created_at')->paginate(10);
         }
         $storage_link = asset('storage/images/'.$type);
 
@@ -46,20 +60,24 @@ class PostController extends Controller
         ]);
         $image_name = $this->saveImageToStorage($request->type, $request->file('image'));
         if($request->type == 'achievements'){
-            Achievement::create([
+            $achievement = Achievement::create([
                 'image'         => $image_name,
                 'title'         => $request->title,
                 'description'   => $request->description,
                 'status'        => 'active',
             ]);
+
+            $this->uploadImages($request->file('images'), $request->type, $achievement->id);
         }
         else if($request->type == 'announcements'){
-            Announcement::create([
+            $announcement = Announcement::create([
                 'image'         => $image_name,
                 'title'         => $request->title,
                 'description'   => $request->description,
                 'status'        => 'active',
             ]);
+
+            $this->uploadImages($request->file('images'), $request->type, $announcement->id);
         }
 
         return back();
@@ -135,4 +153,5 @@ class PostController extends Controller
 
         return back();
     }
+
 }

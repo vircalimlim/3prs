@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits, watch } from 'vue';
+import { ref, defineEmits, watch, reactive } from 'vue';
 import Modal from '@/Components/Modal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -10,6 +10,7 @@ import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import { useDropzone } from 'vue3-dropzone';
 
 const {showAdd} = defineProps({
   showAdd: {
@@ -18,12 +19,17 @@ const {showAdd} = defineProps({
   }
 });
 
+const state = reactive({
+  files: [],
+});
+
 const emit = defineEmits(['close']);
 
 const form = useForm({
   title: '',
   description: '',
   image: null,
+  images: [],
   type: ''
 });
 
@@ -33,6 +39,7 @@ const closeModal = () => {
 };
 
 const storePost = () => {
+  form.images = state.files
   form.post(route("admin.post.store"), {
     onSuccess: () => {
       emit('close');
@@ -40,6 +47,8 @@ const storePost = () => {
       form.description = "";
       form.image = null;
       form.type = '';
+      form.images = null;
+      state.files = [];
                   
       toast.success("Saved!", {
         autoClose: 1000,
@@ -47,6 +56,26 @@ const storePost = () => {
 
     },
   });
+}
+
+const { getRootProps, getInputProps, isDragActive, ...rest } = useDropzone({
+  onDrop,
+});
+
+watch(state, () => {
+  // console.log('state', state);
+});
+
+watch(isDragActive, () => {
+  // console.log('isDragActive', isDragActive.value, rest);
+});
+
+function onDrop(acceptFiles, rejectReasons) {
+  state.files = acceptFiles;
+}
+
+function handleClickDeleteFile(index) {
+  state.files.splice(index, 1);
 }
 </script>
 
@@ -77,12 +106,36 @@ const storePost = () => {
       </div>
 
       <div>
-        <InputLabel for="image" value="Image" />
+        <InputLabel for="image" value="Thumbnail" />
         <input type="file" @input="form.image = $event.target.files[0]" accept="image/png, image/gif, image/jpeg, image/jpg" required class="block mt-2 w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none" aria-describedby="file_input_help" id="image">
         <p class="mt-1 text-sm text-gray-500" id="file_input_help">JPG, JPEG, PNG.</p>
         <progress v-if="form.progress" :value="form.progress.percentage" max="100">
         {{ form.progress.percentage }}%
         </progress>
+      </div>
+
+      <div>
+          <InputLabel value="Images" class="mb-2"/>
+          <div v-if="state.files.length > 0" class="files">
+            <div class="file-item" v-for="(file, index) in state.files" :key="index">
+              <span>{{ file.name }}</span>
+              <span class="delete-file" @click="handleClickDeleteFile(index)"
+                >Delete</span
+              >
+            </div>
+          </div>
+          <div v-else class="dropzone" v-bind="getRootProps()">
+            <div
+              class="multiple-image-border"
+              :class="{
+                isDragActive,
+              }"
+            >
+              <input v-bind="getInputProps()" />
+              <p v-if="isDragActive">Drop the files here ...</p>
+              <p v-else>Drag and drop files here, or Click to select files</p>
+            </div>
+          </div>
       </div>
       
       <!-- DOCUMENTATION => https://vueup.github.io/vue-quill/guide/toolbar.html -->
@@ -106,3 +159,58 @@ const storePost = () => {
     </form>
   </Modal>
 </template>
+
+
+<style scoped>
+.dropzone,
+.files {
+  width: 100%;
+  /* max-width: 300px; */
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.multiple-image-border {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: all 0.3s ease;
+  background: #fff;
+
+  &.isDragActive {
+    border: 2px dashed #ffb300;
+    background: rgb(255 167 18 / 20%);
+  }
+}
+
+.file-item {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(255 167 18 / 20%);
+  padding: 7px;
+  padding-left: 15px;
+  margin-top: 10px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+.delete-file {
+    background: red;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+}
+</style>

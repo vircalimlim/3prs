@@ -9,4 +9,9 @@ class Achievement extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function images()
+    {
+        return $this->hasMany(PostImage::class, 'post_id')->where('category', 'achievements');
+    }
 }

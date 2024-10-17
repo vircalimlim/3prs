@@ -8,6 +8,7 @@ import ImageModal from "../Post/Partials/ImageModal.vue";
 import { reactive, ref } from "vue";
 import Pagination from "@/Components/Pagination.vue";
 import { onMounted } from "vue";
+// import ImagesModal from "./Partials/ImagesModal.vue";
 
 const { posts } = defineProps({
   posts: {
@@ -25,12 +26,14 @@ const showAdd = ref(false);
 const showEdit = ref(false);
 const showDelete = ref(false);
 const showImage = ref(false);
+const showImages = ref(false);
 
 type DynamicObject = Record<string, any>;
 
 // Create a reactive object with dynamic properties
 const editPost = reactive<DynamicObject>({});
 const deletePost = reactive<DynamicObject>({});
+const postImages = ref([]);
 
 const openAddModal = () => {
   showAdd.value = true;
@@ -46,6 +49,13 @@ const openImageModal = (post: DynamicObject) => {
   showImage.value = true;
   post.type = filteredPost.value;
   Object.assign(editPost, post);
+};
+
+const openImagesModal = (post: DynamicObject, images: Array<any>) => {
+  showEdit.value = true;
+  post.type = filteredPost.value;
+  Object.assign(editPost, post);
+  postImages.value = [];
 };
 
 const openDeleteModal = (post: DynamicObject) => {
@@ -233,6 +243,12 @@ onMounted(() => {
       @close="showImage = false"
       :post="editPost"
     />
+    <!-- <ImagesModal
+      v-if="showImages"
+      :showImages="showImages"
+      @close="showImages = false"
+      :post="postImages"
+    /> -->
     <DeleteModal
       v-if="showDelete"
       :showDelete="showDelete"
