@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->text('description');
             $table->string('thumbnail');
-            $table->enum('category', ['about', 'mission', 'vision', 'objectives']);
+            $table->enum('category', ['about', 'mission', 'vision', 'objectives', 'org-chart']);
         });
 
         DB::table('abouts')->insert(
@@ -41,6 +41,11 @@ return new class extends Migration
                     'thumbnail'     => 'hero.png',
                     'category'      => 'objectives',
                 ],   
+                [
+                    'description'   => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero ut, delectus labore dolores eum porro laudantium deleniti optio itaque eius nemo, unde maxime vel harum quisquam dolorem quidem commodi facilis. Obcaecati doloremque quidem animi! Dolore, qui labore. Unde, dolores? Laborum dicta ipsa dolores fuga ratione id quo repellendus aut eveniet!',
+                    'thumbnail'     => 'hero.png',
+                    'category'      => 'org-chart',
+                ],  
             )
         );
     }

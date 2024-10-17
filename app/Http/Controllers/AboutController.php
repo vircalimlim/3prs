@@ -48,6 +48,15 @@ class AboutController extends Controller
         ]);
     }
 
+    public function orgChart(){
+        $orgchart       = DB::table('abouts')->where('category', 'org-chart')->first();
+        $contact        = DB::table('contact')->first();
+        return Inertia::render('About/OrgChart', [
+            'orgchart'       => $orgchart,
+            'contact'       => $contact,
+        ]);
+    }
+
     public function vision(){
         $vision     = DB::table('abouts')->where('category', 'vision')->first();
         return Inertia::render('About/Vision', [
@@ -61,6 +70,7 @@ class AboutController extends Controller
             'objectives'        => $objectives,
         ]);
     }
+    
 
     public function update(Request $request) {
         $request->validate([

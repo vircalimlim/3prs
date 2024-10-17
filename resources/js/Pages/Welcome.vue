@@ -314,6 +314,9 @@ header {
                       <li>
                         <Link :href="route('mission')" class="block px-4 py-2 hover:bg-gray-100">Mission Vision</Link>
                       </li>
+                      <li>
+                        <Link :href="route('org-chart')" class="block px-4 py-2 hover:bg-gray-100">Organizational Chart</Link>
+                      </li>
                       <!-- <li>
                         <Link :href="route('vision')" class="block px-4 py-2 hover:bg-gray-100">Vision</Link>
                       </li>

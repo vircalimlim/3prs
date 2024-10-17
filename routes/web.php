@@ -29,6 +29,7 @@ Route::get('/about',                                [AboutController::class, 'in
 Route::get('/mission',                              [AboutController::class, 'mission'])->name('mission');
 Route::get('/vision',                               [AboutController::class, 'vision'])->name('vision');
 Route::get('/objectives',                           [AboutController::class, 'objective'])->name('objectives');
+Route::get('/org-chart',                            [AboutController::class, 'orgChart'])->name('org-chart');
 Route::post('/about/update',                        [AboutController::class, 'update'])->name('about.update');
 
 Route::get('/contactus', function () {
