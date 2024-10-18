@@ -77,14 +77,14 @@ if (clampText.value.length > 1) {
 </template>
 
 <style scoped>
-.line-clamp-5 {
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  line-clamp: 5;
-  -webkit-box-pack: end;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-align: left;
-}
+    .line-clamp-5 {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-pack: end;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: left;
+    }
 </style>
