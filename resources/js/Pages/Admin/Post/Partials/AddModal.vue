@@ -131,7 +131,7 @@ function handleClickDeleteFile(index) {
                 isDragActive,
               }"
             >
-              <input v-bind="getInputProps()" />
+              <input v-bind="getInputProps()" accept="image/png, image/gif, image/jpeg, image/jpg" />
               <p v-if="isDragActive">Drop the files here ...</p>
               <p v-else>Drag and drop files here, or Click to select files</p>
             </div>

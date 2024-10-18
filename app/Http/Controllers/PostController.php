@@ -7,11 +7,12 @@ use App\Models\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    private function saveImageToStorage($type, $image){
-        $filename = time().'.'.$image->getClientOriginalExtension();
+    private function saveImageToStorage($type, $image, $index = 0){
+        $filename = $index . time() . '.' . $image->getClientOriginalExtension();
         $save_path = storage_path("app/public/images/$type/");
 
         if (!file_exists($save_path)) {
@@ -23,8 +24,8 @@ class PostController extends Controller
 
     private function uploadImages($image_files, $category, $post_id){
         if($image_files){
-            foreach($image_files as $image_file){
-                $image_name_2 = $this->saveImageToStorage($category, $image_file);
+            foreach($image_files as $index => $image_file){
+                $image_name_2 = $this->saveImageToStorage($category, $image_file, $index);
                 DB::table('post_images')->insert([
                     'category'  => $category,
                     'post_id'   => $post_id,
@@ -58,7 +59,7 @@ class PostController extends Controller
             'image'         => 'required|mimes:jpeg,png,jpg,gif|max:10240', //max 10mb
             'description'   => 'required'
         ]);
-        $image_name = $this->saveImageToStorage($request->type, $request->file('image'));
+        $image_name = $this->saveImageToStorage($request->type, $request->file('image'), '1999');
         if($request->type == 'achievements'){
             $achievement = Achievement::create([
                 'image'         => $image_name,
@@ -115,7 +116,7 @@ class PostController extends Controller
             'type'          => 'required',
             'image'         => 'required|mimes:jpeg,png,jpg,gif|max:10240', //max 10mb
         ]);
-        $image_name = $this->saveImageToStorage($request->type, $request->file('image'));
+        $image_name = $this->saveImageToStorage($request->type, $request->file('image'), '1999');
         if($request->type == 'achievements'){
             Achievement::where('id', $request->id)
             ->update([
@@ -150,6 +151,32 @@ class PostController extends Controller
                 'status'         => 'inactive'
             ]);
         }
+
+        return back();
+    }
+
+    public function deletePostImage(Request $request){
+        $request->validate([
+            'id'            => 'required',
+        ]);
+
+        DB::table('post_images')->where('id', $request->id)->delete();
+
+        $path = 'public/images/' . $request->type . '/' . $request->image_name;
+        if (Storage::disk('local')->exists($path)) {
+            Storage::delete($path);
+        }
+
+        return back();
+    }
+
+    public function uploadPostImages(Request $request){
+        $request->validate([
+            'id'          => 'required',
+            'type'        => 'required'
+        ]);
+
+        $this->uploadImages($request->file('images'), $request->type, $request->id);
 
         return back();
     }

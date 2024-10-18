@@ -62,7 +62,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::post('/post/save',                   [PostController::class,         'storePost'])->name('admin.post.store');
     Route::patch('/post/update',                [PostController::class,         'updatePost'])->name('admin.post.update');
     Route::post('/post/update/image',           [PostController::class,         'handleImageUpdate'])->name('admin.post.update_image');
-    Route::delete('/post/delete',                [PostController::class,         'deletePost'])->name('admin.post.delete');
+    Route::post('/post/upload/images',          [PostController::class,         'uploadPostImages'])->name('admin.post.upload_images');
+    Route::delete('/post/delete',               [PostController::class,         'deletePost'])->name('admin.post.delete');
+    Route::delete('/post/delete/image',         [PostController::class,         'deletePostImage'])->name('admin.post.delete.image');
 
     Route::get('/futurism',                     [FuturismController::class,     'index'])->name('admin.futurism.index');
     Route::post('/futurism/save',               [FuturismController::class,     'storePost'])->name('admin.futurism.store');
