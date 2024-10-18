@@ -20,7 +20,7 @@ class AnnouncementController extends Controller
 
     public function getSingleAnnouncement(Request $request)
     {
-        $announcement = Announcement::find($request->id);
+        $announcement = Announcement::with('images')->find($request->id);
         $more_announcements = Announcement::where('status', 'active')->where('id', '!=', $request->id)->latest('created_at')->take(10)->get();
         $storage_link = asset('storage/images/announcements');
         return Inertia::render('Announcement/Id', [

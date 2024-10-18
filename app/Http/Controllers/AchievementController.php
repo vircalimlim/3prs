@@ -19,7 +19,7 @@ class AchievementController extends Controller
 
     public function getSingleAchievement(Request $request)
     {
-        $achievement = Achievement::find($request->id);
+        $achievement = Achievement::with('images')->find($request->id);
         $more_achievements = Achievement::where('status', 'active')->where('id', '!=', $request->id)->latest('created_at')->take(10)->get();
         $storage_link = asset('storage/images/achievements');
         return Inertia::render('Achievement/Id', [

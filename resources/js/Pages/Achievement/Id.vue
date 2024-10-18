@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ImageCarousel from '@/Components/ImageCarousel.vue';
 import StudentLayout from '@/Layouts/StudentLayout.vue';
 import { Link } from '@inertiajs/vue3';
 
@@ -33,7 +34,8 @@ const formatDate = (inputDate: string) => {
     <StudentLayout page-name="Achievement Details">
         <section class="flex flex-col md:flex-row justify-center gap-10 py-10">
             <div>
-                <img class="object-cover w-full h-9s6 md:h-86s md:w-full" :src="storage_link + '/' + achievement.image">
+                <ImageCarousel :images="achievement.images" :image="achievement.image" category="achievements"/>
+                <!-- <img class="object-cover w-full h-9s6 md:h-86s md:w-full" :src="storage_link + '/' + achievement.image"> -->
                 <h1 class="mt-5 text-2xl font-bold tracking-tight text-gray-900 capitalize">{{ achievement.title }}</h1>
                 <p class="text-[14px] font-bold text-gray-600">{{ formatDate(achievement.created_at) }}</p>
                 <div class="mt-5" v-html="achievement.description"></div>
