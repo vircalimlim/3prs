@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Futurism extends Model
+class FuturismImage extends Model
 {
     use HasFactory;
-    protected $guarded = [];
 
-    public function images()
+    public function futurism()
     {
-        return $this->hasMany(FuturismImage::class, 'post_id');
+        return $this->belongsTo(Futurism::class, 'post_id');
     }
 }

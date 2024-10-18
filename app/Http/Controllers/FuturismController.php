@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Futurism;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class FuturismController extends Controller
 {
-    private function saveImageToStorage($image){
-        $filename = time().'.'.$image->getClientOriginalExtension();
+    private function saveImageToStorage($image, $index = 0){
+        $filename = $index . time().'.'.$image->getClientOriginalExtension();
         $save_path = storage_path("app/public/images/futurism/");
 
         if (!file_exists($save_path)) {
@@ -20,14 +22,36 @@ class FuturismController extends Controller
         return $filename;
     }
 
+    private function uploadImages($image_files, $post_id){
+        if($image_files){
+            foreach($image_files as $index => $image_file){
+
+                // Validate if the file is an image
+                $validator = Validator::make(['image' => $image_file], [
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240'
+                ]);
+
+                if ($validator->fails()) {
+                    continue;
+                }
+
+                $image_name_2 = $this->saveImageToStorage($image_file, $index);
+                DB::table('futurism_images')->insert([
+                    'post_id'   => $post_id,
+                    'file_name' => $image_name_2
+                ]);
+            }
+        }
+    }
+
     public function index(){
         $result = [];
         $category = !empty(request()->category) ? request()->category : '';
         if($category){
-            $result = Futurism::where('status', 'active')->latest('created_at')->where('category', $category)->paginate(10);
+            $result = Futurism::with('images')->where('status', 'active')->latest('created_at')->where('category', $category)->paginate(10);
         }
         else{
-            $result = Futurism::where('status', 'active')->latest('created_at')->paginate(10);
+            $result = Futurism::with('images')->where('status', 'active')->latest('created_at')->paginate(10);
         }
 
         $storage_link = asset('storage/images/futurism');
@@ -45,14 +69,15 @@ class FuturismController extends Controller
             'image'         => 'required|mimes:jpeg,png,jpg,gif|max:10240', //max 10mb
             'description'   => 'required'
         ]);
-        $image_name = $this->saveImageToStorage($request->file('image'));
-        Futurism::create([
+        $image_name = $this->saveImageToStorage($request->file('image'), '1999');
+        $futurism = Futurism::create([
             'category'      => $request->category,
             'image'         => $image_name,
             'title'         => $request->title,
             'description'   => $request->description,
             'status'        => 'active',
         ]);
+        $this->uploadImages($request->file('images'), $futurism->id);
 
         return back();
     }
@@ -78,7 +103,7 @@ class FuturismController extends Controller
             'id'            => 'required',
             'image'         => 'required|mimes:jpeg,png,jpg,gif|max:10240', //max 10mb
         ]);
-        $image_name = $this->saveImageToStorage($request->file('image'));
+        $image_name = $this->saveImageToStorage($request->file('image'), '1999');
         Futurism::where('id', $request->id)
         ->update([
             'image'         => $image_name,
@@ -133,6 +158,30 @@ class FuturismController extends Controller
             'status'         => 'inactive'
         ]);
 
+        return back();
+    }
+
+    public function deleteFuturismImage(Request $request){
+        $request->validate([
+            'id'            => 'required',
+        ]);
+
+        DB::table('futurism_images')->where('id', $request->id)->delete();
+
+        $path = 'public/images/futurism/' . $request->image_name;
+        if (Storage::disk('local')->exists($path)) {
+            Storage::delete($path);
+        }
+
+        return back();
+    }
+
+    public function uploadFuturismImages(Request $request){
+        $request->validate([
+            'id'          => 'required'
+        ]);
+
+        $this->uploadImages($request->file('images'), $request->id);
         return back();
     }
 }

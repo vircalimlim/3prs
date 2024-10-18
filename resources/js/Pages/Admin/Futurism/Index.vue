@@ -8,6 +8,7 @@ import DeleteModal from "../Futurism/Partials/DeleteModal.vue";
 import { reactive, ref } from "vue";
 import Pagination from "@/Components/Pagination.vue";
 import { onMounted } from "vue";
+import ImagesModal from "./Partials/ImagesModal.vue";
 
 const { posts } = defineProps({
   posts: {
@@ -25,6 +26,7 @@ const showAdd = ref(false);
 const showEdit = ref(false);
 const showImage = ref(false);
 const showDelete = ref(false);
+const showImages = ref(false);
 type DynamicObject = Record<string, any>;
 
 // Create a reactive object with dynamic properties
@@ -43,6 +45,12 @@ const openEditModal = (post: DynamicObject) => {
 
 const openImageModal = (post: DynamicObject) => {
   showImage.value = true;
+  post.type = filteredPost.value;
+  Object.assign(editPost, post);
+};
+
+const openImagesModal = (post: DynamicObject) => {
+  showImages.value = true;
   post.type = filteredPost.value;
   Object.assign(editPost, post);
 };
@@ -185,7 +193,7 @@ onMounted(() => {
               </td>
 
               <td class="font-bold px-4 py-4 align-top">
-                {{post.title}}
+                <a @click.prevent="openImagesModal(post)" class="hover:text-blue-700" href="">{{post.title}}</a>
               </td>
               <td
                 class="px-6 py-4 inline-block"
@@ -234,6 +242,12 @@ onMounted(() => {
       v-if="showImage"
       :showImage="showImage"
       @close="showImage = false"
+      :post="editPost"
+    />
+    <ImagesModal
+      v-if="showImages"
+      :showImages="showImages"
+      @close="showImages = false"
       :post="editPost"
     />
     <DeleteModal

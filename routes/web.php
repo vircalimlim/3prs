@@ -69,8 +69,10 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/futurism',                     [FuturismController::class,     'index'])->name('admin.futurism.index');
     Route::post('/futurism/save',               [FuturismController::class,     'storePost'])->name('admin.futurism.store');
     Route::patch('/futurism/update',            [FuturismController::class,     'updatePost'])->name('admin.futurism.update');
-    Route::post('/futurism/update/image',           [FuturismController::class,     'handleImageUpdate'])->name('admin.futurism.update_image');
+    Route::post('/futurism/update/image',       [FuturismController::class,     'handleImageUpdate'])->name('admin.futurism.update_image');
+    Route::post('/futurism/upload/images',      [FuturismController::class,     'uploadFuturismImages'])->name('admin.futurism.upload_images');
     Route::delete('/futurism/delete',           [FuturismController::class,     'deleteFuturism'])->name('admin.futurism.delete');
+    Route::delete('/futurism/delete/image',     [FuturismController::class,     'deleteFuturismImage'])->name('admin.futurism.delete.image');
 
     // Route::get('/achievement',               [AchievementController::class, 'index'])->name('admin.achievement.index');
     // Route::get('/announcement',              [AnnouncementController::class, 'index'])->name('admin.announcement.index');
