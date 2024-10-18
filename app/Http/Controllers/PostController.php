@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -25,6 +26,16 @@ class PostController extends Controller
     private function uploadImages($image_files, $category, $post_id){
         if($image_files){
             foreach($image_files as $index => $image_file){
+
+                // Validate if the file is an image
+                $validator = Validator::make(['image' => $image_file], [
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240'
+                ]);
+
+                if ($validator->fails()) {
+                    continue;
+                }
+
                 $image_name_2 = $this->saveImageToStorage($category, $image_file, $index);
                 DB::table('post_images')->insert([
                     'category'  => $category,
