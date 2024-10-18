@@ -138,7 +138,7 @@ class FuturismController extends Controller
 
     public function getSingleFuturism(Request $request)
     {
-        $futurism = Futurism::find($request->id);
+        $futurism = Futurism::with('images')->find($request->id);
         $more_futurisms = Futurism::where('id', '!=', $request->id)->where('status', 'active')->latest('created_at')->take(10)->get();
         $storage_link = asset('storage/images/futurism');
         return Inertia::render('Futurism/Id', [
