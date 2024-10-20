@@ -12,8 +12,9 @@ use Inertia\Inertia;
 class GeneralController extends Controller
 {
 
-    private function saveImageToStorage($image){
-        $filename   = time().'.'.$image->getClientOriginalExtension();
+    private function saveImageToStorage($image)
+    {
+        $filename   = time() . '.' . $image->getClientOriginalExtension();
         $save_path = storage_path("app/public/images/about/");
 
         if (!file_exists($save_path)) {
@@ -22,8 +23,9 @@ class GeneralController extends Controller
         $image->move($save_path, $filename);
         return $filename;
     }
-    
-    public function index() {
+
+    public function index()
+    {
         return Inertia::render('Welcome', [
             'canLogin'      => Route::has('login'),
             'canRegister'   => Route::has('register'),
@@ -35,15 +37,16 @@ class GeneralController extends Controller
         ]);
     }
 
-    public function updateSection(Request $request) {
-        if($request->category == 'section1'){
-            if($request->image){
+    public function updateSection(Request $request)
+    {
+        if ($request->category == 'section1') {
+            if ($request->image) {
                 $image_name = $this->saveImageToStorage($request->file('image'));
                 DB::table('sections')
-                ->where('category', $request->category)
-                ->update([
-                    'thumbnail'     => $image_name,
-                ]);
+                    ->where('category', $request->category)
+                    ->update([
+                        'thumbnail'     => $image_name,
+                    ]);
             }
             return back();
         }
@@ -54,31 +57,38 @@ class GeneralController extends Controller
             'description'   => 'required',
         ]);
 
-        if($request->image){
+        if ($request->image) {
             $image_name = $this->saveImageToStorage($request->file('image'));
             DB::table('sections')
-            ->where('category', $request->category)
-            ->update([
-                'description'   => $request->description,
-                'thumbnail'     => $image_name,
-            ]);
+                ->where('category', $request->category)
+                ->update([
+                    'description'   => $request->description,
+                    'thumbnail'     => $image_name,
+                ]);
             return back();
         }
 
 
         DB::table('sections')
-        ->where('category', $request->category)
-        ->update([
-            'description'   => $request->description,
-        ]);
+            ->where('category', $request->category)
+            ->update([
+                'description'   => $request->description,
+            ]);
         return back();
     }
 
-    public function updatePassword(){
+    public function updatePassword()
+    {
         return Inertia::render('Profile/Partials/UpdatePasswordForm');
     }
 
-    public function updateContact(Request $request){
+    public function updateStudentPassword()
+    {
+        return Inertia::render('UpdatePasswordForm');
+    }
+
+    public function updateContact(Request $request)
+    {
         $request->validate([
             'fb_name'   => 'required',
             'fb_link'   => 'required',
@@ -86,11 +96,11 @@ class GeneralController extends Controller
         ]);
 
         DB::table('contact')
-        ->update([
-            'fb_name'   => $request->fb_name,
-            'fb_link'   => $request->fb_link,
-            'email'     => $request->email,
-        ]);
+            ->update([
+                'fb_name'   => $request->fb_name,
+                'fb_link'   => $request->fb_link,
+                'email'     => $request->email,
+            ]);
         return back();
     }
 }

@@ -3,9 +3,9 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import { ref, onMounted, onUnmounted } from "vue";
 import TextHeader from "@/Components/TextHeader.vue";
 import Footer from "@/Components/Footer.vue";
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
-import Dotdotdot from 'dotdotdot-js';
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+import Dotdotdot from "dotdotdot-js";
 
 const { achievements, section2, section1 } = defineProps({
   achievements: {
@@ -38,15 +38,15 @@ const clampTextAnnncmnt = ref(null);
 let dotInstance = null;
 
 const formSection1 = useForm({
-  description: '',
+  description: "",
   image: null,
-  category: 'section1',
+  category: "section1",
 });
 
 const formSection2 = useForm({
-  description: '',
+  description: "",
   image: null,
-  category: 'section2',
+  category: "section2",
 });
 
 const handleScroll = () => {
@@ -69,47 +69,45 @@ const toggleMenu = () => {
 };
 
 const editImage = (category) => {
-    const fileId = `file-${category}`;
-    document.getElementById(fileId).click();
-}
+  const fileId = `file-${category}`;
+  document.getElementById(fileId).click();
+};
 
 const updateSection1 = () => {
-    formSection1.post(route("section.update"), {
-        onSuccess: () => {
-        formSection1.image = null;
-                    
-        toast.success("Saved!", {
-            autoClose: 1000,
-        });
+  formSection1.post(route("section.update"), {
+    onSuccess: () => {
+      formSection1.image = null;
 
-        },
-    });
-}
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+    },
+  });
+};
 
 const updateSection2 = () => {
-    formSection2.post(route("section.update"), {
-        onSuccess: () => {
-        formSection2.image = null;
-                    
-        toast.success("Saved!", {
-            autoClose: 1000,
-        });
+  formSection2.post(route("section.update"), {
+    onSuccess: () => {
+      formSection2.image = null;
 
-        },
-    });
-}
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
+    },
+  });
+};
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
-  formSection2.description   = section2.description || '';
+  formSection2.description = section2.description || "";
 
   if (clampTextAchvmnt.value.length > 1) {
     // Apply Dotdotdot to each element in the array
-    clampTextAchvmnt.value.forEach(text => {
+    clampTextAchvmnt.value.forEach((text) => {
       if (text) {
         new Dotdotdot(text, {
-          height: 100,  // Set max height for the text container
-          truncate: 'letter'  // Truncate by letter, can be 'word' or 'node'
+          height: 100, // Set max height for the text container
+          truncate: "letter", // Truncate by letter, can be 'word' or 'node'
         });
       }
     });
@@ -117,33 +115,34 @@ onMounted(() => {
     // Handle single element case
     new Dotdotdot(clampTextAchvmnt.value[0], {
       height: 100,
-      truncate: 'letter'
+      truncate: "letter",
     });
   }
 
   if (clampTextAnnncmnt.value.length > 1) {
     // Apply Dotdotdot to each element in the array
-    clampTextAnnncmnt.value.forEach(text => {
+    clampTextAnnncmnt.value.forEach((text) => {
       if (text) {
         new Dotdotdot(text, {
-          height: 100,  // Set max height for the text container
-          truncate: 'letter'  // Truncate by letter, can be 'word' or 'node'
+          height: 100, // Set max height for the text container
+          truncate: "letter", // Truncate by letter, can be 'word' or 'node'
         });
       }
     });
-  } else if (clampTextAnnncmnt.value.length === 1 && clampTextAnnncmnt.value[0]) {
+  } else if (
+    clampTextAnnncmnt.value.length === 1 &&
+    clampTextAnnncmnt.value[0]
+  ) {
     // Handle single element case
     new Dotdotdot(clampTextAnnncmnt.value[0], {
       height: 100,
-      truncate: 'letter'
+      truncate: "letter",
     });
   }
-
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
-
 });
 </script>
 
@@ -223,26 +222,55 @@ header {
               >Home</Link>
             </li>
             <li>
-              <div onclick="" id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+              <div
+                onclick=""
+                id="post-dropdown"
+                class="relative flex items-center md:hover:text-blue-700"
+                :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
+              >
                 <a
                   href="#"
                   class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 cursor-pointer"
-                  >
+                >
                   Post
                 </a>
-                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                <svg
+                  class="w-2.5 h-2.5 ms-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
                 </svg>
 
-                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
-                      <li>
-                        <Link :href="route('announcement.index')" class="block px-4 py-2 hover:bg-gray-100">Announcements</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('achievement.index')" class="block px-4 py-2 hover:bg-gray-100">Achievements</Link>
-                      </li>
-                    </ul>
+                <div
+                  id="post-child-dropdown"
+                  class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+                >
+                  <ul
+                    class="py-2 text-sm text-gray-700"
+                    aria-labelledby="doubleDropdownButton"
+                  >
+                    <li>
+                      <Link
+                        :href="route('announcement.index')"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Announcements</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('achievement.index')"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Achievements</Link>
+                    </li>
+                  </ul>
                 </div>
 
               </div>
@@ -255,75 +283,151 @@ header {
               >Research</Link>
             </li>
             <li>
-              <div onclick="" id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+              <div
+                onclick=""
+                id="post-dropdown"
+                class="relative flex items-center md:hover:text-blue-700"
+                :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
+              >
                 <a
                   href="#"
                   class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 cursor-pointer"
-                  >
+                >
                   Sustainability and Futurism
                 </a>
-                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                <svg
+                  class="w-2.5 h-2.5 ms-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
                 </svg>
 
-                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-full">
-                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
-                      <li>
-                        <Link :href="route('futurism.index', {category: 'innovation'})" class="block px-4 py-2 hover:bg-gray-100">AVInnovation</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('futurism.index', {category: 'futurism'})" class="block px-4 py-2 hover:bg-gray-100">Futurism</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('futurism.index', {category: 'social'})" class="block px-4 py-2 hover:bg-gray-100">Social Impact</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('futurism.index', {category: 'empowerment'})" class="block px-4 py-2 hover:bg-gray-100">Women Empowerment</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('futurism.index', {category: 'learning'})" class="block px-4 py-2 hover:bg-gray-100">Learning Development</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('futurism.index', {category: 'environmental'})" class="block px-4 py-2 hover:bg-gray-100">Environmental Projects</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('futurism.index', {category: 'initiatives'})" class="block px-4 py-2 hover:bg-gray-100">Student Initiatives</Link>
-                      </li>
-                    </ul>
+                <div
+                  id="post-child-dropdown"
+                  class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-full"
+                >
+                  <ul
+                    class="py-2 text-sm text-gray-700"
+                    aria-labelledby="doubleDropdownButton"
+                  >
+                    <li>
+                      <Link
+                        :href="route('futurism.index', {category: 'innovation'})"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >AVInnovation</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('futurism.index', {category: 'futurism'})"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Futurism</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('futurism.index', {category: 'social'})"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Social Impact</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('futurism.index', {category: 'empowerment'})"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Women Empowerment</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('futurism.index', {category: 'learning'})"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Learning Development</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('futurism.index', {category: 'environmental'})"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Environmental Projects</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('futurism.index', {category: 'initiatives'})"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Student Initiatives</Link>
+                    </li>
+                  </ul>
                 </div>
 
               </div>
             </li>
             <li>
-              <div onclick="" id="post-dropdown" class="relative flex items-center md:hover:text-blue-700" :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'">
+              <div
+                onclick=""
+                id="post-dropdown"
+                class="relative flex items-center md:hover:text-blue-700"
+                :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
+              >
                 <a
                   href="#"
                   class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 cursor-pointer"
-                  >
+                >
                   About
                 </a>
-                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                <svg
+                  class="w-2.5 h-2.5 ms-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
                 </svg>
 
-                <div id="post-child-dropdown" class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton">
-                      <li>
-                        <Link :href="route('about')" class="block px-4 py-2 hover:bg-gray-100">About</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('mission')" class="block px-4 py-2 hover:bg-gray-100">Mission Vision</Link>
-                      </li>
-                      <li>
-                        <Link :href="route('org-chart')" class="block px-4 py-2 hover:bg-gray-100">Organizational Chart</Link>
-                      </li>
-                      <!-- <li>
+                <div
+                  id="post-child-dropdown"
+                  class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+                >
+                  <ul
+                    class="py-2 text-sm text-gray-700"
+                    aria-labelledby="doubleDropdownButton"
+                  >
+                    <li>
+                      <Link
+                        :href="route('about')"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >About</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('mission')"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Mission Vision</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('org-chart')"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Organizational Chart</Link>
+                    </li>
+                    <!-- <li>
                         <Link :href="route('vision')" class="block px-4 py-2 hover:bg-gray-100">Vision</Link>
                       </li>
                       <li>
                         <Link :href="route('objectives')" class="block px-4 py-2 hover:bg-gray-100">Objectives</Link>
                       </li> -->
-                    </ul>
+                  </ul>
                 </div>
 
               </div>
@@ -336,18 +440,68 @@ header {
               >Login</Link>
             </li>
             <li v-if="$page.props.auth.user !== null">
-              <Link
-                :href="route('logout')"
-                method="post"
-                as="button"
+              <div
+                onclick=""
+                id="post-dropdown"
+                class="relative flex items-center md:hover:text-blue-700"
                 :class="scrollValue >= 250 ? 'text-gray-700' : 'text-gray-700 md:text-gray-100'"
-                class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-              >Logout</Link>
+              >
+                <a
+                  href="#"
+                  class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 cursor-pointer"
+                >
+                  Settings
+                </a>
+                <svg
+                  class="w-2.5 h-2.5 ms-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+
+                <div
+                  id="post-child-dropdown"
+                  class="absolute top-8 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+                >
+                  <ul
+                    class="py-2 text-sm text-gray-700"
+                    aria-labelledby="doubleDropdownButton"
+                  >
+                    <li>
+                      <Link
+                        :href="route('student.password')"
+                        class="block px-4 py-2 hover:bg-gray-100"
+                      >Change Password</Link>
+                    </li>
+                    <li>
+                      <Link
+                        :href="route('logout')"
+                        method="post"
+                        as="button"
+                        class="block w-full text-start px-4 py-2 hover:bg-gray-100"
+                      >Logout</Link>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
             </li>
           </ul>
         </div>
 
-        <div v-if="scrollValue < 250" class="hidden md:flex items-center gap-x-3">
+        <div
+          v-if="scrollValue < 250"
+          class="hidden md:flex items-center gap-x-3"
+        >
           <img
             src="/images/logo-binalonan-without-bg.png"
             class="h-10 hidden md:block"
@@ -359,7 +513,10 @@ header {
             alt="Logo"
           />
         </div>
-        <div v-else class="hidden md:flex items-center gap-x-3">
+        <div
+          v-else
+          class="hidden md:flex items-center gap-x-3"
+        >
           <img
             src="/images/logo-2.png"
             class="h-10 hidden md:block"
@@ -374,7 +531,10 @@ header {
       </div>
     </nav>
 
-    <section :style="{ backgroundImage: `url('/storage/images/about/${section1.thumbnail}')` }"  class="bg-fixed bg-center bg-no-repeat bg-cover bg-gray-400 bg-blend-multiply">
+    <section
+      :style="{ backgroundImage: `url('/storage/images/about/${section1.thumbnail}')` }"
+      class="bg-fixed bg-center bg-no-repeat bg-cover bg-gray-400 bg-blend-multiply"
+    >
       <div class="px-4 mx-auto max-w-screen-xl text-start py-24 lg:py-56">
         <h1 class="w-full sm:w-72 mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
           Discover Boundless Research
@@ -387,17 +547,31 @@ header {
             :href="route('about')"
             class="max-w-32 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:border-blue-800 hover:text-grey-300 hover:bg-blue-800 focus:ring-4 focus:ring-gray-400"
           >
-            About Us
+          About Us
           </Link>
         </div>
-        <button @click="editImage('section-1')" v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0" class="absolute top-[35%] right-[40%] py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-800 focus:ring-4 focus:ring-gray-400 shadow-lg">
+        <button
+          @click="editImage('section-1')"
+          v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0"
+          class="absolute top-[35%] right-[40%] py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-800 focus:ring-4 focus:ring-gray-400 shadow-lg"
+        >
           Update Background Image
-          <input @change="updateSection1" id="file-section-1" @input="formSection1.image = $event.target.files[0]" class="hidden" accept="image/png, image/gif, image/jpeg, image/jpg" type="file">
+          <input
+            @change="updateSection1"
+            id="file-section-1"
+            @input="formSection1.image = $event.target.files[0]"
+            class="hidden"
+            accept="image/png, image/gif, image/jpeg, image/jpg"
+            type="file"
+          >
         </button>
       </div>
     </section>
 
-    <section v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0" class="flex flex-wrap justify-between items-center px-5 mt-20">
+    <section
+      v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0"
+      class="flex flex-wrap justify-between items-center px-5 mt-20"
+    >
       <div class="w-full md:w-[50%]">
         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-700 md:text-5xl lg:text-6xl">
           Welcome to 3PRS e-Journal Website
@@ -405,9 +579,20 @@ header {
         <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl">
           Access Boundless Knowledge
         </p>
-        <textarea v-model="formSection2.description" class="text-justify block" placeholder="Write your description here ..." rows="10" cols="60" required></textarea>
-        <button @click.prevent="updateSection2" type="button" class="mt-2 border border-blue-900 text-blue-800 bg-white-700 hover:bg-blue-800 hover:text-white font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 focus:outline-none">
-            Save
+        <textarea
+          v-model="formSection2.description"
+          class="text-justify block"
+          placeholder="Write your description here ..."
+          rows="10"
+          cols="60"
+          required
+        ></textarea>
+        <button
+          @click.prevent="updateSection2"
+          type="button"
+          class="mt-2 border border-blue-900 text-blue-800 bg-white-700 hover:bg-blue-800 hover:text-white font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 focus:outline-none"
+        >
+          Save
         </button>
         <!-- <a
           href="/research"
@@ -417,31 +602,43 @@ header {
         </a> -->
       </div>
       <div class="w-full md:w-[50%] px-4">
-        <div @click="editImage('section-2')" class="relative group">
-                  <div class="absolute inset-0 flex items-center justify-center rounded bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      fill="currentColor"
-                      class="bi bi-camera text-white"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z" />
-                      <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
-                    </svg>
-                  </div>
+        <div
+          @click="editImage('section-2')"
+          class="relative group"
+        >
+          <div class="absolute inset-0 flex items-center justify-center rounded bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              fill="currentColor"
+              class="bi bi-camera text-white"
+              viewBox="0 0 16 16"
+            >
+              <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z" />
+              <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+            </svg>
+          </div>
 
-                  <img
-                    class="h-auto w-auto md:h-[400px] md:w-full object-cover rounded"
-                    :src="`/storage/images/about/${section2.thumbnail}`"
-                    alt="image description"
-                  >
-                  <input id="file-section-2" @input="formSection2.image = $event.target.files[0]" class="hidden" accept="image/png, image/gif, image/jpeg, image/jpg" type="file">
+          <img
+            class="h-auto w-auto md:h-[400px] md:w-full object-cover rounded"
+            :src="`/storage/images/about/${section2.thumbnail}`"
+            alt="image description"
+          >
+          <input
+            id="file-section-2"
+            @input="formSection2.image = $event.target.files[0]"
+            class="hidden"
+            accept="image/png, image/gif, image/jpeg, image/jpg"
+            type="file"
+          >
         </div>
       </div>
     </section>
-    <section v-else class="flex flex-wrap justify-between items-center px-5 mt-20">
+    <section
+      v-else
+      class="flex flex-wrap justify-between items-center px-5 mt-20"
+    >
       <div class="w-full md:w-[50%]">
         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-700 md:text-5xl lg:text-6xl">
           Welcome to 3PRS e-Journal Website
@@ -460,8 +657,10 @@ header {
         </a>
       </div>
       <div class="w-full md:w-[50%] px-4">
-        <div :style="{ backgroundImage: `url('/storage/images/about/${section2.thumbnail}')` }" 
-            class="min-h-[400px] rounded bg-center bg-cover bg-no-repeat bg-gray-400 bg-blend-multiply">
+        <div
+          :style="{ backgroundImage: `url('/storage/images/about/${section2.thumbnail}')` }"
+          class="min-h-[400px] rounded bg-center bg-cover bg-no-repeat bg-gray-400 bg-blend-multiply"
+        >
         </div>
       </div>
     </section>
@@ -534,11 +733,17 @@ header {
 
     <Footer />
 
-    <section class="fixed bottom-0 left-0 w-full" v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0">
+    <section
+      class="fixed bottom-0 left-0 w-full"
+      v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0"
+    >
       <div class="text-center bg-white py-2">
         <h3 class="">You're viewing as <strong>ADMIN</strong></h3>
         <p>You can customize some parts of this page.</p>
-        <p>Go to <a class="text-blue-700 font-bold" href="/dashboard">Dashboard</a></p>
+        <p>Go to <a
+            class="text-blue-700 font-bold"
+            href="/dashboard"
+          >Dashboard</a></p>
       </div>
     </section>
   </main>
@@ -549,12 +754,12 @@ header {
   display: none;
 }
 
-.menu-items>li:hover #post-child-dropdown{
+.menu-items > li:hover #post-child-dropdown {
   display: block;
   color: blue;
 }
 
-.menu-items>li {
+.menu-items > li {
   padding: 10px 0px;
 }
 

@@ -118,6 +118,12 @@ Route::post('forgot-password',                  [PasswordResetLinkController::cl
 Route::get('reset-password/{token}',            [NewPasswordController::class, 'create'])->name('password.reset');
 Route::post('reset-password',                   [NewPasswordController::class, 'store'])->name('password.store');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/student/update-password',          [GeneralController::class,      'updateStudentPassword'])->name('student.password');
+    Route::put('/student/password',                 [PasswordController::class,     'update'])->name('student.password.update');
+});
+
+
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });
