@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PasswordResetLinkController extends Controller
 {
@@ -30,22 +34,32 @@ class PasswordResetLinkController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'email' => 'required|email',
+            'user_key' => 'required|exists:users',
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-
-        if ($status == Password::RESET_LINK_SENT) {
-            return back()->with('status', __($status));
+        $userKeyExist = DB::table('password_reset_tokens')->where('user_key', $request->user_key)->exists();
+        if ($userKeyExist) {
+            DB::table('password_reset_tokens')->where('user_key', $request->user_key)->delete();
         }
 
-        throw ValidationException::withMessages([
-            'email' => [trans($status)],
+        $token = Str::random(64);
+        DB::table('password_reset_tokens')->insert([
+            'user_key' => $request->user_key,
+            'token' => $token,
+            'created_at' => Carbon::now()
+
         ]);
+
+        $user = DB::table('users')->where('user_key', $request->user_key)->first();
+        $toEmail = $user->email;
+        $subject = 'Reset Password';
+        $message = 'Here is your password reset link: ' . url('/reset-password/' . $token);
+
+        Mail::raw($message, function ($message) use ($toEmail, $subject) {
+            $message->to($toEmail)
+                ->subject($subject);
+        });
+
+        return back()->with('status', 'We have e-mailed your password reset link!');
     }
 }

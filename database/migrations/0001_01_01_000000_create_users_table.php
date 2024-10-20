@@ -26,7 +26,7 @@ return new class extends Migration
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
+            $table->string('user_key')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
@@ -50,8 +50,8 @@ return new class extends Migration
                     'email' => 'admin@gmail.com',
                     'password' => '$2y$12$0ZB9uqbJL/xBrIlVA8Glxe4Iw8hI25mKkt4yxjgUAtg7tc8Xt/SYC',
                     'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'), 
-                ],   
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
             )
         );
     }

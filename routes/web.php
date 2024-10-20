@@ -3,7 +3,9 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuturismController;
@@ -110,6 +112,11 @@ Route::middleware('auth')->group(function () {
 Route::get('login',                             [LoginController::class, 'create'])->name('login');
 Route::post('login',                            [LoginController::class, 'store']);
 Route::post('logout',                           [LoginController::class, 'destroy'])->name('logout');
+
+Route::get('forgot-password',                   [PasswordResetLinkController::class, 'create'])->name('password.request');
+Route::post('forgot-password',                  [PasswordResetLinkController::class, 'store'])->name('password.email');
+Route::get('reset-password/{token}',            [NewPasswordController::class, 'create'])->name('password.reset');
+Route::post('reset-password',                   [NewPasswordController::class, 'store'])->name('password.store');
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
