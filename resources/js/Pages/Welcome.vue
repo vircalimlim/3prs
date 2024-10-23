@@ -670,10 +670,11 @@ header {
       <div class="flex flex-wrap justify-center md:justify-start gap-10 mt-10">
         <div
           v-for="announcement in announcements"
-          class="max-w-96"
+          :key="announcement.id"
+          class="w-full sm:w-[calc(50%-20px)] md:w-[calc(33.33%-20px)] lg:w-[calc(25%-20px)] max-w-[300px]"
         >
           <img
-            class="h-72 max-w-full rounded-lg"
+            class="w-full h-48 object-cover rounded-lg"
             :src="storage_link + '/announcements/' + announcement.image"
             :alt="announcement.title"
           >
@@ -687,14 +688,14 @@ header {
           ></div>
           <Link
             :href="`/announcement/${announcement.id}`"
-            class="py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800"
+            class="inline-block py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800"
           >
           Read more
           </Link>
         </div>
       </div>
-      <div v-show="achievements.length < 1">
-        <h1 class="text-center text-xl text-gray-500 py-10">No achievements yet.</h1>
+      <div v-show="announcements.length < 1">
+        <h1 class="text-center text-xl text-gray-500 py-10">No announcements yet.</h1>
       </div>
     </section>
 
@@ -703,10 +704,11 @@ header {
       <div class="flex flex-wrap justify-center md:justify-start gap-10 mt-10">
         <div
           v-for="achievement in achievements"
-          class="max-w-96"
+          :key="achievement.id"
+          class="w-full sm:w-[calc(50%-20px)] md:w-[calc(33.33%-20px)] lg:w-[calc(25%-20px)] max-w-[300px]"
         >
           <img
-            class="h-72 max-w-full rounded-lg"
+            class="w-full h-48 object-cover rounded-lg"
             :src="storage_link + '/achievements/' + achievement.image"
             :alt="achievement.title"
           >
@@ -720,14 +722,14 @@ header {
           ></div>
           <Link
             :href="`/achievement/${achievement.id}`"
-            class="py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800"
+            class="inline-block py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800"
           >
           Read more
           </Link>
         </div>
       </div>
       <div v-show="achievements.length < 1">
-        <h1 class="text-center text-xl text-gray-500 py-10">No announcements yet.</h1>
+        <h1 class="text-center text-xl text-gray-500 py-10">No achievements yet.</h1>
       </div>
     </section>
 
