@@ -208,7 +208,7 @@ onMounted(() => {
                     <img class="w-full md:h-[350px]" :src="`/storage/images/about/${objectives.thumbnail}`" alt="about image">
                 </div>
                 <div>
-                    <TextHeader title="Objectives" style="font-size: 40px;"/>
+                    <TextHeader title="Preamble" style="font-size: 40px;"/>
                     <div v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0">
                         <textarea v-model="formObj.description" class="block mt-5" rows="10" cols="50" name="" id="" required>{{ objectives.description }}</textarea>
                         <button type="submit" class="mt-2 border border-blue-900 text-blue-800 bg-white-700 hover:bg-blue-800 hover:text-white font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 focus:outline-none">
