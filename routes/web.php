@@ -131,4 +131,8 @@ Route::get('/linkstorage', function () {
 Route::get('/artisan/migrate', function () {
     Artisan::call('migrate');
 });
+
+Route::get('/artisan/optimize-clear', function () {
+    Artisan::call('optimize:clear');
+});
 // require __DIR__.'/auth.php';
