@@ -8,6 +8,7 @@ import { useForm, usePage } from '@inertiajs/vue3';
 import { watchEffect, defineEmits } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 const {showEdit, student} = defineProps({
   showEdit: {
@@ -163,15 +164,15 @@ watchEffect(() => {
       </div>
 
       <div>
-            <InputLabel for="dob" value="Date of Birth" />
-            <TextInput
-            id="dob"
-            type="date"
-            class="mt-1 block w-full"
-            v-model="form.dob"
-            required
-            />
-            <InputError class="mt-2" :message="form.errors.dob" />
+        <InputLabel for="dob" value="Date of Birth" />
+        <TextInput
+        id="dob"
+        type="date"
+        class="mt-1 block w-full"
+        v-model="form.dob"
+        required
+        />
+        <InputError class="mt-2" :message="form.errors.dob" />
       </div>
 
       <div>

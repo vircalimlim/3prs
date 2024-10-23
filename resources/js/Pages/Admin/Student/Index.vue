@@ -5,6 +5,8 @@ import AddModal from "./Partials/AddModal.vue";
 import EditModal from "./Partials/EditModal.vue";
 import { ref, reactive } from "vue";
 import Pagination from "@/Components/Pagination.vue";
+import { useForm } from '@inertiajs/vue3';
+import { toast } from 'vue3-toastify';
 
 const { students } = defineProps({
   students: {
@@ -28,6 +30,22 @@ const openAddModal = () => {
 const openEditModal = (student: DynamicObject) => {
   showEdit.value = true;
   Object.assign(editStudent, student);
+};
+
+const form = useForm({});
+
+const deleteStudent = (id: number) => {
+  if (confirm('Are you sure you want to delete this student?')) {
+    form.delete(route("admin.student.delete", { id }), {
+      preserveState: true,
+      preserveScroll: true,
+      onSuccess: () => {
+        toast.success("Student deleted!", {
+          autoClose: 1000,
+        });
+      },
+    });
+  }
 };
 </script>
 
@@ -90,6 +108,7 @@ const openEditModal = (student: DynamicObject) => {
           <tbody>
             <tr
               v-for="student in students.data"
+              :key="student.id"
               class="bg-white border-b"
             >
               <!-- <th
@@ -108,8 +127,13 @@ const openEditModal = (student: DynamicObject) => {
                 <a
                   @click.prevent="openEditModal(student)"
                   href="#"
-                  class="font-medium text-blue-600 hover:underline"
+                  class="font-medium text-blue-600 hover:underline mr-2"
                 >Edit</a>
+                <a
+                  @click.prevent="deleteStudent(student.id)"
+                  href="#"
+                  class="font-medium text-red-600 hover:underline"
+                >Delete</a>
               </td>
             </tr>
             <tr v-if="students.data.length == 0">

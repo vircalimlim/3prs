@@ -8,6 +8,7 @@ import InputError from '@/Components/InputError.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 const {showAdd} = defineProps({
   showAdd: {
@@ -53,7 +54,7 @@ const storeStudent = () => {
 
     },
   });
-}
+};
 </script>
 
 <template>
@@ -139,15 +140,15 @@ const storeStudent = () => {
       </div>
 
       <div>
-            <InputLabel for="dob" value="Date of Birth" />
-            <TextInput
-            id="dob"
-            type="date"
-            class="mt-1 block w-full"
-            v-model="form.dob"
-            required
-            />
-            <InputError class="mt-2" :message="form.errors.dob" />
+        <InputLabel for="dob" value="Date of Birth" />
+        <TextInput
+        id="dob"
+        type="date"
+        class="mt-1 block w-full"
+        v-model="form.dob"
+        required
+        />
+        <InputError class="mt-2" :message="form.errors.dob" />
       </div>
 
       <div>

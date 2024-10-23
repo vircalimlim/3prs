@@ -59,6 +59,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/student',                      [StudentController::class,      'index'])->name('admin.student.index');
     Route::post('/student/save',                [StudentController::class,      'storeStudent'])->name('admin.student.store');
     Route::patch('/student/update',             [StudentController::class,      'updateStudent'])->name('admin.student.update');
+    Route::delete('/student/delete/{id}',       [StudentController::class,      'deleteStudent'])->name('admin.student.delete');
 
     Route::get('/post',                         [PostController::class,         'index'])->name('admin.post.index');
     Route::post('/post/save',                   [PostController::class,         'storePost'])->name('admin.post.store');
