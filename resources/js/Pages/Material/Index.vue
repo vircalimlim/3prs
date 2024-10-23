@@ -101,6 +101,18 @@ watch(searchQuery, (newValue: any, oldValue: any) => {
                 scope="col"
                 class="px-6 py-3"
               >
+                Date Of Published
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3"
+              >
+                Author
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3"
+              >
                 Description
               </th>
               <th
@@ -122,6 +134,12 @@ watch(searchQuery, (newValue: any, oldValue: any) => {
               >
                 {{ material.title }}
               </th>
+              <td class="px-6 py-4">
+                {{ material.published_date }}
+              </td>
+              <td class="px-6 py-4">
+                {{ material.author }}
+              </td>
               <td class="px-6 py-4">
                 {{ material.description }}
               </td>

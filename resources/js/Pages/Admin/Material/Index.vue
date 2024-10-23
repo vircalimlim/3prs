@@ -121,7 +121,7 @@ const deleteMaterial = (id: number) => {
                 {{ material.status }}
               </td>
               <td class="px-6 py-4">
-                {{ material.created_at }}
+                {{ material.published_date }}
               </td>
               <td class="px-6 py-4 text-right">
                 <a @click.prevent="openEditModal(material)" href="#"

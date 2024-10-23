@@ -56,6 +56,8 @@ class MaterialController extends Controller
             'title'         => 'required|unique:materials',
             'description'   => 'required',
             'pdf'           => 'required|mimetypes:application/pdf',
+            'author'        => 'required|string|max:255',
+            'published_date'=> 'required|date',
         ]);
 
         $file_name = $this->saveFileToStorage($request->file('pdf'));
@@ -64,6 +66,8 @@ class MaterialController extends Controller
             'title'         => $request->title,
             'description'   => $request->description,
             'file_path'     => $file_name,
+            'author'        => $request->author,
+            'published_date'=> $request->published_date,
         ]);
         return back();
     }
@@ -76,6 +80,8 @@ class MaterialController extends Controller
             'title'         => 'required|unique:materials,title,' . $request->id,
             'description'   => 'required',
             'pdf'           => 'nullable|mimetypes:application/pdf',
+            'author'        => 'required|string|max:255',
+            'published_date'=> 'required|date',
         ]);
 
         $file_name = '';
@@ -91,6 +97,8 @@ class MaterialController extends Controller
                 'title'         => $request->title,
                 'description'   => $request->description,
                 'file_path'     => $file_name,
+                'author'        => $request->author,
+                'published_date'=> $request->published_date,
             ]);
 
         return back();
@@ -108,7 +116,7 @@ class MaterialController extends Controller
                 $query->where('m.title', 'like', '%' . $search . '%')
                     ->orWhere('c.title', 'like', '%' . $search . '%');
             })
-            ->latest('created_at')
+            ->latest('published_date')
             ->get();
         $storage_link = asset('storage/materials/');
         return Inertia::render('Material/Index', [

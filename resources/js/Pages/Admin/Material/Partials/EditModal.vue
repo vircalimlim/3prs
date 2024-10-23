@@ -33,6 +33,8 @@ const form = useForm({
     currentFile: '',
     pdf: null,
     id: '',
+    author: '',
+    published_date: '',
 });
 
 const closeModal = () => {
@@ -47,6 +49,8 @@ const editForm = () => {
   form.currentFile = material.file_path || '';
   form.pdf = null,
   form.id = material.id || '';
+  form.author = material.author || '';
+  form.published_date = material.published_date || '';
 };
 
 const updateMaterial = () => {
@@ -59,11 +63,12 @@ const updateMaterial = () => {
       form.currentFile = '';
       form.pdf = null;
       form.id = '';
+      form.author = '';
+      form.published_date = '';
             
       toast.success("Saved!", {
         autoClose: 1000,
       });
-
     },
   });
 };
@@ -107,6 +112,30 @@ watchEffect(() => {
           required
         />
         <InputError class="mt-2" :message="form.errors.title" />
+      </div>
+
+            <div>
+        <InputLabel for="author" value="Author" />
+        <TextInput
+          id="author"
+          type="text"
+          class="mt-1 block w-full"
+          v-model="form.author"
+          required
+        />
+        <InputError class="mt-2" :message="form.errors.author" />
+      </div>
+
+      <div>
+        <InputLabel for="published_date" value="Published Date" />
+        <TextInput
+          id="published_date"
+          type="date"
+          class="mt-1 block w-full"
+          v-model="form.published_date"
+          required
+        />
+        <InputError class="mt-2" :message="form.errors.published_date" />
       </div>
 
       <div>
