@@ -31,7 +31,7 @@ const form = useForm({
   image: null,
   images: [],
   category: '',
-  publish_date: ref(new Date().toISOString().substr(0, 10))
+  publish_date: ''
 });
 
 const closeModal = () => {

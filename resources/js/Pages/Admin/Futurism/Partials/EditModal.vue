@@ -29,7 +29,7 @@ const form = useForm({
   title: '',
   description: '',
   category: '',
-  publish_date: ref('')
+  publish_date: ''
 });
 
 const closeModal = () => {
