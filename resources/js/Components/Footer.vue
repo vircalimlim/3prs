@@ -11,8 +11,8 @@ import { Link } from "@inertiajs/vue3";
           class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
         >
           <img
-            src="/images/logo.png"
-            class="h-8"
+            src="/images/logo-binalonan-without-bg.png"
+            class="h-10"
             alt="Flowbite Logo"
           />
           <!-- <span class="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span> -->
