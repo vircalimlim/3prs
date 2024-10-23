@@ -48,10 +48,10 @@ class FuturismController extends Controller
         $result = [];
         $category = !empty(request()->category) ? request()->category : '';
         if($category){
-            $result = Futurism::with('images')->where('status', 'active')->latest('created_at')->where('category', $category)->paginate(10);
+            $result = Futurism::with('images')->where('status', 'active')->latest('publish_date')->where('category', $category)->paginate(10);
         }
         else{
-            $result = Futurism::with('images')->where('status', 'active')->latest('created_at')->paginate(10);
+            $result = Futurism::with('images')->where('status', 'active')->latest('publish_date')->paginate(10);
         }
 
         $storage_link = asset('storage/images/futurism');
@@ -67,7 +67,8 @@ class FuturismController extends Controller
             'category'      => 'required',
             'title'         => 'required',
             'image'         => 'required|mimes:jpeg,png,jpg,gif|max:10240', //max 10mb
-            'description'   => 'required'
+            'description'   => 'required',
+            'publish_date'  => 'required|date'
         ]);
         $image_name = $this->saveImageToStorage($request->file('image'), '1999');
         $futurism = Futurism::create([
@@ -76,6 +77,7 @@ class FuturismController extends Controller
             'title'         => $request->title,
             'description'   => $request->description,
             'status'        => 'active',
+            'publish_date'  => $request->publish_date,
         ]);
         $this->uploadImages($request->file('images'), $futurism->id);
 
@@ -86,13 +88,15 @@ class FuturismController extends Controller
         $request->validate([
             'id'            => 'required',
             'title'         => 'required',
-            'description'   => 'required'
+            'description'   => 'required',
+            'publish_date'  => 'required|date'
         ]);
 
         Futurism::where('id', $request->id)
         ->update([
             'title'         => $request->title,
-            'description'   => $request->description
+            'description'   => $request->description,
+            'publish_date'  => $request->publish_date
         ]);
 
         return back();

@@ -30,7 +30,8 @@ const form = useForm({
   description: '',
   image: null,
   images: [],
-  type: ''
+  type: '',
+  publish_date: ref('')
 });
 
 const closeModal = () => {
@@ -103,6 +104,17 @@ function handleClickDeleteFile(index) {
           required
         />
         <InputError class="mt-2" :message="form.errors.title" />
+      </div>
+
+      <div>
+        <InputLabel for="publish_date" value="Publish Date" />
+        <input
+          type="date"
+          id="publish_date"
+          v-model="form.publish_date"
+          class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+        >
+        <InputError class="mt-2" :message="form.errors.publish_date" />
       </div>
 
       <div>

@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
-import { watchEffect, defineEmits } from 'vue';
+import { watchEffect, defineEmits, ref } from 'vue';
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { toast } from 'vue3-toastify';
@@ -28,7 +28,8 @@ const form = useForm({
   id: '',
   title: '',
   description: '',
-  category: ''
+  category: '',
+  publish_date: ref('')
 });
 
 const closeModal = () => {
@@ -41,6 +42,7 @@ const editForm = () => {
   form.description = post.description || '';
   form.category = post.category || '';
   form.id = post.id || '';
+  form.publish_date = post.publish_date || new Date().toISOString().substr(0, 10);
 };
 
 const updatePost = () => {
@@ -51,6 +53,7 @@ const updatePost = () => {
       form.description = '';
       form.category = '';
       form.id = '';
+      form.publish_date = '';
                   
       toast.success("Saved!", {
         autoClose: 1000,
@@ -82,6 +85,17 @@ watchEffect(() => {
           required
         />
         <InputError class="mt-2" :message="form.errors.title" />
+      </div>
+      
+      <div>
+        <InputLabel for="publish_date" value="Publish Date" />
+        <input
+          type="date"
+          id="publish_date"
+          v-model="form.publish_date"
+          class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+        >
+        <InputError class="mt-2" :message="form.errors.publish_date" />
       </div>
       
       <!-- DOCUMENTATION => https://vueup.github.io/vue-quill/guide/toolbar.html -->

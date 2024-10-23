@@ -50,10 +50,10 @@ class PostController extends Controller
         $result = [];
         $type = request()->type ? request()->type : 'achievements';
         if(request()->type == 'announcements'){
-            $result = Announcement::with('images')->where('status', 'active')->latest('created_at')->paginate(10);
+            $result = Announcement::with('images')->where('status', 'active')->latest('publish_date')->paginate(10);
         }
         else{
-            $result = Achievement::with('images')->where('status', 'active')->latest('created_at')->paginate(10);
+            $result = Achievement::with('images')->where('status', 'active')->latest('publish_date')->paginate(10);
         }
         $storage_link = asset('storage/images/'.$type);
 
@@ -68,7 +68,8 @@ class PostController extends Controller
             'type'          => 'required',
             'title'         => 'required',
             'image'         => 'required|mimes:jpeg,png,jpg,gif|max:10240', //max 10mb
-            'description'   => 'required'
+            'description'   => 'required',
+            'publish_date'  => 'required|date'
         ]);
         $image_name = $this->saveImageToStorage($request->type, $request->file('image'), '1999');
         if($request->type == 'achievements'){
@@ -77,6 +78,7 @@ class PostController extends Controller
                 'title'         => $request->title,
                 'description'   => $request->description,
                 'status'        => 'active',
+                'publish_date'  => $request->publish_date,
             ]);
 
             $this->uploadImages($request->file('images'), $request->type, $achievement->id);
@@ -87,6 +89,7 @@ class PostController extends Controller
                 'title'         => $request->title,
                 'description'   => $request->description,
                 'status'        => 'active',
+                'publish_date'  => $request->publish_date,
             ]);
 
             $this->uploadImages($request->file('images'), $request->type, $announcement->id);
@@ -100,21 +103,24 @@ class PostController extends Controller
             'id'            => 'required',
             'type'          => 'required',
             'title'         => 'required',
-            'description'   => 'required'
+            'description'   => 'required',
+            'publish_date'  => 'required|date'
         ]);
 
         if($request->type == 'achievements'){
             Achievement::where('id', $request->id)
             ->update([
                 'title'         => $request->title,
-                'description'   => $request->description
+                'description'   => $request->description,
+                'publish_date'  => $request->publish_date
             ]);
         }
         else if($request->type == 'announcements'){
             Announcement::where('id', $request->id)
             ->update([
                 'title'         => $request->title,
-                'description'   => $request->description
+                'description'   => $request->description,
+                'publish_date'  => $request->publish_date
             ]);
         }
 

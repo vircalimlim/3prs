@@ -201,7 +201,7 @@ onMounted(() => {
               >
               </td>
               <td class="font-bold px-4 py-4 align-top">
-                {{formatDate(post.created_at)}}
+                {{post.publish_date}}
               </td>
               <td class="px-6 py-4 text-right align-top">
                 <a
