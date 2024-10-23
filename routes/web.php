@@ -82,10 +82,12 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/category',                     [CategoryController::class, 'index'])->name('admin.category.index');
     Route::post('/category/save',               [CategoryController::class, 'storeCategory'])->name('admin.category.store');
     Route::patch('/category/save',              [CategoryController::class, 'updateCategory'])->name('admin.category.update');
+    Route::delete('/category/delete',           [CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
 
     Route::get('/material',                     [MaterialController::class, 'index'])->name('admin.material.index');
     Route::post('/material/save',               [MaterialController::class, 'storeMaterial'])->name('admin.material.store');
     Route::post('/material/update',             [MaterialController::class, 'updateMaterial'])->name('admin.material.update');
+    Route::delete('/material/delete/{id}', [MaterialController::class, 'deleteMaterial'])->name('admin.material.delete');
 
     Route::get('/logs',                         [DashboardController::class,    'logs'])->name('admin.logs');
     Route::get('/update-password',              [GeneralController::class,      'updatePassword'])->name('admin.password');
@@ -136,3 +138,4 @@ Route::get('/artisan/optimize-clear', function () {
     Artisan::call('optimize:clear');
 });
 // require __DIR__.'/auth.php';
+

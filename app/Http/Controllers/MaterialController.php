@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MaterialController extends Controller
@@ -32,7 +33,7 @@ class MaterialController extends Controller
 
     public function index(Request $request)
     {
-        $materials = Material::with('category');
+        $materials = Material::with('category')->where('status', 'active');
 
         if (!empty($request->type)) {
             $materials = $materials->where('category_id', $request->type);
@@ -102,6 +103,7 @@ class MaterialController extends Controller
         $materials = DB::table('materials as m')
             ->selectRaw('m.*, c.title as category_name')
             ->leftJoin('categories as c', 'm.category_id', '=', 'c.id')
+            ->where('m.status', 'active')
             ->where(function ($query) use ($search) {
                 $query->where('m.title', 'like', '%' . $search . '%')
                     ->orWhere('c.title', 'like', '%' . $search . '%');
@@ -125,7 +127,19 @@ class MaterialController extends Controller
 
         $file = asset('storage/materials') . '/' . $material->file_path;
         return Inertia::render('Material/Id', [
-            'pdfSource' => $file
+            'pdfSource' => $file,
+            'materialId' => $material->id
         ]);
+    }
+
+    public function deleteMaterial(Request $request)
+    {
+
+        $material = Material::findOrFail($request->id);
+        $material->update([
+            'status' => 'inactive'
+        ]);
+
+        return redirect()->back();
     }
 }
