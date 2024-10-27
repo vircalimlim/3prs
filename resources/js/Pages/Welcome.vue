@@ -551,7 +551,7 @@ header {
         <div class="flex flex-col space-y-4 sm:flex-row sm:justify-start sm:space-y-0">
           <Link
             :href="route('about')"
-            class="max-w-32 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:border-blue-800 hover:text-grey-300 hover:bg-blue-800 focus:ring-4 focus:ring-gray-400"
+            class="max-w-32 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-[#e5432d] rounded-lg border border-[#e5432d] border-2 hover:border-[#e5432d] hover:text-grey-300 hover:bg-[#e5432d] hover:text-white focus:ring-4 focus:ring-gray-400"
           >
           About Us
           </Link>
@@ -646,7 +646,7 @@ header {
       class="flex flex-wrap justify-between items-center px-5 mt-20"
     >
       <div class="w-full md:w-[50%]">
-        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-700 md:text-5xl lg:text-6xl">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-[#1034a6] md:text-5xl lg:text-6xl">
           Welcome to 3PRS e-Journal Website
         </h1>
         <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl">
@@ -657,7 +657,7 @@ header {
         </p>
         <a
           href="/research"
-          class="mt-5 bg-blue-700 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg hover:text-grey-300 hover:bg-blue-800"
+          class="mt-5 bg-[#e5432d] inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg hover:text-grey-300 hover:bg-[#e5432d]"
         >
           Explore Our Library
         </a>
@@ -672,7 +672,7 @@ header {
     </section>
 
     <section class="px-5 mt-20">
-      <TextHeader title="Announcements" />
+      <TextHeader title="Announcements" class="text-[#1034a6]" />
       <div class="flex flex-wrap justify-center md:justify-start gap-10 mt-10">
         <div
           v-for="announcement in announcements"
@@ -694,7 +694,7 @@ header {
           ></div>
           <Link
             :href="`/announcement/${announcement.id}`"
-            class="inline-block py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800"
+            class="inline-block py-2 px-3 text-base font-medium text-center text-[#e5432d] rounded-lg border border-[#e5432d] border-2 hover:border-[#e5432d] hover:text-white hover:text-grey-300 hover:bg-[#e5432d]"
           >
           Read more
           </Link>
@@ -706,7 +706,7 @@ header {
     </section>
 
     <section class="px-5 mt-20">
-      <TextHeader title="Achievements" />
+      <TextHeader title="Achievements" class="text-[#1034a6]" />
       <div class="flex flex-wrap justify-center md:justify-start gap-10 mt-10">
         <div
           v-for="achievement in achievements"
@@ -728,7 +728,7 @@ header {
           ></div>
           <Link
             :href="`/achievement/${achievement.id}`"
-            class="inline-block py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800"
+            class="inline-block py-2 px-3 text-base font-medium text-center text-[#e5432d] rounded-lg border border-[#e5432d] border-2 hover:border-[#e5432d] hover:text-white hover:text-grey-300 hover:bg-[#e5432d]"
           >
           Read more
           </Link>

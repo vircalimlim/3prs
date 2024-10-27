@@ -57,12 +57,12 @@ if (clampText.value.length > 1) {
             <a v-for="achievement in achievements" href="#" class="flex flex-col bg-white rounded-lg shadow md:flex-row w-full hover:bg-gray-100">
                 <img class="object-cover w-full h-96 md:h-86 md:w-[450px]" :src="`${storage_link}/${achievement.image}`" alt="">
                 <div class="h-full flex flex-col justify-between p-4 leading-normal">
-                    <h5 class="text-2xl font-bold tracking-tight text-gray-900 capitalize">{{achievement.title}}</h5>
+                    <h5 class="text-2xl font-bold tracking-tight text-[#1034a6] capitalize">{{achievement.title}}</h5>
                     <p class="text-[14px] font-bold text-gray-600 mb-2">{{ formatDate(achievement.created_at) }}</p>
                     <div ref="clampText" v-html="achievement.description" class="mb-3 font-normal text-gray-700 line-clamp-5"></div>
                     <div class="mt-5">
                         <Link :href="`/achievement/${achievement.id}`"
-                            class="py-2 px-3 text-base font-medium text-center text-blue-700 rounded-lg border border-border-800 hover:border-blue-800 hover:text-white hover:text-grey-300 hover:bg-blue-800 shadow-md">
+                            class="py-2 px-3 text-base font-medium text-center text-[#e5432d] rounded-lg border border-[#e5432d] border-2 hover:border-[#e5432d] hover:text-white hover:text-grey-300 hover:bg-[#e5432d] shadow-md">
                             Read more
                         </Link>
                     </div>

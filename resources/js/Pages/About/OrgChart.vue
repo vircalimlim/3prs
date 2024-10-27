@@ -91,6 +91,7 @@ onMounted(() => {
         <div>
           <TextHeader
             title="Organizational Chart"
+            class="text-[#1034a6]"
             style="font-size: 40px;"
           />
           <div v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0">

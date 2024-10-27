@@ -126,7 +126,7 @@ onMounted(() => {
                     <img class="w-full md:h-[350px]" :src="`/storage/images/about/${mission.thumbnail}`" alt="about image">
                 </div>
                 <div>
-                    <TextHeader title="Mission" style="font-size: 40px;"/>
+                    <TextHeader title="Mission" class="text-[#1034a6]" style="font-size: 40px;"/>
                     <div v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0">
                         <textarea v-model="formMission.description" class="block mt-5" rows="10" cols="50" name="" id="" required>{{ mission.description }}</textarea>
                         <button type="submit" class="mt-2 border border-blue-900 text-blue-800 bg-white-700 hover:bg-blue-800 hover:text-white font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 focus:outline-none">
@@ -167,7 +167,7 @@ onMounted(() => {
                     <img class="w-full md:h-[350px]" :src="`/storage/images/about/${vision.thumbnail}`" alt="about image">
                 </div>
                 <div>
-                    <TextHeader title="Vision" style="font-size: 40px;"/>
+                    <TextHeader title="Vision" class="text-[#1034a6]" style="font-size: 40px;"/>
                     <div v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0">
                         <textarea v-model="formVision.description" class="block mt-5" rows="10" cols="50" name="" id="" required>{{ vision.description }}</textarea>
                         <button type="submit" class="mt-2 border border-blue-900 text-blue-800 bg-white-700 hover:bg-blue-800 hover:text-white font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 focus:outline-none">
@@ -208,7 +208,7 @@ onMounted(() => {
                     <img class="w-full md:h-[350px]" :src="`/storage/images/about/${objectives.thumbnail}`" alt="about image">
                 </div>
                 <div>
-                    <TextHeader title="Preamble" style="font-size: 40px;"/>
+                    <TextHeader title="Preamble" class="text-[#1034a6]" style="font-size: 40px;"/>
                     <div v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0">
                         <textarea v-model="formObj.description" class="block mt-5" rows="10" cols="50" name="" id="" required>{{ objectives.description }}</textarea>
                         <button type="submit" class="mt-2 border border-blue-900 text-blue-800 bg-white-700 hover:bg-blue-800 hover:text-white font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 focus:outline-none">

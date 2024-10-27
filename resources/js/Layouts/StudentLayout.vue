@@ -408,7 +408,7 @@ onUnmounted(() => {
           class="hover:text-blue-600"
           href="/"
         >Home</Link>
-        <span>//</span>
+        <span class="text-[#e5432d] text-bold">//</span>
         <span class="text-blue-600 font-bold capitalize">{{pageName}}</span>
       </div>
     </div>

@@ -68,7 +68,7 @@ const handleMenu = () => {
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/dashboard.png" />
-          <span class="ms-3">Dashboard</span>
+          <span :class="currentRoute == 'dashboard' ? 'text-[#e5432d]' : ''" class="ms-3">Dashboard</span>
           </Link>
         </li>
         <li>
@@ -78,7 +78,7 @@ const handleMenu = () => {
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/semester.png" />
-          <span class="flex-1 ms-3 whitespace-nowrap">Semester</span>
+          <span :class="currentRoute == 'semester.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Semester</span>
           </Link>
         </li>
         <li>
@@ -88,7 +88,7 @@ const handleMenu = () => {
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/student.png" />
-          <span class="flex-1 ms-3 whitespace-nowrap">Student</span>
+          <span :class="currentRoute == 'admin.student.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Student</span>
           </Link>
         </li>
         <li>
@@ -98,7 +98,7 @@ const handleMenu = () => {
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/post.png" />
-          <span class="flex-1 ms-3 whitespace-nowrap">Post</span>
+          <span :class="currentRoute == 'admin.post.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Post</span>
           </Link>
         </li>
         <li>
@@ -108,7 +108,7 @@ const handleMenu = () => {
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/futurism.png" />
-          <span class="flex-1 ms-3">Sustainability and Futurism</span>
+          <span :class="currentRoute == 'admin.futurism.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3">Sustainability and Futurism</span>
           </Link>
         </li>
         <li>
@@ -145,14 +145,14 @@ const handleMenu = () => {
             <li>
               <Link
                 :href="route('admin.category.index')"
-                :class="currentRoute == 'admin.category.index' ? 'text-blue-800 bg-gray-100' : ''"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
+                :class="currentRoute == 'admin.category.index' ? 'text-[#e5432d] bg-gray-100' : ''"
               >Category</Link>
             </li>
             <li>
               <Link
                 :href="route('admin.material.index')"
-                :class="currentRoute == 'admin.material.index' ? 'text-blue-800 bg-gray-100' : ''"
+                :class="currentRoute == 'admin.material.index' ? 'text-[#e5432d] bg-gray-100' : ''"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
               >Materials</Link>
             </li>
@@ -165,7 +165,7 @@ const handleMenu = () => {
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
           >
           <img class="h-8 w-8" src="/images/icons/logs.png" />
-          <span class="flex-1 ms-3 whitespace-nowrap">Logs</span>
+          <span :class="currentRoute == 'admin.logs' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Logs</span>
           </Link>
         </li>
         <li>

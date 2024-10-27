@@ -143,7 +143,7 @@ onMounted(() => {
                 </div>
 
                 <div>
-                    <TextHeader title="About Us" style="font-size: 40px;"/>
+                    <TextHeader title="About Us" class="text-[#1034a6]" style="font-size: 40px;"/>
                     <div v-if="$page.props.auth.user && $page.props.auth.user.student_id == 0">
                         <textarea v-model="formAbout.description" class="block mt-5" rows="10" cols="50" name="" id="" required>{{ about.description }}</textarea>
                         <button type="submit" class="mt-2 border border-blue-900 text-blue-800 bg-white-700 hover:bg-blue-800 hover:text-white font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 focus:outline-none">
