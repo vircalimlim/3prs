@@ -118,7 +118,7 @@ class FuturismController extends Controller
 
     public function indexPublic(Request $request)
     {
-        $fullNamecategoryList = ['Av Innovation', 'Futurism', 'Social Impact', 'Women Empowerment', 'Learning Development', 'Environmental Projects', 'Student Initiatives'];
+        $fullNamecategoryList = ['Av Innovation', 'Futurism', 'Social Impact', 'Women Empowerment', 'Learning Development', 'Environmental Projects', 'Student Initiatives', 'Researches'];
 
         $category = $request->category;
         $futurisms = DB::table('futurisms')

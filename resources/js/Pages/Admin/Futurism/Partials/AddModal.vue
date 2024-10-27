@@ -96,6 +96,7 @@ function handleClickDeleteFile(index) {
                 <option value="learning">Learning Development</option>
                 <option value="environmental">Environmental Projects</option>
                 <option value="initiatives">Student Initiatives</option>
+                <option value="researches">Researches</option>
             </select>
             <InputError class="mt-2" :message="form.errors.category" />
         </div>

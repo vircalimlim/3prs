@@ -120,6 +120,7 @@ onMounted(() => {
             <option value="learning">Learning Development</option>
             <option value="environmental">Environmental Projects</option>
             <option value="initiatives">Student Initiatives</option>
+            <option value="researches">Researches</option>
           </select>
 
           <button

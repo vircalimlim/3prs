@@ -228,6 +228,12 @@ onUnmounted(() => {
                       class="block px-4 py-2 hover:bg-gray-100"
                     >Student Initiatives</Link>
                   </li>
+                  <li>
+                    <Link
+                      :href="route('futurism.index', {category: 'researches'})"
+                      class="block px-4 py-2 hover:bg-gray-100"
+                    >Researches</Link>
+                  </li>
                 </ul>
               </div>
 
@@ -602,6 +608,12 @@ onUnmounted(() => {
                       :href="route('futurism.index', {category: 'initiatives'})"
                       class="block px-4 py-2 hover:bg-gray-100"
                     >Student Initiatives</Link>
+                  </li>
+                  <li>
+                    <Link
+                      :href="route('futurism.index', {category: 'researches'})"
+                      class="block px-4 py-2 hover:bg-gray-100"
+                    >Researches</Link>
                   </li>
                 </ul>
               </div>
