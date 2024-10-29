@@ -551,7 +551,7 @@ header {
         <div class="flex flex-col space-y-4 sm:flex-row sm:justify-start sm:space-y-0">
           <Link
             :href="route('about')"
-            class="max-w-32 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-[#e5432d] rounded-lg border border-[#e5432d] border-2 hover:border-[#e5432d] hover:text-grey-300 hover:bg-[#e5432d] hover:text-white focus:ring-4 focus:ring-gray-400"
+            class="max-w-32 inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center bg-[#e5432d] text-white rounded-lg border-[#e5432d] border-2 hover:border-[#e5432d] hover:text-grey-300 hover:text-white focus:ring-4 focus:ring-gray-400"
           >
           About Us
           </Link>
