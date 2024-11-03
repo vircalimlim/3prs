@@ -3,7 +3,7 @@ import ImageCarousel from '@/Components/ImageCarousel.vue';
 import StudentLayout from '@/Layouts/StudentLayout.vue';
 import { Link } from '@inertiajs/vue3';
 
-const {} = defineProps({
+const {futurism_category_images} = defineProps({
     'futurism': {
         type: Object,
         required: true,
@@ -14,6 +14,10 @@ const {} = defineProps({
     },
     'storage_link': {
         type: String,
+        required: true,
+    },
+    'futurism_category_images': {
+        type: Array<any>,
         required: true,
     }
 });
@@ -40,7 +44,16 @@ const formatDate = (inputDate: string) => {
                 <p class="text-[14px] font-bold text-gray-600 mb-2">{{ formatDate(futurism.created_at) }}</p>
                 <div class="mt-5" v-html="futurism.description"></div>
             </div>
-            <div v-show="more_futurisms.length > 0">
+            <div v-if="futurism_category_images.length > 0" class="w-full mdw-96">
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-2xl font-bold mb-5">SDG Initiatives</h3>
+                    <div class="flex flex-wrap gap-5">
+                        <img :src="storage_link + '/' + futurism_category_image.image" v-for="futurism_category_image in futurism_category_images" class="w-28 h-32 cover rounded">
+                    </div>
+                    <a :href="`/futurism/index/${futurism.category}`" class="text-blue-500 text-[18px] mt-2">Read More</a>
+                </div>
+            </div>
+            <!-- <div v-show="more_futurisms.length > 0">
                 <h3 class="uppercase text-2xl font-bold mb-5">Latest Futurisms</h3>
                 <div class="flex flex-col gap-5">
                     <Link :href="`/futurism/${more_futurism.id}`" v-for="more_futurism in more_futurisms" class="flex flex-row items-center gap-2 md:w-96 rounded hover:bg-gray-100">
@@ -51,7 +64,7 @@ const formatDate = (inputDate: string) => {
                         </div>
                     </Link>
                 </div>
-            </div>
+            </div> -->
         </section>
     </StudentLayout>
 </template>
