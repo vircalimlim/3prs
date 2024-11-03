@@ -44,6 +44,28 @@ class FuturismController extends Controller
         }
     }
 
+    private function uploadCategoryImages($image_files, $category){
+        if($image_files){
+            foreach($image_files as $index => $image_file){
+
+                // Validate if the file is an image
+                $validator = Validator::make(['image' => $image_file], [
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240'
+                ]);
+
+                if ($validator->fails()) {
+                    continue;
+                }
+
+                $image_name_2 = $this->saveImageToStorage($image_file, $index);
+                DB::table('futurism_category_images')->insert([
+                    'category'   => $category,
+                    'image' => $image_name_2
+                ]);
+            }
+        } 
+    }
+
     public function index(){
         $result = [];
         $category = !empty(request()->category) ? request()->category : '';
@@ -186,6 +208,78 @@ class FuturismController extends Controller
         ]);
 
         $this->uploadImages($request->file('images'), $request->id);
+        return back();
+    }
+
+    public function categoryIndex(){
+        $categories = [
+            (object)[
+                'category_name'  => 'AVInnovation',
+                'category'       => 'innovation',
+                'images'    => DB::table('futurism_category_images')->where('category', 'innovation')->get()
+            ],
+            (object)[
+                'category_name'  => 'Futurism',
+                'category'       => 'futurism',
+                'images'    => DB::table('futurism_category_images')->where('category', 'futurism')->get()
+            ],
+            (object)[
+                'category_name'  => 'Social Impact',
+                'category'       => 'social',
+                'images'    => DB::table('futurism_category_images')->where('category', 'social')->get()
+            ],
+            (object)[
+                'category_name'  => 'Women Empowerment',
+                'category'       => 'empowerment',
+                'images'    => DB::table('futurism_category_images')->where('category', 'empowerment')->get()
+            ],
+            (object)[
+                'category_name'  => 'Learning Development',
+                'category'       => 'learning',
+                'images'    => DB::table('futurism_category_images')->where('category', 'learning')->get()
+            ],
+            (object)[
+                'category_name'  => 'Environmental Projects',
+                'category'       => 'environmental',
+                'images'    => DB::table('futurism_category_images')->where('category', 'environmental')->get()
+            ],
+            (object)[
+                'category_name'  => 'Student Initiatives',
+                'category'       => 'initiatives',
+                'images'    => DB::table('futurism_category_images')->where('category', 'initiatives')->get()
+            ],
+            (object)[
+                'category_name'  => 'Researches',
+                'category'       => 'researches',
+                'images'    => DB::table('futurism_category_images')->where('category', 'researches')->get()
+            ]
+        ];
+
+        $storage_link = asset('storage/images/futurism');
+
+        return Inertia::render('Admin/Futurism/Category', [
+            'categories' => $categories,
+            'storage_link' => $storage_link
+        ]);
+    }
+
+    public function uploadFuturismCategoryImages(Request $request){
+        $this->uploadCategoryImages($request->file('images'), $request->category);
+        return back();
+    }
+
+    public function deleteFuturismCategoryImage(Request $request){
+        $request->validate([
+            'id' => 'required',
+        ]);
+
+        DB::table('futurism_category_images')->where('id', $request->id)->delete();
+
+        $path = 'public/images/futurism/' . $request->image_name;
+        if (Storage::disk('local')->exists($path)) {
+            Storage::delete($path);
+        }
+
         return back();
     }
 }

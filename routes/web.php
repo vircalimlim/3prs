@@ -70,13 +70,15 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::delete('/post/delete/image',         [PostController::class,         'deletePostImage'])->name('admin.post.delete.image');
 
     Route::get('/futurism',                     [FuturismController::class,     'index'])->name('admin.futurism.index');
+    Route::get('/futurism/category',            [FuturismController::class,     'categoryIndex'])->name('admin.futurism.category.index');
     Route::post('/futurism/save',               [FuturismController::class,     'storePost'])->name('admin.futurism.store');
     Route::patch('/futurism/update',            [FuturismController::class,     'updatePost'])->name('admin.futurism.update');
     Route::post('/futurism/update/image',       [FuturismController::class,     'handleImageUpdate'])->name('admin.futurism.update_image');
     Route::post('/futurism/upload/images',      [FuturismController::class,     'uploadFuturismImages'])->name('admin.futurism.upload_images');
+    Route::post('/futurism/category/upload/images',[FuturismController::class,  'uploadFuturismCategoryImages'])->name('admin.futurism.category.upload_images');
     Route::delete('/futurism/delete',           [FuturismController::class,     'deleteFuturism'])->name('admin.futurism.delete');
     Route::delete('/futurism/delete/image',     [FuturismController::class,     'deleteFuturismImage'])->name('admin.futurism.delete.image');
-
+    Route::delete('/futurism/category/delete/image',[FuturismController::class, 'deleteFuturismCategoryImage'])->name('admin.futurism.category.delete.image');
     // Route::get('/achievement',               [AchievementController::class, 'index'])->name('admin.achievement.index');
     // Route::get('/announcement',              [AnnouncementController::class, 'index'])->name('admin.announcement.index');
 

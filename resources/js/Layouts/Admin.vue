@@ -4,6 +4,7 @@ import { onMounted } from "vue";
 import { ref } from "vue";
 const isShowDropDown = ref(false);
 const isShowDropDown2 = ref(false);
+const isShowDropDown3 = ref(false);
 
 const toggleMenu = ref(false);
 const currentRoute = route().current();
@@ -102,14 +103,51 @@ const handleMenu = () => {
           </Link>
         </li>
         <li>
-          <Link
-            :href="route('admin.futurism.index')"
-            :class="currentRoute == 'admin.futurism.index' ? 'text-blue-800 bg-gray-100' : ''"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+          <button
+            @click="isShowDropDown3 = !isShowDropDown3"
+            type="button"
+            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100"
+            aria-controls="dropdown-example"
+            data-collapse-toggle="dropdown-example"
           >
-          <img class="h-8 w-8" src="/images/icons/futurism.png" />
-          <span :class="currentRoute == 'admin.futurism.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3">Sustainability and Futurism</span>
-          </Link>
+            <img class="h-8 w-8" src="/images/icons/futurism.png" />
+            <span class="flex-1 ms-3 text-left rtl:text-right">Sustainability and Futurism</span>
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+          <ul
+            v-show="isShowDropDown3"
+            id="dropdown-example"
+            class="py-2 space-y-2"
+          >
+            <li>
+              <Link
+                :href="route('admin.futurism.category.index')"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
+                :class="currentRoute == 'admin.futurism.category.index' ? 'text-[#e5432d] bg-gray-100' : ''"
+              >Category Images</Link>
+            </li>
+            <li>
+              <Link
+                :href="route('admin.futurism.index')"
+                :class="currentRoute == 'admin.futurism.index' ? 'text-[#e5432d] bg-gray-100' : ''"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
+              >Futurism</Link>
+            </li>
+          </ul>
         </li>
         <li>
           <button
