@@ -33,15 +33,15 @@ class DashboardController extends Controller
     {
         $research_visit = $this->getLogsPerMonth();
         $today = date('Y-m-d');
-        $total_students         = Student::count();
+        $total_students         = Student::where('status', 'active')->count();
         $total_enrolled         = DB::table('semester_student as st')
             ->leftJoin('semesters as sem', 'st.semester_id', '=', 'sem.id')
             ->whereDate('sem.start_date', '<=', $today)
             ->whereDate('sem.end_date', '>=', $today)
             ->count();
-        $total_achievements     = Achievement::count();
-        $total_announcements    = Announcement::count();
-        $total_materials        = Material::count();
+        $total_achievements     = Achievement::where('status', 'active')->count();
+        $total_announcements    = Announcement::where('status', 'active')->count();
+        $total_materials        = Material::where('status', 'active')->count();
 
         return Inertia::render('Dashboard', [
             'total_students'        => $total_students,
