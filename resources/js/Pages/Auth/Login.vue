@@ -28,7 +28,7 @@ const submit = () => {
 </script>
 
 <template>
-  <GuestLayout class="px-2 md:px-0 bg-center bg-no-repeat bg-[url('/images/bg-login.png')] bg-cover bg-gray-400 bg-blend-multiply">
+  <GuestLayout class="px-2 md:px-0 bg-center bg-no-repeat bg-[url('/images/login-bg.png')] bg-cover bg-gray-400 bg-blend-multiply">
 
     <Head title="Log in" />
 
