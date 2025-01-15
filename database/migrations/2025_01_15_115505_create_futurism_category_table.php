@@ -18,35 +18,35 @@ return new class extends Migration
         });
 
         DB::table('futurism_category')->insert([
-            'name' => 'innovation',
+            'name' => 'AVInnovation',
         ]);
 
         DB::table('futurism_category')->insert([
-            'name' => 'futurism',
+            'name' => 'Futurism',
         ]);
 
         DB::table('futurism_category')->insert([
-            'name' => 'social',
+            'name' => 'Social Impact',
         ]);
 
         DB::table('futurism_category')->insert([
-            'name' => 'empowerment',
+            'name' => 'Women Empowerment',
         ]);
 
         DB::table('futurism_category')->insert([
-            'name' => 'learning',
+            'name' => 'Learning Development',
         ]);
 
         DB::table('futurism_category')->insert([
-            'name' => 'environmental',
+            'name' => 'Environmental Projects',
         ]);
 
         DB::table('futurism_category')->insert([
-            'name' => 'initiatives',
+            'name' => 'Student Initiatives',
         ]);
 
         DB::table('futurism_category')->insert([
-            'name' => 'researches',
+            'name' => 'Researches',
         ]);
     }
 
