@@ -76,6 +76,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::post('/futurism/update/image',       [FuturismController::class,     'handleImageUpdate'])->name('admin.futurism.update_image');
     Route::post('/futurism/upload/images',      [FuturismController::class,     'uploadFuturismImages'])->name('admin.futurism.upload_images');
     Route::post('/futurism/category/upload/images',[FuturismController::class,  'uploadFuturismCategoryImages'])->name('admin.futurism.category.upload_images');
+    Route::post('/futurism/category/save',      [FuturismController::class,     'storeFuturismCategory'])->name('admin.futurism_category.store');
+    Route::patch('/futurism/category/update',   [FuturismController::class,     'updateFuturismCategory'])->name('admin.futurism_category.update');
     Route::delete('/futurism/delete',           [FuturismController::class,     'deleteFuturism'])->name('admin.futurism.delete');
     Route::delete('/futurism/delete/image',     [FuturismController::class,     'deleteFuturismImage'])->name('admin.futurism.delete.image');
     Route::delete('/futurism/category/delete/image',[FuturismController::class, 'deleteFuturismCategoryImage'])->name('admin.futurism.category.delete.image');

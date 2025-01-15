@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('futurism_category_images', function (Blueprint $table) {
             $table->id();
-            $table->enum('category', ['innovation', 'futurism', 'social', 'empowerment', 'learning', 'environmental', 'initiatives', 'researches']);
+            $table->id('category');
             $table->string('image');
         });
     }

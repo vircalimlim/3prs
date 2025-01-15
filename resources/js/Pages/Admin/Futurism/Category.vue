@@ -4,6 +4,8 @@ import { Head, router, useForm } from "@inertiajs/vue3";
 import { reactive, ref } from "vue";
 import { onMounted } from "vue";
 import CategoryImagesModal from "./Partials/CategoryImagesModal.vue";
+import CategoryAddModal from "./Partials/CategoryAddModal.vue";
+import CategoryEditModal from "./Partials/CategoryEditModal.vue";
 
 const { categories, storage_link } = defineProps({
   categories: {
@@ -18,6 +20,8 @@ const { categories, storage_link } = defineProps({
 
 const filteredPost = ref("");
 const showImages = ref(false);
+const showAdd = ref(false);
+const showEdit = ref(false);
 type DynamicObject = Record<string, any>;
 
 // Create a reactive object with dynamic properties
@@ -55,6 +59,15 @@ const formatDate = (inputDate: string) => {
     return `${month}/${day}/${year}`;
 }
 
+const openAddModal = () => {
+  showAdd.value = true;
+};
+
+const openEditModal = (category: DynamicObject) => {
+  showEdit.value = true;
+  Object.assign(editCategory, category);
+};
+
 onMounted(() => {
   getFilter();
 });
@@ -68,8 +81,15 @@ onMounted(() => {
     <section>
       <div class="flex justify-between items-center">
         <h1 class="my-5 text-4xl font-extrabold tracking-tight leading-none text-gray-600 capitalize">
-          Futurism Category Images
+          Futurism Category
         </h1>
+        <button
+            @click.prevent="openAddModal"
+            type="button"
+            class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center"
+          >
+            Add
+          </button>
       </div>
 
       <div class="relative overflow-x-auto shadow sm:rounded-lg">
@@ -84,6 +104,7 @@ onMounted(() => {
                 scope="col"
                 class="px-6 py-3"
               >Images</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -115,6 +136,13 @@ onMounted(() => {
                   >
                 </div>
               </td>
+              <td>
+                <a
+                  @click.prevent="openEditModal(category)"
+                  href="#"
+                  class="font-medium text-blue-600 hover:underline mr-2"
+                >Edit</a>
+              </td>
             </tr>
             <tr v-if="categories.length == 0">
               <td
@@ -126,6 +154,15 @@ onMounted(() => {
         </table>
       </div>
     </section>
+    <CategoryAddModal       
+      :showAdd="showAdd"
+      @close="showAdd = false"
+    />
+    <CategoryEditModal       
+      :showEdit="showEdit"
+      :category="editCategory"
+      @close="showEdit = false"
+    />
     <CategoryImagesModal
       v-if="showImages"
       :showImages="showImages"

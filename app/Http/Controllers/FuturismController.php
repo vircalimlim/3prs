@@ -216,48 +216,17 @@ class FuturismController extends Controller
     }
 
     public function categoryIndex(){
-        $categories = [
-            (object)[
-                'category_name'  => 'AVInnovation',
-                'category'       => 'innovation',
-                'images'    => DB::table('futurism_category_images')->where('category', 'innovation')->get()
-            ],
-            (object)[
-                'category_name'  => 'Futurism',
-                'category'       => 'futurism',
-                'images'    => DB::table('futurism_category_images')->where('category', 'futurism')->get()
-            ],
-            (object)[
-                'category_name'  => 'Social Impact',
-                'category'       => 'social',
-                'images'    => DB::table('futurism_category_images')->where('category', 'social')->get()
-            ],
-            (object)[
-                'category_name'  => 'Women Empowerment',
-                'category'       => 'empowerment',
-                'images'    => DB::table('futurism_category_images')->where('category', 'empowerment')->get()
-            ],
-            (object)[
-                'category_name'  => 'Learning Development',
-                'category'       => 'learning',
-                'images'    => DB::table('futurism_category_images')->where('category', 'learning')->get()
-            ],
-            (object)[
-                'category_name'  => 'Environmental Projects',
-                'category'       => 'environmental',
-                'images'    => DB::table('futurism_category_images')->where('category', 'environmental')->get()
-            ],
-            (object)[
-                'category_name'  => 'Student Initiatives',
-                'category'       => 'initiatives',
-                'images'    => DB::table('futurism_category_images')->where('category', 'initiatives')->get()
-            ],
-            (object)[
-                'category_name'  => 'Researches',
-                'category'       => 'researches',
-                'images'    => DB::table('futurism_category_images')->where('category', 'researches')->get()
-            ]
-        ];
+        $categories = [];
+        $temp_category = [];
+        $futurism_categories = DB::table('futurism_category')->latest('id')->get();
+
+        foreach($futurism_categories as $category){
+            $temp_category['id']            = $category->id;
+            $temp_category['category_name'] = $category->name;
+            $temp_category['name']          = $category->name;
+            $temp_category['images']        = DB::table('futurism_category_images')->where('category', $category->id)->get();
+            $categories[] = $temp_category;
+        }
 
         $storage_link = asset('storage/images/futurism');
 
@@ -268,7 +237,7 @@ class FuturismController extends Controller
     }
 
     public function uploadFuturismCategoryImages(Request $request){
-        $this->uploadCategoryImages($request->file('images'), $request->category);
+        $this->uploadCategoryImages($request->file('images'), $request->id);
         return back();
     }
 
@@ -283,6 +252,31 @@ class FuturismController extends Controller
         if (Storage::disk('local')->exists($path)) {
             Storage::delete($path);
         }
+
+        return back();
+    }
+
+    public function storeFuturismCategory(Request $request){
+        $request->validate([
+            'name'      => 'required|unique:futurism_category,name',
+        ]);
+
+        $id = DB::table('futurism_category')->insertGetId([
+            'name'      => $request->name,
+        ]);
+        $this->uploadCategoryImages($request->file('images'), $id);
+
+        return back();
+    }
+
+    public function updateFuturismCategory(Request $request){
+        $request->validate([
+            'name'      => 'required|unique:futurism_category,name,'.$request->id,
+        ]);
+
+        $id = DB::table('futurism_category')->where('id', $request->id)->update([
+            'name'      => $request->name,
+        ]);
 
         return back();
     }
