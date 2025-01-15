@@ -20,7 +20,6 @@ const emit = defineEmits(['close']);
 
 const form = useForm({
   title: '',
-  description: '',
 });
 
 const closeModal = () => {
@@ -33,7 +32,6 @@ const storeCategory = () => {
     onSuccess: () => {
       emit('close');
       form.title = "";
-      form.description = "";
 
       toast.success("Saved!", {
         autoClose: 1000,
@@ -59,18 +57,6 @@ const storeCategory = () => {
           required
         />
         <InputError class="mt-2" :message="form.errors.title" />
-      </div>
-
-      <div>
-        <InputLabel for="description" value="Description" />
-        <TextInput
-          id="description"
-          type="text"
-          class="mt-1 block w-full"
-          v-model="form.description"
-          required
-        />
-        <InputError class="mt-2" :message="form.errors.description" />
       </div>
 
       <div class="flex items-center gap-4">

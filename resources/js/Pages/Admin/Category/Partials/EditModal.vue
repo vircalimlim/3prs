@@ -25,7 +25,6 @@ const emit = defineEmits(['close']);
 const form = useForm({
   id: '',
   title: '',
-  description: '',
 });
 
 const closeModal = () => {
@@ -35,7 +34,6 @@ const closeModal = () => {
 
 const editForm = () => {
   form.title = category.title || '';
-  form.description = category.description || '';
   form.id = category.id || '';
 };
 
@@ -44,7 +42,6 @@ const updateCategory = () => {
     onSuccess: () => {
       emit('close');
       form.title = '';
-      form.description = '';
       form.id = '';
       
       toast.success("Saved!", {
@@ -76,18 +73,6 @@ watchEffect(() => {
           required
         />
         <InputError class="mt-2" :message="form.errors.title" />
-      </div>
-
-      <div>
-        <InputLabel for="description" value="Description" />
-        <TextInput
-          id="description"
-          type="text"
-          class="mt-1 block w-full"
-          v-model="form.description"
-          required
-        />
-        <InputError class="mt-2" :message="form.errors.description" />
       </div>
       
       <div class="flex items-center gap-4">
