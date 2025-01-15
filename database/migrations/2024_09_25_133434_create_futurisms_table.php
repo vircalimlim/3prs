@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('image', 155);
             $table->string('title');
             $table->text('description');
-            $table->enum('category', ['innovation', 'futurism', 'social', 'empowerment', 'learning', 'environmental', 'initiatives']);
+            $table->int('category');
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
