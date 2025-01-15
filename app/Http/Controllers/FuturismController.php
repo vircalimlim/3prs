@@ -69,6 +69,7 @@ class FuturismController extends Controller
     public function index(){
         $result = [];
         $category = !empty(request()->category) ? request()->category : '';
+        $futurism_categories = DB::table('futurism_category')->get();
         if($category){
             $result = Futurism::with('images')->where('status', 'active')->latest('publish_date')->where('category', $category)->paginate(10);
         }
@@ -79,8 +80,9 @@ class FuturismController extends Controller
         $storage_link = asset('storage/images/futurism');
 
         return Inertia::render('Admin/Futurism/Index', [
-            'posts' => $result,
-            'storage_link'  => $storage_link
+            'posts'               => $result,
+            'futurism_categories' => $futurism_categories,
+            'storage_link'        => $storage_link
         ]);
     }
 
@@ -144,6 +146,7 @@ class FuturismController extends Controller
         $futurisms = DB::table('futurisms')
             ->where('status', 'active')
             ->where('category', $category)
+            ->latest('publish_date')
             ->get();
             
         $storage_link = asset('storage/images/futurism/');

@@ -15,6 +15,10 @@ const { posts } = defineProps({
     type: Object,
     required: true,
   },
+  futurism_categories: {
+    type: Array<any>,
+    required: true,
+  },
   storage_link: {
     type: String,
     required: true,
@@ -113,14 +117,7 @@ onMounted(() => {
               value=""
               selected
             >All</option>
-            <option value="innovation">Av Innovation</option>
-            <option value="futurism">Futurism</option>
-            <option value="social">Social Impact</option>
-            <option value="empowerment">Women Empowerment</option>
-            <option value="learning">Learning Development</option>
-            <option value="environmental">Environmental Projects</option>
-            <option value="initiatives">Student Initiatives</option>
-            <option value="researches">Researches</option>
+            <option v-for="futurism_category in futurism_categories" :value="futurism_category.id" class="capitalize">{{futurism_category.name}}</option>
           </select>
 
           <button
@@ -231,6 +228,7 @@ onMounted(() => {
     </section>
     <AddModal
       :showAdd="showAdd"
+      :futurism_categories="futurism_categories"
       @close="showAdd = false"
     />
     <EditModal

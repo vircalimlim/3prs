@@ -12,11 +12,15 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { useDropzone } from 'vue3-dropzone';
 
-const {showAdd} = defineProps({
+const {showAdd, futurism_categories} = defineProps({
   showAdd: {
     type: Boolean,
     required: true
-  }
+  },
+  futurism_categories: {
+    type: Array,
+    required: true,
+  },
 });
 
 const state = reactive({
@@ -89,14 +93,7 @@ function handleClickDeleteFile(index) {
             <InputLabel for="category" value="Category" />
             <select v-model="form.category" id="category" class="w-full block mt-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 py-2" required>
                 <option value="" disabled selected>Select Category</option>
-                <option value="innovation">Av Innovation</option>
-                <option value="futurism">Futurism</option>
-                <option value="social">Social Impact</option>
-                <option value="empowerment">Women Empowerment</option>
-                <option value="learning">Learning Development</option>
-                <option value="environmental">Environmental Projects</option>
-                <option value="initiatives">Student Initiatives</option>
-                <option value="researches">Researches</option>
+                <option v-for="futurism_category in futurism_categories" :value="futurism_category.id" class="capitalize">{{futurism_category.name}}</option>
             </select>
             <InputError class="mt-2" :message="form.errors.category" />
         </div>
