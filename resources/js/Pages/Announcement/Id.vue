@@ -47,7 +47,7 @@ const formatDate = (inputDate: string) => {
                         <img class="h-full w-28" :src="storage_link + '/' + more_announcement.image">
                         <div>
                             <h1 class="text-lg font-bold tracking-tight text-gray-900 capitalize">{{ more_announcement.title }}</h1>
-                            <strong class="mt-2 text-md text-gray-600">{{ formatDate(more_announcement.created_at) }}</strong>
+                            <strong class="mt-2 text-md text-gray-600">{{ more_announcement.publish_date ? formatDate(more_announcement.publish_date) : formatDate(more_announcement.created_at) }}</strong>
                         </div>
                     </Link>
                 </div>

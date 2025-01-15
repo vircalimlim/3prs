@@ -58,7 +58,7 @@ onMounted(() => {
                 <img class="object-cover w-full h-9sd6 md:h-8sds6 md:w-[450px]" :src="`${storage_link}/${announcement.image}`" alt="">
                 <div class="h-full flex flex-col justify-between p-4 leading-normal">
                     <h5 class="text-2xl font-bold tracking-tight text-[#1034a6] capitalize">{{announcement.title}}</h5>
-                    <p class="text-[14px] font-bold text-gray-600 mb-2">{{ formatDate(announcement.created_at) }}</p>
+                    <p class="text-[14px] font-bold text-gray-600 mb-2">{{ announcement.publish_date ? formatDate(announcement.publish_date) : formatDate(announcement.created_at) }}</p>
                     <div ref="clampText" v-html="announcement.description" class="mb-3 font-normal text-gray-700 line-clamp-5"></div>
                     <div class="mt-5">
                         <Link :href="`/announcement/${announcement.id}`"

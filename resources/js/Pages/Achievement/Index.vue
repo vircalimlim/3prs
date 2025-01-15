@@ -58,7 +58,7 @@ if (clampText.value.length > 1) {
                 <img class="object-cover w-full h-96 md:h-86 md:w-[450px]" :src="`${storage_link}/${achievement.image}`" alt="">
                 <div class="h-full flex flex-col justify-between p-4 leading-normal">
                     <h5 class="text-2xl font-bold tracking-tight text-[#1034a6] capitalize">{{achievement.title}}</h5>
-                    <p class="text-[14px] font-bold text-gray-600 mb-2">{{ formatDate(achievement.created_at) }}</p>
+                    <p class="text-[14px] font-bold text-gray-600 mb-2">{{ achievement.publish_date ? formatDate(achievement.publish_date) : formatDate(achievement.created_at) }}</p>
                     <div ref="clampText" v-html="achievement.description" class="mb-3 font-normal text-gray-700 line-clamp-5"></div>
                     <div class="mt-5">
                         <Link :href="`/achievement/${achievement.id}`"

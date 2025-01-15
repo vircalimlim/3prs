@@ -37,7 +37,7 @@ const formatDate = (inputDate: string) => {
                 <ImageCarousel :images="achievement.images" :image="achievement.image" file_folder="/storage/images/achievements/"/>
                 <!-- <img class="object-cover w-full h-9s6 md:h-86s md:w-full" :src="storage_link + '/' + achievement.image"> -->
                 <h1 class="mt-5 text-2xl font-bold tracking-tight text-gray-900 capitalize">{{ achievement.title }}</h1>
-                <p class="text-[14px] font-bold text-gray-600">{{ formatDate(achievement.created_at) }}</p>
+                <p class="text-[14px] font-bold text-gray-600">{{ achievement.publish_date ? formatDate(achievement.publish_date) : formatDate(achievement.created_at) }}</p>
                 <div class="mt-5" v-html="achievement.description"></div>
             </div>
             <div v-show="more_achievements.length > 0">
@@ -47,7 +47,7 @@ const formatDate = (inputDate: string) => {
                         <img class="h-full w-28" :src="storage_link + '/' + more_achievement.image">
                         <div>
                             <h1 class="text-lg font-bold tracking-tight text-gray-900 capitalize">{{ more_achievement.title }}</h1>
-                            <strong class="mt-2 text-md text-gray-600">{{ formatDate(more_achievement.created_at) }}</strong>
+                            <strong class="mt-2 text-md text-gray-600">{{ more_achievement.publish_date ? formatDate(more_achievement.publish_date) : formatDate(more_achievement.created_at) }}</strong>
                         </div>
                     </Link>
                 </div>

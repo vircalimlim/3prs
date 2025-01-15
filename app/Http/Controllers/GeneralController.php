@@ -29,8 +29,8 @@ class GeneralController extends Controller
         return Inertia::render('Welcome', [
             'canLogin'      => Route::has('login'),
             'canRegister'   => Route::has('register'),
-            'achievements'  => Achievement::where('status', 'active')->latest('created_at')->take(3)->get(),
-            'announcements' => Announcement::where('status', 'active')->latest('created_at')->take(3)->get(),
+            'achievements'  => Achievement::where('status', 'active')->latest('publish_date')->take(3)->get(),
+            'announcements' => Announcement::where('status', 'active')->latest('publish_date')->take(3)->get(),
             'section1'      => DB::table('sections')->where('category', 'section1')->first(),
             'section2'      => DB::table('sections')->where('category', 'section2')->first(),
             'storage_link'  => asset('storage/images/'),
