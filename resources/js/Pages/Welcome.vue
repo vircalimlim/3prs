@@ -24,6 +24,10 @@ const { achievements, section2, section1 } = defineProps({
     type: Object,
     required: true,
   },
+  futurism_categories: {
+    type: Array,
+    required: true,
+  },
   storage_link: {
     type: String,
     required: true,
@@ -316,53 +320,11 @@ header {
                       class="py-2 text-sm text-gray-700"
                       aria-labelledby="doubleDropdownButton"
                     >
-                      <li>
+                      <li v-for="futurism_category in futurism_categories">
                         <Link
-                          :href="route('futurism.index', {category: 'innovation'})"
-                          class="block px-4 py-2 hover:bg-gray-100"
-                        >AVInnovation</Link>
-                      </li>
-                      <li>
-                        <Link
-                          :href="route('futurism.index', {category: 'futurism'})"
-                          class="block px-4 py-2 hover:bg-gray-100"
-                        >Futurism</Link>
-                      </li>
-                      <li>
-                        <Link
-                          :href="route('futurism.index', {category: 'social'})"
-                          class="block px-4 py-2 hover:bg-gray-100"
-                        >Social Impact</Link>
-                      </li>
-                      <li>
-                        <Link
-                          :href="route('futurism.index', {category: 'empowerment'})"
-                          class="block px-4 py-2 hover:bg-gray-100"
-                        >Women Empowerment</Link>
-                      </li>
-                      <li>
-                        <Link
-                          :href="route('futurism.index', {category: 'learning'})"
-                          class="block px-4 py-2 hover:bg-gray-100"
-                        >Learning Development</Link>
-                      </li>
-                      <li>
-                        <Link
-                          :href="route('futurism.index', {category: 'environmental'})"
-                          class="block px-4 py-2 hover:bg-gray-100"
-                        >Environmental Projects</Link>
-                      </li>
-                      <li>
-                        <Link
-                          :href="route('futurism.index', {category: 'initiatives'})"
-                          class="block px-4 py-2 hover:bg-gray-100"
-                        >Student Initiatives</Link>
-                      </li>
-                      <li>
-                        <Link
-                          :href="route('futurism.index', {category: 'researches'})"
-                          class="block px-4 py-2 hover:bg-gray-100"
-                        >Researches</Link>
+                          :href="route('futurism.index', {category: futurism_category.id})"
+                          class="block px-4 py-2 hover:bg-gray-100 capitalize"
+                        >{{futurism_category.name}}</Link>
                       </li>
                     </ul>
                   </div>

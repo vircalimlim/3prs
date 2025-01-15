@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, useForm } from "@inertiajs/vue3";
 import { ref, onMounted, onUnmounted } from "vue";
 import Footer from "@/Components/Footer.vue";
 
@@ -10,9 +10,12 @@ const { pageName } = defineProps({
   },
 });
 
+const form = useForm({});
+
 const scrollValue = ref(0);
 let lastScrollTop = 0;
 const isMenuOpen = ref(false);
+const futurismCategories = ref([]);
 
 const handleScroll = () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -24,7 +27,16 @@ const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
+const getFuturismcategory = () => {
+  axios
+  .get("/get_futurism/category")
+  .then((res) => {
+    futurismCategories.value = res.data;
+  });
+}
+
 onMounted(() => {
+  getFuturismcategory();
   window.addEventListener("scroll", handleScroll);
 });
 
@@ -183,53 +195,11 @@ onUnmounted(() => {
                     class="py-2 text-sm text-gray-700"
                     aria-labelledby="doubleDropdownButton"
                   >
-                    <li>
+                    <li v-for="futurism_category in futurismCategories">
                       <Link
-                        :href="route('futurism.index', {category: 'innovation'})"
-                        class="block px-4 py-2 hover:bg-gray-100"
-                      >AVInnovation</Link>
-                    </li>
-                    <li>
-                      <Link
-                        :href="route('futurism.index', {category: 'futurism'})"
-                        class="block px-4 py-2 hover:bg-gray-100"
-                      >Futurism</Link>
-                    </li>
-                    <li>
-                      <Link
-                        :href="route('futurism.index', {category: 'social'})"
-                        class="block px-4 py-2 hover:bg-gray-100"
-                      >Social Impact</Link>
-                    </li>
-                    <li>
-                      <Link
-                        :href="route('futurism.index', {category: 'empowerment'})"
-                        class="block px-4 py-2 hover:bg-gray-100"
-                      >Women Empowerment</Link>
-                    </li>
-                    <li>
-                      <Link
-                        :href="route('futurism.index', {category: 'learning'})"
-                        class="block px-4 py-2 hover:bg-gray-100"
-                      >Learning Development</Link>
-                    </li>
-                    <li>
-                      <Link
-                        :href="route('futurism.index', {category: 'environmental'})"
-                        class="block px-4 py-2 hover:bg-gray-100"
-                      >Environmental Projects</Link>
-                    </li>
-                    <li>
-                      <Link
-                        :href="route('futurism.index', {category: 'initiatives'})"
-                        class="block px-4 py-2 hover:bg-gray-100"
-                      >Student Initiatives</Link>
-                    </li>
-                    <li>
-                      <Link
-                        :href="route('futurism.index', {category: 'researches'})"
-                        class="block px-4 py-2 hover:bg-gray-100"
-                      >Researches</Link>
+                        :href="route('futurism.index', {category: futurism_category.id})"
+                        class="block px-4 py-2 hover:bg-gray-100 capitalize"
+                      >{{futurism_category.name}}</Link>
                     </li>
                   </ul>
                 </div>
@@ -562,53 +532,11 @@ onUnmounted(() => {
                   class="py-2 text-sm text-gray-700"
                   aria-labelledby="doubleDropdownButton"
                 >
-                  <li>
+                  <li v-for="futurism_category in futurismCategories">
                     <Link
-                      :href="route('futurism.index', {category: 'innovation'})"
-                      class="block px-4 py-2 hover:bg-gray-100"
-                    >AVInnovation</Link>
-                  </li>
-                  <li>
-                    <Link
-                      :href="route('futurism.index', {category: 'futurism'})"
-                      class="block px-4 py-2 hover:bg-gray-100"
-                    >Futurism</Link>
-                  </li>
-                  <li>
-                    <Link
-                      :href="route('futurism.index', {category: 'social'})"
-                      class="block px-4 py-2 hover:bg-gray-100"
-                    >Social Impact</Link>
-                  </li>
-                  <li>
-                    <Link
-                      :href="route('futurism.index', {category: 'empowerment'})"
-                      class="block px-4 py-2 hover:bg-gray-100"
-                    >Women Empowerment</Link>
-                  </li>
-                  <li>
-                    <Link
-                      :href="route('futurism.index', {category: 'learning'})"
-                      class="block px-4 py-2 hover:bg-gray-100"
-                    >Learning Development</Link>
-                  </li>
-                  <li>
-                    <Link
-                      :href="route('futurism.index', {category: 'environmental'})"
-                      class="block px-4 py-2 hover:bg-gray-100"
-                    >Environmental Projects</Link>
-                  </li>
-                  <li>
-                    <Link
-                      :href="route('futurism.index', {category: 'initiatives'})"
-                      class="block px-4 py-2 hover:bg-gray-100"
-                    >Student Initiatives</Link>
-                  </li>
-                  <li>
-                    <Link
-                      :href="route('futurism.index', {category: 'researches'})"
-                      class="block px-4 py-2 hover:bg-gray-100"
-                    >Researches</Link>
+                      :href="route('futurism.index', {category: futurism_category.id})"
+                      class="block px-4 py-2 hover:bg-gray-100 capitalize"
+                    >{{futurism_category.name}}</Link>
                   </li>
                 </ul>
               </div>

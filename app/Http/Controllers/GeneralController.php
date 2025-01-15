@@ -33,6 +33,7 @@ class GeneralController extends Controller
             'announcements' => Announcement::where('status', 'active')->latest('publish_date')->take(3)->get(),
             'section1'      => DB::table('sections')->where('category', 'section1')->first(),
             'section2'      => DB::table('sections')->where('category', 'section2')->first(),
+            'futurism_categories' => DB::table('futurism_category')->get(), 
             'storage_link'  => asset('storage/images/'),
         ]);
     }

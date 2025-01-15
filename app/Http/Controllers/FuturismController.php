@@ -140,8 +140,6 @@ class FuturismController extends Controller
 
     public function indexPublic(Request $request)
     {
-        $fullNamecategoryList = ['Av Innovation', 'Futurism', 'Social Impact', 'Women Empowerment', 'Learning Development', 'Environmental Projects', 'Student Initiatives', 'Researches'];
-
         $category = $request->category;
         $futurisms = DB::table('futurisms')
             ->where('status', 'active')
@@ -149,16 +147,13 @@ class FuturismController extends Controller
             ->get();
             
         $storage_link = asset('storage/images/futurism/');
-        $fullNameCategory = array_filter($fullNamecategoryList, function($string) use ($category) {
-            return stripos($string, $category) !== false;
-        });
-        $fullNameCategory = reset($fullNameCategory);
-        if(!$fullNameCategory) abort(404);
+        $categoryName = DB::table('futurism_category')->where('id', $category)->first();
+        if(!$categoryName) abort(404);
 
         return Inertia::render('Futurism/Index', [
             'futurisms'     => $futurisms,
             'storage_link'  => $storage_link,
-            'category'      => $fullNameCategory,
+            'category'      => $categoryName->name,
         ]);
     }
 
@@ -279,5 +274,10 @@ class FuturismController extends Controller
         ]);
 
         return back();
+    }
+
+    public function getFuturismCategory(Request $request){
+        $futurism_categories = DB::table('futurism_category')->get();
+        return response()->json($futurism_categories);
     }
 }

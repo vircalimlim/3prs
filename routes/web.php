@@ -106,6 +106,7 @@ Route::get('/announcements',                 [AnnouncementController::class, 'in
 Route::get('/announcement/{id}',             [AnnouncementController::class, 'getSingleAnnouncement'])->name('announcement.id');
 Route::get('/futurism/index/{category}',     [FuturismController::class, 'indexPublic'])->name('futurism.index');
 Route::get('/futurism/{id}',                 [FuturismController::class, 'getSingleFuturism'])->name('futurism.id');
+Route::get('/get_futurism/category',         [FuturismController::class, 'getFuturismCategory'])->name('get_futurism_category.index');
 
 Route::get('/research',                      [MaterialController::class, 'indexPublic'])->middleware(['auth'])->name('research.index_public');
 Route::get('/research/{id}',                 [MaterialController::class, 'getSingleMaterial'])->middleware(['auth'])->name('research.id');
