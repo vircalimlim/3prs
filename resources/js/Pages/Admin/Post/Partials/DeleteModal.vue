@@ -66,12 +66,12 @@ watchEffect(() => {
 
 <template>
   <Modal :show="showDelete" @close="closeModal">
-    <h1 class="text-gray-700 text-2xl font-bold">Delete Post</h1>
+    <h1 class="text-gray-700 text-2xl font-bold">{{ post.type == 'achievements' ? 'Archive' : 'Delete' }} Post</h1>
     <form @submit.prevent="deletePost" class="mt-6 space-y-6">
-        <div class="pt-2 text-center text-lg">Are you sure you want to delete this post?</div>
+        <div class="pt-2 text-center text-lg">Are you sure you want to {{ post.type == 'achievements' ? 'archive' : 'delete' }} this post?</div>
         <h1 class="text-center font-bold pb-2">"{{ form.title }}"</h1>
         <div class="flex justify-center gap-4">
-            <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Delete</button>
+            <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">{{ post.type == 'achievements' ? 'Archive' : 'Delete' }}</button>
             <button @click.prevent="closeModal" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Close</button>
         </div>
     </form>

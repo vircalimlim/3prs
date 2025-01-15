@@ -211,7 +211,9 @@ onMounted(() => {
                   @click.prevent="openDeleteModal(post)"
                   href="#"
                   class="font-medium text-red-600 hover:underline"
-                >Delete</a>
+                >
+                {{ filteredPost == 'achievements' ? 'Archive' : 'Delete' }}
+              </a>
               </td>
             </tr>
             <tr v-if="posts.data.length == 0">
