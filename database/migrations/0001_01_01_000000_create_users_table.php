@@ -54,6 +54,36 @@ return new class extends Migration
                 ],
             )
         );
+
+        DB::table('users')->insert(
+            array(
+                [
+                    'student_id'    => 0,
+                    'semester_id'   => 0,
+                    'user_key'      => '2000000000',
+                    'name' => 'admin admin',
+                    'email' => 'admin2@gmail.com',
+                    'password' => '$2y$12$0ZB9uqbJL/xBrIlVA8Glxe4Iw8hI25mKkt4yxjgUAtg7tc8Xt/SYC',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+            )
+        );
+
+        DB::table('users')->insert(
+            array(
+                [
+                    'student_id'    => 0,
+                    'semester_id'   => 0,
+                    'user_key'      => '3000000000',
+                    'name' => 'admin admin',
+                    'email' => 'admin3@gmail.com',
+                    'password' => '$2y$12$0ZB9uqbJL/xBrIlVA8Glxe4Iw8hI25mKkt4yxjgUAtg7tc8Xt/SYC',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+            )
+        );
     }
 
     /**
