@@ -72,7 +72,7 @@ const handleMenu = () => {
           <span :class="currentRoute == 'dashboard' ? 'text-[#e5432d]' : ''" class="ms-3">Dashboard</span>
           </Link>
         </li>
-        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '2000000000'">
+        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '9000000000' || $page.props.auth.user.user_key == '2000000000'">
           <Link
             :href="route('semester.index')"
             :class="currentRoute == 'semester.index' ? 'text-blue-800 bg-gray-100' : ''"
@@ -82,7 +82,7 @@ const handleMenu = () => {
           <span :class="currentRoute == 'semester.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Semester</span>
           </Link>
         </li>
-        <!-- <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '2000000000'">
+        <!-- <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '9000000000' || $page.props.auth.user.user_key == '2000000000'">
           <Link
             :href="route('admin.student.index')"
             :class="currentRoute == 'admin.student.index' ? 'text-blue-800 bg-gray-100' : ''"
@@ -92,7 +92,7 @@ const handleMenu = () => {
           <span :class="currentRoute == 'admin.student.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Student</span>
           </Link>
         </li> -->
-        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
+        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '9000000000' || $page.props.auth.user.user_key == '3000000000'">
           <Link
             :href="route('admin.post.index')"
             :class="currentRoute == 'admin.post.index' ? 'text-blue-800 bg-gray-100' : ''"
@@ -102,7 +102,7 @@ const handleMenu = () => {
           <span :class="currentRoute == 'admin.post.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Post</span>
           </Link>
         </li>
-        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
+        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '9000000000' || $page.props.auth.user.user_key == '3000000000'">
           <button
             @click="isShowDropDown3 = !isShowDropDown3"
             type="button"
@@ -149,7 +149,7 @@ const handleMenu = () => {
             </li>
           </ul>
         </li>
-        <!-- <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
+        <!-- <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '9000000000' || $page.props.auth.user.user_key == '3000000000'">
           <button
             @click="isShowDropDown2 = !isShowDropDown2"
             type="button"
@@ -196,7 +196,7 @@ const handleMenu = () => {
             </li>
           </ul>
         </li> -->
-        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
+        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '9000000000' || $page.props.auth.user.user_key == '3000000000'">
           <Link
             :href="route('admin.material.index')"
             :class="currentRoute == 'admin.material.index' ? 'text-blue-800 bg-gray-100' : ''"
@@ -206,7 +206,7 @@ const handleMenu = () => {
           <span :class="currentRoute == 'admin.material.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Research</span>
           </Link>
         </li>
-        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
+        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '9000000000' || $page.props.auth.user.user_key == '3000000000'">
           <Link
             :href="route('admin.logs')"
             :class="currentRoute == 'admin.logs' ? 'text-blue-800 bg-gray-100' : ''"
