@@ -149,7 +149,7 @@ const handleMenu = () => {
             </li>
           </ul>
         </li>
-        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
+        <!-- <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
           <button
             @click="isShowDropDown2 = !isShowDropDown2"
             type="button"
@@ -195,6 +195,16 @@ const handleMenu = () => {
               >Materials</Link>
             </li>
           </ul>
+        </li> -->
+        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
+          <Link
+            :href="route('admin.material.index')"
+            :class="currentRoute == 'admin.material.index' ? 'text-blue-800 bg-gray-100' : ''"
+            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+          >
+          <img class="h-8 w-8" src="/images/icons/research.png" />
+          <span :class="currentRoute == 'admin.material.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Research</span>
+          </Link>
         </li>
         <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
           <Link
