@@ -9,13 +9,20 @@ import { useForm, usePage } from '@inertiajs/vue3';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import AddCourseModal from './AddCourseModal.vue';
 
-const {showAdd} = defineProps({
+const {showAdd, courses} = defineProps({
   showAdd: {
     type: Boolean,
     required: true
+  },
+  courses: {
+    type: Array<any>,
+    required: true,
   }
 });
+
+const showAddCourse = ref(false);
 
 const emit = defineEmits(['close']);
 
@@ -28,6 +35,8 @@ const form = useForm({
   email: '',
   mobile: '',
   address: '',
+  course_id: '',
+  student_number: '',
 });
 
 const closeModal = () => {
@@ -47,6 +56,8 @@ const storeStudent = () => {
       form.email = "";
       form.mobile = "";
       form.address = "";
+      form.course_id = "";      
+      form.student_number = "";
                         
       toast.success("Saved!", {
         autoClose: 1000,
@@ -54,6 +65,10 @@ const storeStudent = () => {
 
     },
   });
+};
+
+const openAddCourseModal = () => {
+  showAddCourse.value = true;
 };
 </script>
 
@@ -152,6 +167,36 @@ const storeStudent = () => {
       </div>
 
       <div>
+            <InputLabel for="student_number" value="Student ID Number" />
+            <TextInput
+            id="student_number"
+            type="text"
+            class="mt-1 block w-full"
+            v-model="form.student_number"
+            required
+            autofocus
+            autocomplete="student_number"
+            />
+            <InputError class="mt-2" :message="form.errors.student_number" />
+      </div>
+
+      <div>
+            <div class="flex items-center gap-x-2">
+              <InputLabel for="course_id" value="Course" />
+              <button @click.prevent="openAddCourseModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-square text-green-600" viewBox="0 0 16 16">
+                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                </svg>
+              </button>
+            </div>
+            <select v-model="form.course_id" class="w-full block mt-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 py-2" required>
+                <option value="" disabled selected>Select course</option>
+                <option v-for="course in courses" :value="course.id">{{course.name}}</option>
+            </select>
+      </div>
+
+      <div>
         <InputLabel for="gender" value="Gender" />
 
         <div class="flex items-center mb-4">
@@ -179,4 +224,5 @@ const storeStudent = () => {
       </div>
     </form>
   </Modal>
+  <AddCourseModal :showAdd="showAddCourse" @close="showAddCourse = false" />
 </template>

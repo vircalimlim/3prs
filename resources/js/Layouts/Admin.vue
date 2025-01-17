@@ -82,7 +82,7 @@ const handleMenu = () => {
           <span :class="currentRoute == 'semester.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Semester</span>
           </Link>
         </li>
-        <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '2000000000'">
+        <!-- <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '2000000000'">
           <Link
             :href="route('admin.student.index')"
             :class="currentRoute == 'admin.student.index' ? 'text-blue-800 bg-gray-100' : ''"
@@ -91,7 +91,7 @@ const handleMenu = () => {
           <img class="h-8 w-8" src="/images/icons/student.png" />
           <span :class="currentRoute == 'admin.student.index' ? 'text-[#e5432d]' : ''" class="flex-1 ms-3 whitespace-nowrap">Student</span>
           </Link>
-        </li>
+        </li> -->
         <li v-if="$page.props.auth.user.user_key == '1000000000' || $page.props.auth.user.user_key == '3000000000'">
           <Link
             :href="route('admin.post.index')"

@@ -10,7 +10,7 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 
-const {showEdit, student} = defineProps({
+const {showEdit, student, courses} = defineProps({
   showEdit: {
     type: Boolean,
     required: true
@@ -18,6 +18,10 @@ const {showEdit, student} = defineProps({
   student: {
     type: Object,
     required: true
+  },
+  courses: {
+    type: Array<any>,
+      required: true
   }
 });
 
@@ -33,6 +37,8 @@ const form = useForm({
   email: '',
   mobile: '',
   address: '',
+  student_number: '',
+  course_id: '',
 });
 
 const closeModal = () => {
@@ -49,6 +55,8 @@ const editForm = () => {
   form.email = student.email || '';
   form.mobile = student.mobile || '';
   form.address = student.address || '';
+  form.student_number = student.student_number || '';
+  form.course_id = student.course_id || '';
   form.id = student.id || '';
 };
 
@@ -64,6 +72,8 @@ const updateStudent = () => {
       form.email = '';
       form.mobile = '';
       form.address = '';
+      form.student_number = '';
+      form.course_id = '';
       form.id = '';
                         
       toast.success("Saved!", {
@@ -173,6 +183,28 @@ watchEffect(() => {
         required
         />
         <InputError class="mt-2" :message="form.errors.dob" />
+      </div>
+
+      <div>
+            <InputLabel for="student_number" value="Student ID Number" />
+            <TextInput
+            id="student_number"
+            type="text"
+            class="mt-1 block w-full"
+            v-model="form.student_number"
+            required
+            autofocus
+            autocomplete="student_number"
+            />
+            <InputError class="mt-2" :message="form.errors.student_number" />
+      </div>
+
+      <div>
+            <InputLabel for="course_id" value="Course" />
+            <select v-model="form.course_id" class="w-full block mt-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 py-2" required>
+                <option value="" disabled selected>Select course</option>
+                <option v-for="course in courses" :value="course.id">{{course.name}}</option>
+            </select>
       </div>
 
       <div>

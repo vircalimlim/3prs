@@ -38,8 +38,8 @@ class SemesterController extends Controller
     public function storeSemester(Request $request){
         $data = $request->validate([
             'name'          => 'required|unique:semesters',
-            'start_date'    => 'required',
-            'end_date'      => 'required'
+            'start_date'    => 'required|unique:semesters',
+            'end_date'      => 'required|unique:semesters'
         ]);
 
         Semester::create($data);
@@ -50,8 +50,8 @@ class SemesterController extends Controller
     {
         $validated_data = $request->validate([
             'name'          => "required|unique:semesters,name,$request->id",
-            'start_date'    => 'required',
-            'end_date'      => 'required',
+            'start_date'    => "required|unique:semesters,start_date,$request->id",
+            'end_date'      => "required|unique:semesters,end_date,$request->id",
             'id'            => 'required'
         ]);
 

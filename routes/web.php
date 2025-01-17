@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuturismController;
 use App\Http\Controllers\GeneralController;
@@ -58,6 +59,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
 
     Route::get('/student',                      [StudentController::class,      'index'])->name('admin.student.index');
     Route::post('/student/save',                [StudentController::class,      'storeStudent'])->name('admin.student.store');
+    Route::post('/student/enroll/save',         [StudentController::class,      'enrollStudent'])->name('admin.student.enroll');
     Route::patch('/student/update',             [StudentController::class,      'updateStudent'])->name('admin.student.update');
     Route::delete('/student/delete/{id}',       [StudentController::class,      'deleteStudent'])->name('admin.student.delete');
 
@@ -98,6 +100,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/update-password',              [GeneralController::class,      'updatePassword'])->name('admin.password');
     Route::put('password',                      [PasswordController::class,     'update'])->name('password.update');
     Route::patch('/contact/update',             [GeneralController::class,      'updateContact'])->name('admin.contact.update');
+
+    Route::post('/course/save',                  [CourseController::class, 'storeCourse'])->name('admin.course.store');
 });
 
 Route::get('/achievements',                  [AchievementController::class, 'index'])->name('achievement.index');

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('email', 100);
             $table->string('mobile', 11);
             $table->string('address');
+            $table->string('student_number', 20);
+            $table->unsignedBigInteger('course_id');
             $table->timestamps();
         });
     }
