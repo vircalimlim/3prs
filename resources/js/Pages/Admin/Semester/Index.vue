@@ -6,11 +6,15 @@ import { ref, reactive } from "vue";
 import EditModal from "./Partials/EditModal.vue";
 import Pagination from "@/Components/Pagination.vue";
 
-const {semesters} = defineProps({
+const {semesters, is_sem_started} = defineProps({
   semesters: {
     type: Object,
     required: true,
   },
+  is_sem_started: {
+    type: Boolean,
+    required: true,
+  }
 });
 
 const showAdd = ref(false);
@@ -26,7 +30,9 @@ const openAddModal = () => {
   showAdd.value = true;
 };
 
-const openEditModal = (semester: DynamicObject) => {
+const openEditModal = (semester: DynamicObject, is_sem_started: Boolean) => {
+  if(is_sem_started) return;
+
   showEdit.value = true;
   Object.assign(editSemester, semester);
 };
@@ -63,7 +69,7 @@ const openEditModal = (semester: DynamicObject) => {
         <!-- <Link :href="route('semester.register_student')" type="button" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
           Register Student
         </Link> -->
-        <button @click.prevent="openAddModal()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
+        <button :disabled="is_sem_started" :class="is_sem_started ? 'text-gray-500 cursor-not-allowed' : ''" @click.prevent="openAddModal()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2">
           Add
         </button>
       </div>
@@ -130,7 +136,7 @@ const openEditModal = (semester: DynamicObject) => {
                 </Link>
               </td>
               <td class="px-6 py-4 text-right">
-                <a  @click.prevent="openEditModal(semester)" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                <a  @click.prevent="openEditModal(semester, is_sem_started)" :class="is_sem_started ? 'text-gray-500 cursor-not-allowed' : ''" href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
               </td>
             </tr>
             <tr v-if="semesters.data.length == 0">

@@ -29,9 +29,14 @@ class SemesterController extends Controller
     }
 
     public function index(){
+        $today = date('Y-m-d');
         $semesters = Semester::latest('id')->paginate(10);
+        $is_sem_started = Semester::where('start_date', '<=', $today)
+            ->where('end_date', '>=', $today)
+            ->exists();
         return Inertia::render('Admin/Semester/Index', [
-            'semesters' => $semesters
+            'semesters' => $semesters,
+            'is_sem_started' => $is_sem_started
         ]);
     }
 
