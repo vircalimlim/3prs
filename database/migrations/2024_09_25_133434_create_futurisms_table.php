@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('image', 155);
             $table->string('title');
             $table->text('description');
-            $table->int('category');
+            $table->integer('category');
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->enum('status', ['active', 'inactive'])->default('active')->after('description');
+            $table->enum('status', ['active', 'inactive'])->default('active')->after('title');
             $table->timestamps();
         });
     }
