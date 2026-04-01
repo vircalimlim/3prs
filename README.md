@@ -54,7 +54,7 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate
 ```
 
-7. Run the app:
+7. Open on browser:
 
 ```bash
 http://localhost:8000
