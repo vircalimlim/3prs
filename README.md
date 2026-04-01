@@ -22,7 +22,7 @@ Make sure you have these installed:
 
 ```bash
 git clone https://github.com/vircalimlim/3prs.git
-cd ip-management
+cd 3prs
 ```
 
 2. Copy the environment file:
@@ -78,22 +78,6 @@ If needed, you can also run:
 ```bash
 docker-compose exec node npm install
 docker-compose exec node npm run dev
-```
-
----
-
-## Useful Commands
-
-* Stop containers:
-
-```bash
-docker-compose down
-```
-
-* Rebuild containers:
-
-```bash
-docker-compose up -d --build
 ```
 
 ---
