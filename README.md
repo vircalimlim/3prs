@@ -9,10 +9,9 @@ The whole application is containerized using Docker, including the frontend (Nod
 
 ## Requirements
 
-Make sure you have these installed:
+Make sure you have:
 
-* Docker
-* Docker Compose
+* Docker App
 
 ---
 
@@ -55,11 +54,11 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate
 ```
 
----
+7. Run the app:
 
-## Running the App
-
-* Laravel app: http://localhost:8000
+```bash
+http://localhost:8000
+```
 
 ---
 
