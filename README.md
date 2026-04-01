@@ -81,14 +81,12 @@ docker-compose exec node npm run dev
 
 ## Sample Users
 
-After running the database seeders, you can log in using the following accounts:
-
-### Admin User
-- **Email:** admin@example.com
-- **Password:** password
+### Superadmin
+- **Email:** supermeow@gmail.com, supermeow2@gmail.com
+- **Password:** pass@dev
 
 ### Regular User
-- **Email:** user@example.com
-- **Password:** password
+- **Email:** adminmeow@gmail.com, adminmeow2@gmail.com, adminmeow3@gmail.com
+- **Password:** pass@dev
 ---
 
