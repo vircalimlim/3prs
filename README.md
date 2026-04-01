@@ -1,4 +1,4 @@
-# Laravel + Vue (Inertia) Project
+# IP MANAGEMENT SYSTEM - Laravel + Vue Project
 
 ## About
 
@@ -21,8 +21,8 @@ Make sure you have these installed:
 1. Clone the repository:
 
 ```bash
-git clone <your-repo-url>
-cd <project-folder>
+git clone https://github.com/vircalimlim/3prs.git
+cd ip-management
 ```
 
 2. Copy the environment file:
@@ -60,7 +60,6 @@ docker-compose exec app php artisan migrate
 ## Running the App
 
 * Laravel app: http://localhost:8000
-* Vite dev server (frontend): http://localhost:5173
 
 ---
 
@@ -96,13 +95,5 @@ docker-compose down
 ```bash
 docker-compose up -d --build
 ```
-
----
-
-## Notes
-
-* All services (PHP, Nginx, MySQL, Node) are running in separate containers.
-* The project uses Vite for frontend asset bundling.
-* Make sure ports `8000`, `5173`, and `3307` are available on your machine.
 
 ---
